@@ -1,2 +1,3 @@
 
-recursive-include testprogram/etc *.yaml
+recursive-include notetub/etc *.yaml
+recursive-include notetub/css *.css
