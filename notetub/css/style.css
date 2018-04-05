@@ -1,28 +1,60 @@
-QFrame  {
-    background-color: #e1e1e1;
+TableList  {
+    background-color: #e0e0e0;
+    border-left: none;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
 }
 
-ColumnLabel {
-    background-color: #e1e1e1;
+
+
+
+ListView::item {
+    /*background-color: qlineargradient(spread:pad, x1:0.499, y1:0, x2:0.511364, y2:1, stop:0 rgba(171, 171, 171, 149), stop:1 rgba(198, 198, 198, 158));*/
+    background-color: #d3d3d5;
+    padding-left: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+
+
+QListView {
+    /*alternate-background-color: #407487;*/
+    /*alternate-background-color: #e0e0e0;*/
+    /*background-color: #cbcbcb;*/
     font-family: "Helvetica";
-    font-size: 14pt;
+    font-size: 12pt;
+    color: #636363;
+    border-left: 1px solid #8f8f91;
+    border-right:  none;
+    border-bottom:  none;
     border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: 1px solid #9c9c9c;
-    margin-left: 2px;
-    padding-left: 10px;
+
+    /*padding-right: 52px;*/
+
+
 }
 
-QTableWidget {
-    background-color: #fafafa;
+
+
+
+
+QListView::item:selected {
+    /*background-color: #cbcbcb;*/
+    color: #0e9429;
+
 }
 
-QTableWidget::item {
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-left: 1px solid #b4b4b4;
-    background-color: rgb(255, 255, 255);
-    padding-left: 10px;
+
+
+
+
+QListView::item:hover {
+    /*background-color: #cbcbcb;*/
+    /*color: green;*/
+    /*border-left: none;*/
+    /*border-right:  none;*/
+    /*border-bottom: 1px solid #0e9429;*/
+    /*border-top: none;*/
 }
