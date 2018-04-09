@@ -1,61 +1,21 @@
 
-import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
+import npyscreen
 
-class App(QWidget):
+class App(npyscreen.StandardApp):
+    def onStart(self):
+        self.addForm("MAIN", MainForm, name="Hello Habr!")
 
-    def __init__(self):
-        super().__init__()
-        self.title = 'PyQt5 table - pythonspot.com'
-        self.left = 0
-        self.top = 0
-        self.width = 500
-        self.height = 300
-        self.initUI()
+class MainForm(npyscreen.ActionForm):
+    # Конструктор
+    def create(self):
+        # Добавляем виджет TitleText на форму
+        self.title = self.add(npyscreen.TitleText, name="TitleText", value="Hello World!")
+    # переопределенный метод, срабатывающий при нажатии на кнопку «ok»
+    def on_ok(self):
+        self.parentApp.setNextForm(None)
+    # переопределенный метод, срабатывающий при нажатии на кнопку «cancel»
+    def on_cancel(self):
+        self.title.value = "Hello World!"
 
-    def initUI(self):
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
-
-        self.createTable()
-
-        # Add box layout, add table to box layout and add box layout to widget
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.tableWidget)
-        self.setLayout(self.layout)
-
-        # Show widget
-        self.show()
-
-    def createTable(self):
-       # Create table
-        self.tableWidget = QTableWidget()
-        self.tableWidget.setShowGrid(False)
-        self.tableWidget.setRowCount(4)
-        self.tableWidget.setColumnCount(2)
-        self.tableWidget.setItem(0,0, QTableWidgetItem("Cell (1,1)"))
-        self.tableWidget.setItem(0,1, QTableWidgetItem("Cell (1,2)"))
-        self.tableWidget.setItem(1,0, QTableWidgetItem("Cell (2,1)"))
-        self.tableWidget.setItem(1,1, QTableWidgetItem("Cell (2,2)"))
-        self.tableWidget.setItem(2,0, QTableWidgetItem("Cell (3,1)"))
-        self.tableWidget.setItem(2,1, QTableWidgetItem("Cell (3,2)"))
-        self.tableWidget.setItem(3,0, QTableWidgetItem("Cell (4,1)"))
-        self.tableWidget.setItem(3,1, QTableWidgetItem("Cell (4,2)"))
-        self.tableWidget.move(0,0)
-
-        # table selection change
-        self.tableWidget.doubleClicked.connect(self.on_click)
-
-    @pyqtSlot()
-    def on_click(self):
-        print("\n")
-        for currentQTableWidgetItem in self.tableWidget.selectedItems():
-            print(currentQTableWidgetItem.row(), currentQTableWidgetItem.column(), currentQTableWidgetItem.text())
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    app.setStyleSheet(open("../css/style.css", "r").read())
-    ex = App()
-    sys.exit(app.exec_())
+MyApp = App()
+MyApp.run()
