@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     app.setStyleSheet(open("../css/style.css", "r").read())
 
-    words = serv.group(serv.get_words("../resources/words.txt"), 10)
+    words = serv.group_by(serv.get_words("../resources/words.txt"), 10)
     print(words[0])
     model.set_items(words[0])
     model.set_items(words[0])

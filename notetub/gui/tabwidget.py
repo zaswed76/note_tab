@@ -1,9 +1,10 @@
-
+# -*- coding: utf-8 -*-
 
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
+
 
 from notetub.gui.listwidget import *
 
@@ -29,7 +30,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyleSheet(open("../css/style.css", "r").read())
     main = TableList()
-    words = serv.group(serv.get_words("../resources/words.txt", 45), 15)
+    words = serv.group_by(serv.get_words("../resource/corpora_noun.txt", 100), 20)
     main.set_items(words)
     main.show()
     sys.exit(app.exec_())
