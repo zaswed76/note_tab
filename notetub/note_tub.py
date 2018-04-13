@@ -24,6 +24,7 @@ def main():
 
 
     note.show()
+    print(note.wizard.frameGeometry())
     sys.exit(app.exec_())
 
 

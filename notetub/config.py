@@ -4,11 +4,11 @@ class Config:
 
     @property
     def max_words(self):
-        return 100
+        return 50
 
     @property
     def words_on_page(self):
-        return 100
+        return 50
     @property
     def number_columns(self):
         return 5

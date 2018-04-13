@@ -12,7 +12,10 @@ class ListView(QListView):
         self.setSelectionMode(QAbstractItemView.MultiSelection)
         self.setFocusPolicy(Qt.NoFocus)
         self.setSelectionRectVisible(False)
-        # self.setGridSize(QSize(55, 45))
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        self.setSizePolicy(sizePolicy)
 
 
 class ListModel(QStandardItemModel):

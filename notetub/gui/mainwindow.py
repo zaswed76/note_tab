@@ -26,7 +26,7 @@ class MainWindow(QFrame):
         self.work_dictionary = serv.files_to_list(
             serv.get_dictionaries_files(self.cfg.dictionaries_dir,
                                         self.cfg.dictionary_ext))
-        print(self.cfg.dictionary_ext, 6)
+
         self.resize(500, 500)
 
         self.box = QVBoxLayout(self)
@@ -52,9 +52,9 @@ class MainWindow(QFrame):
                                         self.cfg.dictionary_ext))
 
     def set_omo_words(self):
-        print(3)
+
         work_dictionary = self.work_dictionary
-        print(work_dictionary)
+
         diff_word = self.tool.line_edit_text
         min_ratio = self.cfg.min_ratio
         prefix_weight = self.cfg.prefix_weight
@@ -65,16 +65,22 @@ class MainWindow(QFrame):
         if diff_word:
             omo_list = _diff.jaro_winkler(work_dictionary, diff_word, min_ratio,
                                           prefix_weight=prefix_weight)
-            print(omo_list)
 
             sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
             cut_omo_list = sorted_on_ratio[:max_words]
 
-            words = serv.group_by(cut_omo_list, 20)
+            words = serv.group_by(cut_omo_list, words_on_page//number_columns)
+
+            if words:
+                self.wizard.create_pages(max_words, words_on_page)
+                self.wizard.set_words(words)
+                width = (self.wizard.wizard.max_column_size + 2) * number_columns
+                height = (self.wizard.wizard.max_line_size + 2) * (words_on_page // number_columns) + 50
+
+                self.setMinimumSize(width, height)
+                self.resize(width, height)
 
 
-            self.wizard.create_pages(max_words, words_on_page)
-            self.wizard.set_words(words)
 
 
 if __name__ == '__main__':

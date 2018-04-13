@@ -15,6 +15,8 @@ class TableList(QFrame):
         self.box.setSpacing(0)
         self.box.setContentsMargins(0, 0, 0, 0)
         self.lst_models = []
+        self.max_column_size_list = []
+        self.max_line_size_list = []
 
 
     def set_items(self, items_list):
@@ -23,9 +25,17 @@ class TableList(QFrame):
             model.set_items(lst)
             self.lst_models.append(model)
             view = ListView(model)
+            self.max_column_size_list.append(view.sizeHintForColumn(0))
+            self.max_line_size_list.append(view.sizeHintForRow(0))
             self.box.addWidget(view)
 
+    @property
+    def max_column_size(self):
+        return max(self.max_column_size_list)
 
+    @property
+    def max_line_size(self):
+        return max(self.max_line_size_list)
 
 if __name__ == '__main__':
     from notetub.lib import serv
