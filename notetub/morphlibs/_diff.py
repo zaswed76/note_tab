@@ -66,10 +66,10 @@ def find(lst, *words):
 
 if __name__ == '__main__':
     # print(test())
-    opcorpora_noun_file = pjoin("../resource/corpora_noun.txt")
+    opcorpora_noun_file = pjoin("../resource/dictionaries/corpora_noun.txt")
     corp = file_to_words(opcorpora_noun_file)
 
-    r = jaro_winkler(corp, "север!!",  40, prefix_weight=0.01)
+    r = jaro_winkler(corp, "потрит",  40, prefix_weight=0.01)
     # r = jaro(corp, "ден!м!",  65)
     print(sorted_on_ratio(r)[:1550])
-    print(find(sorted_on_ratio(r)[:1550], "сервер"))
+    print(find(sorted_on_ratio(r)[:1550], "портрет", "патриот"))

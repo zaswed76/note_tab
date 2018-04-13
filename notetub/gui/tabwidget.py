@@ -25,12 +25,13 @@ class TableList(QFrame):
             self.box.addWidget(view)
 
 
+
 if __name__ == '__main__':
-    from notetub.ex import serv
+    from notetub.lib import serv
     app = QApplication(sys.argv)
     app.setStyleSheet(open("../css/style.css", "r").read())
     main = TableList()
-    words = serv.group_by(serv.get_words("../resource/corpora_noun.txt", 100), 20)
+    words = serv.group_by(serv.get_words("../resource/dictionaries/corpora_noun.txt", 100), 20)
     main.set_items(words)
     main.show()
     sys.exit(app.exec_())

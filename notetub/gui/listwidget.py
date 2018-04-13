@@ -29,7 +29,7 @@ class ListModel(QStandardItemModel):
 
 if __name__ == "__main__":
 
-    from notetub.ex import serv
+    from notetub.lib import serv
     app = QApplication(sys.argv)
 
 
