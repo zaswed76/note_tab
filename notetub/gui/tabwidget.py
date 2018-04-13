@@ -16,6 +16,7 @@ class TableList(QFrame):
         self.box.setContentsMargins(0, 0, 0, 0)
         self.lst_models = []
 
+
     def set_items(self, items_list):
         for n, lst in enumerate(items_list):
             model = ListModel()
@@ -31,7 +32,8 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyleSheet(open("../css/style.css", "r").read())
     main = TableList()
-    words = serv.group_by(serv.get_words("../resource/dictionaries/corpora_noun.txt", 100), 20)
-    main.set_items(words)
+    main.resize(100, 100)
+    # words = serv.group_by(serv.get_words("../resource/dictionaries/corpora_noun.txt", 100), 20)
+    # main.set_items(words)
     main.show()
     sys.exit(app.exec_())

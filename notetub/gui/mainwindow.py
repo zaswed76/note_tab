@@ -15,34 +15,7 @@ class Controller:
         self.parent.set_omo_words()
 
 
-class Config:
-    def __init__(self, cfg):
-        self.cfg = cfg
 
-    @property
-    def max_words(self):
-        return 200
-
-    @property
-    def words_on_page(self):
-        return 100
-    @property
-    def number_columns(self):
-        return 5
-    @property
-    def min_ratio(self):
-        return 50
-    @property
-    def prefix_weight(self):
-        return 0.2
-
-    @property
-    def dictionaries_dir(self):
-        return "../resource/dictionaries"
-
-    @property
-    def dictionary_ext(self):
-        return ".txt"
 
 
 class MainWindow(QFrame):
@@ -53,6 +26,7 @@ class MainWindow(QFrame):
         self.work_dictionary = serv.files_to_list(
             serv.get_dictionaries_files(self.cfg.dictionaries_dir,
                                         self.cfg.dictionary_ext))
+        print(self.cfg.dictionary_ext, 6)
         self.resize(500, 500)
 
         self.box = QVBoxLayout(self)
@@ -78,7 +52,9 @@ class MainWindow(QFrame):
                                         self.cfg.dictionary_ext))
 
     def set_omo_words(self):
+        print(3)
         work_dictionary = self.work_dictionary
+        print(work_dictionary)
         diff_word = self.tool.line_edit_text
         min_ratio = self.cfg.min_ratio
         prefix_weight = self.cfg.prefix_weight
@@ -86,13 +62,19 @@ class MainWindow(QFrame):
         words_on_page = self.cfg.words_on_page
         number_columns = self.cfg.number_columns
 
-        omo_list = _diff.jaro_winkler(work_dictionary, diff_word, min_ratio,
-                                      prefix_weight=prefix_weight)
+        if diff_word:
+            omo_list = _diff.jaro_winkler(work_dictionary, diff_word, min_ratio,
+                                          prefix_weight=prefix_weight)
+            print(omo_list)
 
-        sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
-        cut_omo_list = sorted_on_ratio[:max_words]
-        print(cut_omo_list)
-        # self.wizard.set_words()
+            sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
+            cut_omo_list = sorted_on_ratio[:max_words]
+
+            words = serv.group_by(cut_omo_list, 20)
+
+
+            self.wizard.create_pages(max_words, words_on_page)
+            self.wizard.set_words(words)
 
 
 if __name__ == '__main__':

@@ -22,6 +22,9 @@ class Tool(QFrame):
         self.box.addWidget(self.word_line)
 
         self.btn = QPushButton()
+        self.btn.setStyleSheet("background-color: #B47C05")
+
+
         self.box.addWidget(self.btn)
 
 
