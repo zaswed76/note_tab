@@ -58,3 +58,42 @@ QListView::item:hover {
     /*border-bottom: 1px solid #0e9429;*/
     /*border-top: none;*/
 }
+
+ToolBtn#search {
+    image: url(:/resource/icons/forward.png);
+
+    border: none;
+    min-width: 22px;
+    min-height: 22px;
+}
+
+ToolBtn#config {
+    image: url(:/resource/icons/config.png);
+
+    border: none;
+    min-width: 18px;
+    min-height: 18px;
+}
+
+ConfigTool {
+    background-color: #d6d6d8;
+    border-left: none;
+    border-right:  1px solid #bcbcbe;
+    border-bottom:  none;
+    border-top: none;
+}
+
+LineEdit {
+    font-family: "Helvetica";
+    font-size: 14pt;
+    font-weight: 300;
+    color: #5a5a5a;
+    border-left: 1px solid #adadaf;
+    border-right:  1px solid #adadaf;
+    border-bottom:  1px solid #adadaf;
+    border-top: 1px solid #adadaf;
+    border-radius: 4px;
+    width: 220px;
+    min-height: 12px;
+
+}

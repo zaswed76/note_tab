@@ -14,7 +14,8 @@ class Controller:
     def enter(self):
         self.parent.set_omo_words()
 
-
+    def open_config(self):
+        self.parent.show_config_manager()
 
 
 
@@ -22,6 +23,7 @@ class MainWindow(QFrame):
     def __init__(self, cfg):
         super().__init__()
         self.controller = None
+        self.config_manager = None
         self.cfg = cfg
         self.work_dictionary = serv.files_to_list(
             serv.get_dictionaries_files(self.cfg.dictionaries_dir,
@@ -31,18 +33,26 @@ class MainWindow(QFrame):
 
         self.box = QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
+        self.box.setSpacing(0)
         self.tool = tool.Tool()
         self.box.addWidget(self.tool)
 
         self.wizard = wizard.WizardManager()
         self.box.addWidget(self.wizard)
 
+    def set_config_manager(self,  manager):
+        self.config_manager = manager
+
+    def show_config_manager(self):
+        self.config_manager.show()
+
     def set_controller(self, controller):
         self.controller = controller
 
     def register_controllers(self):
         if self.controller is not None:
-            self.tool.btn.clicked.connect(self.controller.enter)
+            self.tool.search_btn.clicked.connect(self.controller.enter)
+            self.tool.config_btn.clicked.connect(self.controller.open_config)
         else:
             print("controller not installed")
 
@@ -74,8 +84,8 @@ class MainWindow(QFrame):
             if words:
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_words(words)
-                width = (self.wizard.wizard.max_column_size + 2) * number_columns
-                height = (self.wizard.wizard.max_line_size + 2) * (words_on_page // number_columns) + 50
+                width = (self.wizard.wizard.max_column_size + 3) * number_columns
+                height = (self.wizard.wizard.max_line_size + 0) * (words_on_page // number_columns) + 50
 
                 self.setMinimumSize(width, height)
                 self.resize(width, height)

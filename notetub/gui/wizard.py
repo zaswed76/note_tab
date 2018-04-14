@@ -9,6 +9,8 @@ class WizardManager(QFrame):
     def __init__(self):
         super().__init__()
         self.box = QHBoxLayout(self)
+        self.box.setContentsMargins(0, 1, 0, 0)
+        self.box.setSpacing(0)
         self.wizard = None
 
     def create_pages(self, max_words, words_on_page):

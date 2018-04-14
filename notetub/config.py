@@ -21,7 +21,7 @@ class Config:
 
     @property
     def dictionaries_dir(self):
-        return "./resource/dictionaries"
+        return "./dictionaries"
 
     @property
     def dictionary_ext(self):

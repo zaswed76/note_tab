@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/">
+    <file>resource/icons/forward.png</file>
+    <file>resource/icons/config.png</file>
+
+
+  </qresource>
+</RCC>
