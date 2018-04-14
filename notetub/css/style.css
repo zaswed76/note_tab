@@ -119,3 +119,28 @@ ConfigBtn {
     border-bottom-right-radius: 0px ;
 
 }
+
+AbcCfgWidget {
+
+}
+
+SearchCfgWidget {
+    border-left: 15px solid #0aaf0f;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
+}
+
+TableCfgWidget {
+    border-left: 15px solid #05afad;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
+}
+
+ViewCfgWidget {
+    border-left: 15px solid #d3c523;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
+}
