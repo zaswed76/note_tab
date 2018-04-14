@@ -4,10 +4,30 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
+class ConfigBtn(QPushButton):
+    def __init__(self, name, text=None):
+        super().__init__()
+        self.setObjectName(name)
+        self.setText(text)
+
+
 class ConfigTool(QFrame):
     def __init__(self):
         super().__init__()
         self.setFixedWidth(100)
+        self.vbox = QVBoxLayout(self)
+        self.vbox.setContentsMargins(5, 0, 0, 0)
+        self.vbox.setSpacing(6)
+        self.__init_btns()
+
+    def __init_btns(self):
+        self.search_cfg_btn = ConfigBtn("search_cfg_btn", text="поиск")
+        self.table_cfg_btn = ConfigBtn("table_cfg_btn", text="таблица")
+        self.app_cfg_btn = ConfigBtn("app_cfg_btn", text="вид")
+        self.vbox.addWidget(self.search_cfg_btn)
+        self.vbox.addWidget(self.table_cfg_btn)
+        self.vbox.addWidget(self.app_cfg_btn)
+        self.vbox.addStretch(1)
 
 
 class ConfigWidget(QFrame):

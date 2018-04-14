@@ -77,7 +77,7 @@ ToolBtn#config {
 
 ConfigTool {
     background-color: #d6d6d8;
-    border-left: none;
+    border-left: 15px solid #c5c5c7;
     border-right:  1px solid #bcbcbe;
     border-bottom:  none;
     border-top: none;
@@ -95,5 +95,27 @@ LineEdit {
     border-radius: 4px;
     width: 220px;
     min-height: 12px;
+
+}
+
+ConfigBtn {
+    font-family: "Helvetica";
+    font-size: 10pt;
+    font-weight: 300;
+    background-color: #c9c9c9;
+    color: #089913;
+    border-left: 1px solid #adadaf;
+    border-right:  none;
+    border-bottom:  1px solid #adadaf;
+    border-top: 1px solid #adadaf;
+    /*border-radius: 4px;*/
+    text-align: left;
+    padding-left: 10;
+    min-height: 24px;
+
+    border-top-left-radius: 10px ;
+    border-bottom-left-radius: 10px ;
+    border-top-right-radius: 0px ;
+    border-bottom-right-radius: 0px ;
 
 }
