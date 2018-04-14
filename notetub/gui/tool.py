@@ -1,6 +1,7 @@
 
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QPushButton, QLineEdit
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QRegExpValidator
+from PyQt5.QtCore import QRegExp
 
 class LineEdit(QLineEdit):
     def __init__(self):
@@ -8,6 +9,7 @@ class LineEdit(QLineEdit):
         self.setFixedHeight(38)
         font = QFont("serif", 18)
         self.setFont(font)
+
 
 
 class ToolBtn(QPushButton):
@@ -44,4 +46,8 @@ class Tool(QFrame):
 
 
 
-        self.box.addStretch()
+    def set_line_validator(self, reg=None):
+        if reg is None:
+            reg = "[.]+"
+        validator = QRegExpValidator(QRegExp(reg))
+        self.word_line.setValidator(validator)

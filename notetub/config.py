@@ -26,3 +26,7 @@ class Config:
     @property
     def dictionary_ext(self):
         return ".txt"
+
+    @property
+    def line_validator(self):
+        return "[а-яА-ЯёЁ!\d]+"

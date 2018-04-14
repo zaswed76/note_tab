@@ -18,7 +18,6 @@ class Controller:
         self.parent.show_config_manager()
 
 
-
 class MainWindow(QFrame):
     def __init__(self, cfg):
         super().__init__()
@@ -34,13 +33,20 @@ class MainWindow(QFrame):
         self.box = QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
         self.box.setSpacing(0)
-        self.tool = tool.Tool()
-        self.box.addWidget(self.tool)
+
+        self.__init_tool()
 
         self.wizard = wizard.WizardManager()
         self.box.addWidget(self.wizard)
 
-    def set_config_manager(self,  manager):
+    def __init_tool(self):
+        self.tool = tool.Tool()
+        self.box.addWidget(self.tool)
+
+        self.tool.set_line_validator(self.cfg.line_validator)
+
+
+    def set_config_manager(self, manager):
         self.config_manager = manager
 
     def show_config_manager(self):
@@ -53,6 +59,8 @@ class MainWindow(QFrame):
         if self.controller is not None:
             self.tool.search_btn.clicked.connect(self.controller.enter)
             self.tool.config_btn.clicked.connect(self.controller.open_config)
+            self.tool.word_line.returnPressed.connect(
+                self.controller.enter)
         else:
             print("controller not installed")
 
@@ -73,24 +81,26 @@ class MainWindow(QFrame):
         number_columns = self.cfg.number_columns
 
         if diff_word:
-            omo_list = _diff.jaro_winkler(work_dictionary, diff_word, min_ratio,
+            omo_list = _diff.jaro_winkler(work_dictionary, diff_word,
+                                          min_ratio,
                                           prefix_weight=prefix_weight)
 
             sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
             cut_omo_list = sorted_on_ratio[:max_words]
 
-            words = serv.group_by(cut_omo_list, words_on_page//number_columns)
+            words = serv.group_by(cut_omo_list,
+                                  words_on_page // number_columns)
 
             if words:
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_words(words)
-                width = (self.wizard.wizard.max_column_size + 3) * number_columns
-                height = (self.wizard.wizard.max_line_size + 0) * (words_on_page // number_columns) + 50
+                width = (
+                        self.wizard.wizard.max_column_size + 3) * number_columns
+                height = (self.wizard.wizard.max_line_size + 0) * (
+                words_on_page // number_columns) + 50
 
                 self.setMinimumSize(width, height)
                 self.resize(width, height)
-
-
 
 
 if __name__ == '__main__':
