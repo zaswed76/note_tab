@@ -48,6 +48,6 @@ class Tool(QFrame):
 
     def set_line_validator(self, reg=None):
         if reg is None:
-            reg = "[.]+"
+            reg = "[\d\w!]+"
         validator = QRegExpValidator(QRegExp(reg))
         self.word_line.setValidator(validator)

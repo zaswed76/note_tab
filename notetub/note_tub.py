@@ -13,11 +13,14 @@ from notetub.config import Config
 ROOT = os.path.join(os.path.dirname(__file__))
 CSS_STYLE = os.path.join(ROOT, "css/style.css")
 
+cfg_path = os.path.join(ROOT, "etc/cfg.yaml")
+
 def main():
     app = QApplication(sys.argv)
     app.setStyleSheet(open(CSS_STYLE, "r").read())
 
-    cfg = Config("path")
+    cfg = Config(cfg_path)
+    cfg.load_cfg()
 
 
     note = mainwindow.MainWindow(cfg=cfg)
@@ -25,7 +28,7 @@ def main():
     note.set_controller(controller)
     note.register_controllers()
 
-    config_manager = configwidget.ConfigManager()
+    config_manager = configwidget.ConfigManager(cfg)
     note.set_config_manager(config_manager)
 
 

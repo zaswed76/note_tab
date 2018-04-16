@@ -43,7 +43,8 @@ class MainWindow(QFrame):
         self.tool = tool.Tool()
         self.box.addWidget(self.tool)
 
-        self.tool.set_line_validator(self.cfg.line_validator)
+        if self.cfg.line_validator:
+            self.tool.set_line_validator(self.cfg.line_validator_reg)
 
 
     def set_config_manager(self, manager):
