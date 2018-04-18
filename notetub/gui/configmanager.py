@@ -114,6 +114,9 @@ class ConfigManager(QFrame):
         self.config_widget.stack.setCurrentWidget(self.sender().link_widget)
 
     def closeEvent(self, *args, **kwargs):
+        lv = self.config_widget.search_cfg.check_valid_line.isChecked()
+        print(lv)
+        self.cfg["line_validator"] = lv
         self.cfg.save()
 
 if __name__ == '__main__':

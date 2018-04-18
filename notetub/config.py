@@ -1,63 +1,64 @@
 import yaml
 
 
-class Config:
+from collections import MutableMapping
+
+
+class Config(MutableMapping):
     def __init__(self, pth):
         self.pth = pth
         self._data = {}
+
+    @property
+    def data(self):
+        return self._data
 
     def load_cfg(self):
         with open(self.pth, "r") as f:
             self._data = yaml.load(f)
 
     def save(self):
-        with open(self.pth, "r") as f:
-            self._data = yaml.load(f)
+        with open(self.pth, "w") as f:
+            yaml.dump(self._data, f, default_flow_style=False)
 
-    @property
-    def data(self):
-        return self._data
+    def __len__(self):
+        return len(self._data)
 
-    @property
-    def max_words(self):
-        return self.data["max_words"]
+    def __iter__(self):
+        return self._data.__iter__()
 
-    @property
-    def words_on_page(self):
-        return self.data["words_on_page"]
+    def __contains__(self, key):
+        return self._data.__contains__(self, id(key))
 
-    @property
-    def number_columns(self):
-        return self.data["number_columns"]
+    def __getitem__(self, key):
+        return self._data[key]
 
-    @property
-    def min_ratio(self):
-        return self.data["min_ratio"]
+    def __setitem__(self, key, value):
 
-    @property
-    def prefix_weight(self):
-        return self.data["prefix_weight"]
+        self._data[key] = value
 
-    @property
-    def dictionaries_dir(self):
-        return self.data["dictionaries_dir"]
 
-    @property
-    def dictionary_ext(self):
-        return self.data["dictionary_ext"]
+    def __delitem__(self, key):
+        del(self._data[key])
 
-    @property
-    def line_validator_reg(self):
-        return self.data["line_validator_reg"]
+    def __str__(self):
+        return str(self._data)
 
-    @property
-    def line_validator(self):
-        return self.data["line_validator"]
+    def __getattr__(self, attr):
+        return self._data[attr]
 
+    # def __setattr__(self, key, value):
+    #     print(self._data, 111)
+    #     print("----------------")
+    #     self._data.__setattr__(self, key, value)
+    #
+    #     print(self._data, 222)
 
 if __name__ == '__main__':
     pth = "./etc/cfg.yaml"
 
     cfg = Config(pth)
     cfg.load_cfg()
+    print(cfg.data)
+    cfg.line_validator["line_validator"] = 5
     print(cfg.data)

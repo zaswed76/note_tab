@@ -28,7 +28,7 @@ class MainWindow(QFrame):
             serv.get_dictionaries_files(self.cfg.dictionaries_dir,
                                         self.cfg.dictionary_ext))
 
-        self.resize(500, 500)
+
 
         self.box = QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
@@ -38,6 +38,11 @@ class MainWindow(QFrame):
 
         self.wizard = wizard.WizardManager()
         self.box.addWidget(self.wizard)
+        self.resize(self.cfg["last_width"], self.cfg["minimum_height"])
+        self.setFixedHeight(self.cfg["minimum_height"])
+
+
+
 
     def __init_tool(self):
         self.tool = tool.Tool()
@@ -99,9 +104,15 @@ class MainWindow(QFrame):
                         self.wizard.wizard.max_column_size + 3) * number_columns
                 height = (self.wizard.wizard.max_line_size + 0) * (
                 words_on_page // number_columns) + 50
+                # if height != self.height():
+                print(height)
+                self.setFixedHeight(height-150)
 
-                self.setMinimumSize(width, height)
-                self.resize(width, height)
+    def closeEvent(self, *args, **kwargs):
+
+        self.cfg["minimum_height"] = self.height()
+        self.cfg["last_width"] = self.width()
+        self.cfg.save()
 
 
 if __name__ == '__main__':

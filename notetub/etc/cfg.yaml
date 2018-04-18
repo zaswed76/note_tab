@@ -1,28 +1,12 @@
-# всего найденых слов
-max_words: 50
-
-# сколько на странице вмещается
-words_on_page: 50
-
-# на сколько колонок делится страница
-number_columns: 5
-
-# нижняя граница рейтинга
-min_ratio: 50
-
-# преффикс для алгоритма jaro_winkler
-prefix_weight: 0.01
-
-# каталог со словарями
-dictionaries_dir: './dictionaries'
-
-# расширение по которому ищутся словари
-dictionary_ext: '.txt'
-
+dictionaries_dir: ./dictionaries
+dictionary_ext: .txt
+last_width: 726
 line_validator: true
-
-# что можно печатать в строке поиска
-line_validator_reg: '[а-яА-ЯёЁ!\d]+'
-
-
-
+line_validator_reg: "[\u0420\xB0-\u0421\u040F\u0420\u0452-\u0420\u0407\u0421\u2018\
+  \u0420\u0403!\\d]+"
+max_words: 60
+min_ratio: 50
+minimum_height: 230
+number_columns: 6
+prefix_weight: 0.01
+words_on_page: 60

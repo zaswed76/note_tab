@@ -5,7 +5,7 @@ import resources
 
 import os
 
-from notetub.gui import mainwindow, configwidget
+from notetub.gui import mainwindow, configmanager
 from notetub.config import Config
 
 
@@ -28,14 +28,14 @@ def main():
     note.set_controller(controller)
     note.register_controllers()
 
-    config_manager = configwidget.ConfigManager(cfg)
+    config_manager = configmanager.ConfigManager(cfg)
     note.set_config_manager(config_manager)
 
 
 
 
     note.show()
-    print(note.wizard.frameGeometry())
+
     sys.exit(app.exec_())
 
 
