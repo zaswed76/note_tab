@@ -39,7 +39,7 @@ class MainWindow(QFrame):
         self.wizard = wizard.WizardManager()
         self.box.addWidget(self.wizard)
         self.resize(self.cfg["last_width"], self.cfg["minimum_height"])
-        self.setFixedHeight(self.cfg["minimum_height"])
+        self.setMinimumHeight(self.cfg["minimum_height"])
 
 
 
@@ -76,9 +76,7 @@ class MainWindow(QFrame):
                                         self.cfg.dictionary_ext))
 
     def set_omo_words(self):
-
         work_dictionary = self.work_dictionary
-
         diff_word = self.tool.line_edit_text
         min_ratio = self.cfg.min_ratio
         prefix_weight = self.cfg.prefix_weight
@@ -105,8 +103,10 @@ class MainWindow(QFrame):
                 height = (self.wizard.wizard.max_line_size + 0) * (
                 words_on_page // number_columns) + 50
                 # if height != self.height():
-                print(height)
-                self.setFixedHeight(height-150)
+                self.setMinimumHeight(height)
+
+                if width != self.width():
+                     self.setMinimumWidth(width)
 
     def closeEvent(self, *args, **kwargs):
 

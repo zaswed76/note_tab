@@ -14,8 +14,8 @@ class ListView(QListView):
         self.setSelectionRectVisible(False)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        self.setSizePolicy(sizePolicy)
+        # sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        # self.setSizePolicy(sizePolicy)
 
 
 class ListModel(QStandardItemModel):
@@ -24,6 +24,8 @@ class ListModel(QStandardItemModel):
 
     def set_items(self, items):
         self.clear()
+        print(items)
+        print(len(items))
         for i in items:
             item = QStandardItem(str(i))
             self.appendRow(item)

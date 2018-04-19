@@ -22,7 +22,7 @@ class Tool(QFrame):
     def __init__(self):
         super().__init__()
         self.setFixedHeight(50)
-        self.setStyleSheet("background-color: lightgrey")
+        # self.setStyleSheet("background-color: lightgrey")
 
         self.box = QHBoxLayout(self)
 

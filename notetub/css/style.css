@@ -1,3 +1,13 @@
+
+MainWindow {
+    background-color: #d3d3d5;
+}
+
+Tool {
+    background-color: #a4a4a4;
+}
+
+
 TableList  {
     background-color: #e0e0e0;
     border-left: none;
@@ -42,7 +52,9 @@ QListView {
 
 QListView::item:selected {
     /*background-color: #cbcbcb;*/
-    color: #0e9429;
+    color: #027e88;
+    font-weight: 600;
+
 
 }
 
