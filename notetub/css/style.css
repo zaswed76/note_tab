@@ -115,7 +115,7 @@ ConfigBtn {
     font-size: 10pt;
     font-weight: 300;
     background-color: #c9c9c9;
-    color: #089913;
+    color: #868688;
     border-left: 1px solid #adadaf;
     border-right:  none;
     border-bottom:  1px solid #adadaf;
@@ -151,7 +151,7 @@ TableCfgWidget {
 }
 
 ViewCfgWidget {
-    border-left: 15px solid #d3c523;
+    border-left: 15px solid #be5805;
     border-right:  none;
     border-bottom:  none;
     border-top: none;
@@ -173,4 +173,26 @@ Combo{
     border-top: 1px solid #a8a8aa;
     max-width: 80px;
     min-width: 80px;
+}
+
+ConfigBtn#search_cfg_btn:checked {
+    color: #088115;
+    border-left: 1px solid #21af1f;
+    border-right:  none;
+    border-bottom:  1px solid #21af1f;
+    border-top: 1px solid #21af1f;
+}
+ConfigBtn#table_cfg_btn:checked {
+    color: #059c9a;
+    border-left: 1px solid #059c9a;
+    border-right:  none;
+    border-bottom:  1px solid #059c9a;
+    border-top: 1px solid #059c9a;
+}
+ConfigBtn#app_cfg_btn:checked {
+    color: #be5805;
+    border-left: 1px solid #be5805;
+    border-right:  none;
+    border-bottom:  1px solid #be5805;
+    border-top: 1px solid #be5805;
 }

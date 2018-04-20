@@ -13,6 +13,7 @@ class ConfigBtn(QPushButton):
         self.setObjectName(name)
         self.setText(text)
         self.setCursor(Qt.PointingHandCursor)
+        self.setCheckable(True)
 
     @property
     def link_widget(self):
@@ -30,12 +31,16 @@ class ConfigTool(QFrame):
         self.vbox = QVBoxLayout(self)
         self.vbox.setContentsMargins(5, 0, 0, 0)
         self.vbox.setSpacing(6)
+        self.tool_group = QButtonGroup()
         self.__init_btns()
 
     def __init_btns(self):
         self.search_cfg_btn = ConfigBtn("search_cfg_btn", text="поиск")
         self.table_cfg_btn = ConfigBtn("table_cfg_btn", text="таблица")
         self.app_cfg_btn = ConfigBtn("app_cfg_btn", text="вид")
+        self.tool_group.addButton(self.search_cfg_btn)
+        self.tool_group.addButton(self.table_cfg_btn)
+        self.tool_group.addButton(self.app_cfg_btn)
         self.vbox.addWidget(self.search_cfg_btn)
         self.vbox.addWidget(self.table_cfg_btn)
         self.vbox.addWidget(self.app_cfg_btn)
