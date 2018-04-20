@@ -45,7 +45,7 @@ class MainWindow(QFrame):
 
 
     def __init_tool(self):
-        self.tool = tool.Tool()
+        self.tool = tool.Tool(self.cfg)
         self.box.addWidget(self.tool)
 
         if self.cfg.line_validator:
@@ -101,12 +101,15 @@ class MainWindow(QFrame):
                 width = (
                         self.wizard.wizard.max_column_size + 3) * number_columns
                 height = (self.wizard.wizard.max_line_size + 0) * (
-                words_on_page // number_columns) + 50
-                # if height != self.height():
-                self.setMinimumHeight(height)
+                words_on_page // number_columns) + self.cfg["tool_height"] + 1
 
-                if width != self.width():
+                if height != self.height():
+                    self.setFixedHeight(height)
+
+                if width > self.width():
+                     self.resize(width, height)
                      self.setMinimumWidth(width)
+
 
     def closeEvent(self, *args, **kwargs):
 

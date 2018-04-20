@@ -114,9 +114,13 @@ class ConfigManager(QFrame):
         self.config_widget.stack.setCurrentWidget(self.sender().link_widget)
 
     def closeEvent(self, *args, **kwargs):
-        lv = self.config_widget.search_cfg.check_valid_line.isChecked()
-        print(lv)
-        self.cfg["line_validator"] = lv
+
+        all_words = self.config_widget.table_cfg.all_words.value()
+        words_on_page = self.config_widget.table_cfg.words_on_page.value()
+        columns = self.config_widget.table_cfg.columns.value()
+        self.cfg["max_words"] = all_words
+        self.cfg["words_on_page"] = words_on_page
+        self.cfg["number_columns"] = columns
         self.cfg.save()
 
 if __name__ == '__main__':

@@ -85,7 +85,7 @@ def get_dictionaries_files(folder, ext):
 
 
 if __name__ == '__main__':
-    files = get_dictionaries_files("../resource/test", ".txt")
+    files = get_dictionaries_files("../dictionaries", ".txt")
     print(files_to_list(files))
 
     # print(group_by(lst, 4))

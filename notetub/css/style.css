@@ -33,7 +33,7 @@ QListView {
     /*alternate-background-color: #407487;*/
     /*alternate-background-color: #e0e0e0;*/
     /*background-color: #cbcbcb;*/
-    font-family: "Helvetica";
+    font-family: "Helvetica Neue";
     font-size: 12pt;
     color: #636363;
     border-left: 1px solid #8f8f91;
@@ -52,8 +52,8 @@ QListView {
 
 QListView::item:selected {
     /*background-color: #cbcbcb;*/
-    color: #027e88;
-    font-weight: 600;
+    color: #088115;
+    font-weight: bold;
 
 
 }
@@ -105,7 +105,7 @@ LineEdit {
     border-bottom:  1px solid #adadaf;
     border-top: 1px solid #adadaf;
     border-radius: 4px;
-    width: 220px;
+    width: 160px;
     min-height: 12px;
 
 }
@@ -155,4 +155,22 @@ ViewCfgWidget {
     border-right:  none;
     border-bottom:  none;
     border-top: none;
+}
+
+QSpin{
+    border-left: 1px solid #a8a8aa;
+    border-right:  1px solid #a8a8aa;
+    border-bottom:  1px solid #a8a8aa;
+    border-top: 1px solid #a8a8aa;
+    max-width: 80px;
+    min-width: 80px;
+}
+
+Combo{
+    border-left: 1px solid #a8a8aa;
+    border-right:  1px solid #a8a8aa;
+    border-bottom:  1px solid #a8a8aa;
+    border-top: 1px solid #a8a8aa;
+    max-width: 80px;
+    min-width: 80px;
 }
