@@ -1,14 +1,14 @@
 dictionaries_dir: ./dictionaries
 dictionary_ext: .txt
-last_width: 967
+last_width: 507
 line_edit__height: 50
 line_validator: true
 line_validator_reg: "[\u0420\xB0-\u0421\u040F\u0420\u0452-\u0420\u0407\u0421\u2018\
   \u0420\u0403!\\d]+"
 max_words: 60
 min_ratio: 50
-minimum_height: 381
-number_columns: 6
+minimum_height: 546
+number_columns: 4
 prefix_weight: 0.01
 tool_height: 50
 words_on_page: 60

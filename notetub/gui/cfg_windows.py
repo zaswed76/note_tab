@@ -4,6 +4,15 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
+class Combo(QComboBox):
+    def __init__(self):
+        super().__init__()
+
+
+class QSpin(QSpinBox):
+    def __init__(self):
+        super().__init__()
+
 class AbcCfgWidget(QLabel):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,14 +32,7 @@ class SearchCfgWidget(AbcCfgWidget):
 
 
 
-class Combo(QComboBox):
-    def __init__(self):
-        super().__init__()
 
-
-class QSpin(QSpinBox):
-    def __init__(self):
-        super().__init__()
 
 
 class TableCfgWidget(AbcCfgWidget):

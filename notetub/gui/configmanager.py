@@ -105,8 +105,12 @@ class ConfigManager(QFrame):
         self.__init_controllers()
 
 
+
+
+
     def __init_controllers(self):
         self.tool.search_cfg_btn.clicked.connect(self.select_cfg_window)
+        self.tool.search_cfg_btn.setChecked(True)
         self.tool.search_cfg_btn.link_widget = self.config_widget.search_cfg
 
         self.tool.table_cfg_btn.clicked.connect(self.select_cfg_window)
@@ -114,6 +118,8 @@ class ConfigManager(QFrame):
 
         self.tool.app_cfg_btn.clicked.connect(self.select_cfg_window)
         self.tool.app_cfg_btn.link_widget = self.config_widget.view_cfg
+
+
 
     def select_cfg_window(self):
         self.config_widget.stack.setCurrentWidget(self.sender().link_widget)
