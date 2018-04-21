@@ -26,9 +26,12 @@ class SearchCfgWidget(AbcCfgWidget):
         super().__init__(name, cfg, *args, **kwargs)
         self.box = QVBoxLayout(self)
 
+
+        self.algorithm_group = QGroupBox()
         self.check_valid_line = QCheckBox()
-        self.check_valid_line.setChecked(cfg.line_validator)
-        self.box.addWidget(self.check_valid_line)
+
+
+
 
 
 

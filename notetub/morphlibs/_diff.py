@@ -34,7 +34,12 @@ def test():
     return res[0]
 
 
-def jaro_winkler(lst, word, ratio, prefix_weight=0.1):
+def jaro_winkler(**kwargs):
+    lst = kwargs["lst"]
+    word = kwargs["word"]
+    ratio = kwargs["ratio"]
+    prefix_weight = kwargs["prefix_weight"]
+
     result = []
     ratio = float(ratio) / 100
     for line in lst:
@@ -43,7 +48,10 @@ def jaro_winkler(lst, word, ratio, prefix_weight=0.1):
             result.append((line, r))
     return result
 
-def jaro(lst, word, ratio):
+def jaro(**kwargs):
+    lst = kwargs["lst"]
+    word = kwargs["word"]
+    ratio = kwargs["ratio"]
     result = []
     ratio = float(ratio) / 100
     for line in lst:

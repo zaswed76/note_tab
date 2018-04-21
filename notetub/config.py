@@ -19,7 +19,8 @@ class Config(MutableMapping):
 
     def save(self):
         with open(self.pth, "w") as f:
-            yaml.dump(self._data, f, default_flow_style=False)
+            yaml.dump(self._data, f, default_flow_style=False,
+                      allow_unicode=True)
 
     def __len__(self):
         return len(self._data)
