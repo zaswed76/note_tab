@@ -85,18 +85,13 @@ class MainWindow(QFrame):
         number_columns = self.cfg.number_columns
         search_algorithm = self.cfg.search_algorithm
 
-        print(search_algorithm)
-
-
         if diff_word:
 
             omo_list = getattr(_diff, search_algorithm)(lst=work_dictionary,
                                                         word=diff_word,
                                           ratio=min_ratio,
                                           prefix_weight=prefix_weight)
-            # omo_list = _diff.jaro_winkler(work_dictionary, diff_word,
-            #                               min_ratio,
-            #                               prefix_weight=prefix_weight)
+
 
             sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
             cut_omo_list = sorted_on_ratio[:max_words]

@@ -105,9 +105,6 @@ class ConfigManager(QFrame):
         self.__init_controllers()
 
 
-
-
-
     def __init_controllers(self):
         self.tool.search_cfg_btn.clicked.connect(self.select_cfg_window)
         self.tool.search_cfg_btn.setChecked(True)
@@ -125,13 +122,14 @@ class ConfigManager(QFrame):
         self.config_widget.stack.setCurrentWidget(self.sender().link_widget)
 
     def closeEvent(self, *args, **kwargs):
-
         all_words = self.config_widget.table_cfg.all_words.value()
         words_on_page = self.config_widget.table_cfg.words_on_page.value()
         columns = self.config_widget.table_cfg.columns.value()
+
         self.cfg["max_words"] = all_words
         self.cfg["words_on_page"] = words_on_page
         self.cfg["number_columns"] = columns
+        self.cfg["search_algorithm"] = self.config_widget.search_cfg.algorithm_box.get_active_algorithm()
         self.cfg.save()
 
 if __name__ == '__main__':

@@ -196,3 +196,9 @@ ConfigBtn#app_cfg_btn:checked {
     border-bottom:  1px solid #be5805;
     border-top: 1px solid #be5805;
 }
+
+Algorithms {
+    font-family: "Helvetica Neue";
+    font-size: 12pt;
+    color: #636363;
+}

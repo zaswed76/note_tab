@@ -1,9 +1,10 @@
 algorithm_list:
 - jaro_winkler
 - jaro
+- ratio
 dictionaries_dir: ./dictionaries
 dictionary_ext: .txt
-last_width: 552
+last_width: 1036
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'

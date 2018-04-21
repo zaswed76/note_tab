@@ -60,6 +60,18 @@ def jaro(**kwargs):
             result.append((line, r))
     return result
 
+def ratio(**kwargs):
+    lst = kwargs["lst"]
+    word = kwargs["word"]
+    ratio = kwargs["ratio"]
+    result = []
+    ratio = float(ratio) / 100
+    for line in lst:
+        r = lv._levenshtein.ratio(word, line)
+        if r > ratio:
+            result.append((line, r))
+    return result
+
 def find(lst, *words):
     d = {}
     for w in words:

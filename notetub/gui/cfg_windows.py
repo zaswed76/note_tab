@@ -19,20 +19,43 @@ class AbcCfgWidget(QLabel):
         self.setObjectName(name)
         self.setStyleSheet("background-color: #CCCCCE")
 
+class RadioButton(QRadioButton):
+    def __init__(self, *__args):
+        super().__init__(*__args)
 
+class Algorithms(QGroupBox):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        self.algorithms = {}
+        self.box = QVBoxLayout()
+        self.setLayout(self.box)
+
+    def add_algorithm(self, name):
+        self.algorithms[name] = RadioButton(name)
+        self.box.addWidget(self.algorithms[name])
+
+    def set_active_algorithm(self, name):
+        self.algorithms[name].setChecked(True)
+
+    def get_active_algorithm(self):
+        for n, r in self.algorithms.items():
+            if r.isChecked():
+                return n
 
 class SearchCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
-        self.box = QVBoxLayout(self)
+        self.cfg = cfg
+        self.main_box = QVBoxLayout(self)
+        self.__init_algorithms()
+        self.main_box.addStretch(1)
 
-
-        self.algorithm_group = QGroupBox()
-        self.check_valid_line = QCheckBox()
-
-
-
-
+    def __init_algorithms(self):
+        self.algorithm_box = Algorithms("алгоритмы")
+        self.main_box.addWidget(self.algorithm_box)
+        for alg in self.cfg["algorithm_list"]:
+            self.algorithm_box.add_algorithm(alg)
+        self.algorithm_box.set_active_algorithm(self.cfg["search_algorithm"])
 
 
 
