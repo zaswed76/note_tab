@@ -1,3 +1,6 @@
+algorithm_list:
+- jaro_winkler
+- jaro
 dictionaries_dir: ./dictionaries
 dictionary_ext: .txt
 last_width: 552
@@ -12,5 +15,3 @@ prefix_weight: 0.01
 search_algorithm: jaro_winkler
 tool_height: 50
 words_on_page: 60
-algorithm_list: [jaro_winkler, jaro]
-
