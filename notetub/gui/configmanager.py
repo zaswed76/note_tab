@@ -38,10 +38,13 @@ class ConfigTool(QFrame):
         self.search_cfg_btn = ConfigBtn("search_cfg_btn", text="поиск")
         self.table_cfg_btn = ConfigBtn("table_cfg_btn", text="таблица")
         self.app_cfg_btn = ConfigBtn("app_cfg_btn", text="вид")
+        self.dict_cfg_btn = ConfigBtn("dict_cfg_btn", text="словари")
         self.tool_group.addButton(self.search_cfg_btn)
+        self.tool_group.addButton(self.dict_cfg_btn)
         self.tool_group.addButton(self.table_cfg_btn)
         self.tool_group.addButton(self.app_cfg_btn)
         self.vbox.addWidget(self.search_cfg_btn)
+        self.vbox.addWidget(self.dict_cfg_btn)
         self.vbox.addWidget(self.table_cfg_btn)
         self.vbox.addWidget(self.app_cfg_btn)
         self.vbox.addStretch(1)
@@ -59,9 +62,11 @@ class ConfigWidget(QFrame):
         self.search_cfg = cfg_windows.SearchCfgWidget("search_cfg", cfg)
         self.table_cfg = cfg_windows.TableCfgWidget("table_cfg", cfg)
         self.view_cfg = cfg_windows.ViewCfgWidget("view_cfg", cfg)
+        self.dict_cfg = cfg_windows.DictCfgWidget("dict_cfg", cfg)
         self.stack.addWidget(self.search_cfg)
         self.stack.addWidget(self.table_cfg)
         self.stack.addWidget(self.view_cfg)
+        self.stack.addWidget(self.dict_cfg)
 
 
 
@@ -116,7 +121,8 @@ class ConfigManager(QFrame):
         self.tool.app_cfg_btn.clicked.connect(self.select_cfg_window)
         self.tool.app_cfg_btn.link_widget = self.config_widget.view_cfg
 
-
+        self.tool.dict_cfg_btn.clicked.connect(self.select_cfg_window)
+        self.tool.dict_cfg_btn.link_widget = self.config_widget.dict_cfg
 
     def select_cfg_window(self):
         self.config_widget.stack.setCurrentWidget(self.sender().link_widget)
@@ -130,6 +136,8 @@ class ConfigManager(QFrame):
         self.cfg["words_on_page"] = words_on_page
         self.cfg["number_columns"] = columns
         self.cfg["search_algorithm"] = self.config_widget.search_cfg.algorithm_box.get_active_algorithm()
+        self.cfg["works_dictionaries"] = [x.text() for x in self.config_widget.dict_cfg.get_active_dict]
+        print(self.cfg["works_dictionaries"])
         self.cfg.save()
 
 if __name__ == '__main__':

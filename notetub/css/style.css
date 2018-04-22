@@ -157,6 +157,13 @@ ViewCfgWidget {
     border-top: none;
 }
 
+DictCfgWidget {
+    border-left: 15px solid #913899;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
+}
+
 QSpin{
     border-left: 1px solid #a8a8aa;
     border-right:  1px solid #a8a8aa;
@@ -195,6 +202,14 @@ ConfigBtn#app_cfg_btn:checked {
     border-right:  none;
     border-bottom:  1px solid #be5805;
     border-top: 1px solid #be5805;
+}
+
+ConfigBtn#dict_cfg_btn:checked {
+    color: #913899;
+    border-left: 1px solid #913899;
+    border-right:  none;
+    border-bottom:  1px solid #913899;
+    border-top: 1px solid #913899;
 }
 
 Algorithms {

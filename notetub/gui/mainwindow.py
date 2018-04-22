@@ -24,11 +24,12 @@ class MainWindow(QFrame):
         self.controller = None
         self.config_manager = None
         self.cfg = cfg
-        self.work_dictionary = serv.files_to_list(
-            serv.get_dictionaries_files(self.cfg.dictionaries_dir,
-                                        self.cfg.dictionary_ext))
-
-
+        self.dictionaries_files = serv.get_dictionaries_files(
+            self.cfg.dictionaries_dir,
+            self.cfg.dictionary_ext)
+        self.cfg["dictionaries_files"] = self.dictionaries_files
+        self.cfg.save()
+        self.work_dictionary = serv.files_to_list(self.dictionaries_files)
 
         self.box = QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
@@ -41,8 +42,14 @@ class MainWindow(QFrame):
         self.resize(self.cfg["last_width"], self.cfg["minimum_height"])
         self.setMinimumHeight(self.cfg["minimum_height"])
 
-
-
+    def _is_checked_dict(self):
+        check_dict = self.config_manager.config_widget.dict_cfg.get_active_dict
+        if not check_dict:
+            self.show_config_manager()
+            self.config_manager.tool.dict_cfg_btn.click()
+            # self.config_manager.config_widget.stack.setCurrentWidget(
+            #     self.config_manager.config_widget.dict_cfg
+            # )
 
     def __init_tool(self):
         self.tool = tool.Tool(self.cfg)
@@ -51,11 +58,12 @@ class MainWindow(QFrame):
         if self.cfg.line_validator:
             self.tool.set_line_validator(self.cfg.line_validator_reg)
 
-
     def set_config_manager(self, manager):
         self.config_manager = manager
+        self._is_checked_dict()
 
     def show_config_manager(self):
+
         self.config_manager.show()
 
     def set_controller(self, controller):
@@ -89,9 +97,8 @@ class MainWindow(QFrame):
 
             omo_list = getattr(_diff, search_algorithm)(lst=work_dictionary,
                                                         word=diff_word,
-                                          ratio=min_ratio,
-                                          prefix_weight=prefix_weight)
-
+                                                        ratio=min_ratio,
+                                                        prefix_weight=prefix_weight)
 
             sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
             cut_omo_list = sorted_on_ratio[:max_words]
@@ -103,17 +110,16 @@ class MainWindow(QFrame):
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_words(words)
                 width = (
-                        self.wizard.wizard.max_column_size + 3) * number_columns
+                            self.wizard.wizard.max_column_size + 3) * number_columns
                 height = (self.wizard.wizard.max_line_size + 0) * (
-                words_on_page // number_columns) + self.cfg["tool_height"] + 1
+                    words_on_page // number_columns) + self.cfg["tool_height"] + 1
 
                 if height != self.height():
                     self.setFixedHeight(height)
 
                 if width > self.width():
-                     self.resize(width, height)
-                     self.setMinimumWidth(width)
-
+                    self.resize(width, height)
+                    self.setMinimumWidth(width)
 
     def closeEvent(self, *args, **kwargs):
 

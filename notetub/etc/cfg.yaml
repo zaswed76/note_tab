@@ -3,6 +3,9 @@ algorithm_list:
 - jaro
 - ratio
 dictionaries_dir: ./dictionaries
+dictionaries_files:
+- ./dictionaries\corpora_noun.txt
+- ./dictionaries\test.txt
 dictionary_ext: .txt
 last_width: 1036
 line_edit__height: 50
@@ -13,6 +16,8 @@ min_ratio: 50
 minimum_height: 546
 number_columns: 4
 prefix_weight: 0.01
-search_algorithm: jaro_winkler
+search_algorithm: jaro
 tool_height: 50
 words_on_page: 60
+works_dictionaries:
+- test
