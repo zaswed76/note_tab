@@ -13,11 +13,12 @@ line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
 max_words: 60
 min_ratio: 50
-minimum_height: 447
-number_columns: 5
+minimum_height: 381
+number_columns: 6
 prefix_weight: 0.01
-search_algorithm: jaro
+search_algorithm: jaro_winkler
 tool_height: 50
 words_on_page: 60
 works_dictionaries:
+- corpora_noun
 - test

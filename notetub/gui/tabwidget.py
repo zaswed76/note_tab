@@ -37,6 +37,13 @@ class TableList(QFrame):
     def max_line_size(self):
         return max(self.max_line_size_list)
 
+    def clear_table(self):
+
+        for m in self.lst_models:
+            print(m, 111)
+            m.clear()
+
+
 if __name__ == '__main__':
     from notetub.lib import serv
     app = QApplication(sys.argv)

@@ -72,7 +72,7 @@ class MainWindow(QFrame):
     def show_config_manager(self):
 
         self.config_manager.show()
-        print(555)
+
 
     def set_controller(self, controller):
         self.controller = controller
@@ -129,6 +129,8 @@ class MainWindow(QFrame):
                 if width > self.width():
                     self.resize(width, height)
                     self.setMinimumWidth(width)
+            elif self.wizard.wizard is not None:
+                self.wizard.wizard.clear_table()
 
     def closeEvent(self, *args, **kwargs):
         self.cfg["minimum_height"] = self.height()

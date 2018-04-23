@@ -24,10 +24,10 @@ class ListModel(QStandardItemModel):
 
     def set_items(self, items):
         self.clear()
-        print(items)
-        print(len(items))
         for i in items:
             item = QStandardItem(str(i))
+            item.setToolTip("rrr")
+            item.setWhatsThis("!!!!")
             self.appendRow(item)
 
 
