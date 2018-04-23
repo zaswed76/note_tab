@@ -1,5 +1,6 @@
 import fileinput
 import glob
+import os
 from os.path import join as pjoin
 import pprint
 from itertools import groupby
@@ -81,6 +82,11 @@ def files_to_list(files):
 def get_dictionaries_files(folder, ext):
     return glob.glob(pjoin(folder, '*' + ext))
 
+def get_files_by_names(folder, dict_names, ext):
+    fd = []
+    for n in dict_names:
+        fd.append(pjoin(folder, n + ext))
+    return fd
 
 
 

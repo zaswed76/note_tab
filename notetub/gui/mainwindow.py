@@ -24,13 +24,11 @@ class MainWindow(QFrame):
         self.controller = None
         self.config_manager = None
         self.cfg = cfg
-        self.dictionaries_files = serv.get_dictionaries_files(
-            self.cfg.dictionaries_dir,
-            self.cfg.dictionary_ext)
+
+        self._update_dictionaries()
+
         self.cfg["dictionaries_files"] = self.dictionaries_files
         self.cfg.save()
-        self.work_dictionary = serv.files_to_list(self.dictionaries_files)
-
         self.box = QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
         self.box.setSpacing(0)
@@ -47,9 +45,17 @@ class MainWindow(QFrame):
         if not check_dict:
             self.show_config_manager()
             self.config_manager.tool.dict_cfg_btn.click()
-            # self.config_manager.config_widget.stack.setCurrentWidget(
-            #     self.config_manager.config_widget.dict_cfg
-            # )
+
+    def _update_dictionaries(self):
+        self.dictionaries_files = serv.get_dictionaries_files(
+            self.cfg.dictionaries_dir,
+            self.cfg.dictionary_ext)
+
+        files = serv.get_files_by_names(self.cfg.dictionaries_dir,
+                                        self.cfg["works_dictionaries"],
+                                        self.cfg.dictionary_ext)
+
+        self.work_dictionary = serv.files_to_list(files)
 
     def __init_tool(self):
         self.tool = tool.Tool(self.cfg)
@@ -61,10 +67,12 @@ class MainWindow(QFrame):
     def set_config_manager(self, manager):
         self.config_manager = manager
         self._is_checked_dict()
+        self.config_manager.closeEvent = self.config_close_event
 
     def show_config_manager(self):
 
         self.config_manager.show()
+        print(555)
 
     def set_controller(self, controller):
         self.controller = controller
@@ -112,7 +120,8 @@ class MainWindow(QFrame):
                 width = (
                             self.wizard.wizard.max_column_size + 3) * number_columns
                 height = (self.wizard.wizard.max_line_size + 0) * (
-                    words_on_page // number_columns) + self.cfg["tool_height"] + 1
+                    words_on_page // number_columns) + self.cfg[
+                             "tool_height"] + 1
 
                 if height != self.height():
                     self.setFixedHeight(height)
@@ -122,13 +131,29 @@ class MainWindow(QFrame):
                     self.setMinimumWidth(width)
 
     def closeEvent(self, *args, **kwargs):
-
         self.cfg["minimum_height"] = self.height()
         self.cfg["last_width"] = self.width()
         self.cfg.save()
 
+    def config_close_event(self, e):
+        all_words = self.config_manager.config_widget.table_cfg.all_words.value()
+        words_on_page = self.config_manager.config_widget.table_cfg.words_on_page.value()
+        columns = self.config_manager.config_widget.table_cfg.columns.value()
+
+        self.cfg["max_words"] = all_words
+        self.cfg["words_on_page"] = words_on_page
+        self.cfg["number_columns"] = columns
+        self.cfg[
+            "search_algorithm"] = self.config_manager.config_widget.search_cfg.algorithm_box.get_active_algorithm()
+        self.cfg["works_dictionaries"] = [x.text() for x in
+                                          self.config_manager.config_widget.dict_cfg.get_active_dict]
+        self._update_dictionaries()
+        self.cfg.save()
+
 
 if __name__ == '__main__':
+    from notetub.config import Config
+
     app = QApplication(sys.argv)
     cfg = Config("path")
 

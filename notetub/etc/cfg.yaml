@@ -13,8 +13,8 @@ line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
 max_words: 60
 min_ratio: 50
-minimum_height: 546
-number_columns: 4
+minimum_height: 447
+number_columns: 5
 prefix_weight: 0.01
 search_algorithm: jaro
 tool_height: 50
