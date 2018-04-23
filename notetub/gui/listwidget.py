@@ -4,6 +4,19 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
 
+class StandardItem(QStandardItem):
+    def __init__(self, text, ratio, ratio_in_text=False, ndigits=3):
+
+        super().__init__()
+        ratio = str(round(ratio, ndigits))
+        if ratio_in_text:
+            text = "{} {}".format(text, ratio)
+        else:
+            self.setToolTip(ratio)
+
+        self.setText(text)
+
+
 class ListView(QListView):
     def __init__(self, model):
         super().__init__()
@@ -24,10 +37,9 @@ class ListModel(QStandardItemModel):
 
     def set_items(self, items):
         self.clear()
-        for i in items:
-            item = QStandardItem(str(i))
-            item.setToolTip("rrr")
-            item.setWhatsThis("!!!!")
+        for i, r in items:
+            item = StandardItem(i, r)
+
             self.appendRow(item)
 
 

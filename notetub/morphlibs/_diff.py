@@ -4,9 +4,9 @@ import Levenshtein as lv
 
 
 def sorted_on_ratio(iterable, reverse=True):
-    r = sorted(iterable, key=lambda w: w[1], reverse=reverse)
-    print(r)
-    return [x[0] for x in r]
+    return sorted(iterable, key=lambda w: w[1], reverse=reverse)
+    # print(r)
+    # return [x[0] for x in r]
 
 
 def file_to_words(file):
