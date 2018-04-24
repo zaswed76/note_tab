@@ -7,7 +7,7 @@ dictionaries_files:
 - ./dictionaries\corpora_noun.txt
 - ./dictionaries\test.txt
 dictionary_ext: .txt
-last_width: 1036
+last_width: 630
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'

@@ -9,7 +9,8 @@ class TextEdit(QTextEdit):
 
     def set_items(self, items):
         for i in items:
-            self.append(i)
+            t = '<font color="red" face="Arial">{}</font>'.format(i[0])
+            self.append(t)
 
 class TableList(QFrame):
     def __init__(self, cfg):

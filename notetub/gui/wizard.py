@@ -18,7 +18,7 @@ class WizardManager(QFrame):
         if max_words == words_on_page:
             if self.wizard is not None:
                 self.box.removeWidget(self.wizard)
-            self.wizard = tabwidget.TableList(self.cfg)
+            self.wizard = textedit.TableList(self.cfg)
             self.box.addWidget(self.wizard)
 
 
