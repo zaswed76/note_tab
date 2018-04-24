@@ -14,10 +14,13 @@ line_validator_reg: '[а-яА-ЯёЁ!\d]+'
 max_words: 60
 min_ratio: 50
 minimum_height: 381
+ndigits: 3
 number_columns: 6
 prefix_weight: 0.01
+ratio_in_text: false
 search_algorithm: jaro_winkler
 tool_height: 50
+tool_tip: true
 words_on_page: 60
 works_dictionaries:
 - corpora_noun

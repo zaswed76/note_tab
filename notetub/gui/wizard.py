@@ -6,8 +6,9 @@ from notetub.gui import tabwidget
 
 
 class WizardManager(QFrame):
-    def __init__(self):
+    def __init__(self, cfg):
         super().__init__()
+        self.cfg = cfg
         self.box = QHBoxLayout(self)
         self.box.setContentsMargins(0, 1, 0, 0)
         self.box.setSpacing(0)
@@ -17,7 +18,7 @@ class WizardManager(QFrame):
         if max_words == words_on_page:
             if self.wizard is not None:
                 self.box.removeWidget(self.wizard)
-            self.wizard = tabwidget.TableList()
+            self.wizard = tabwidget.TableList(self.cfg)
             self.box.addWidget(self.wizard)
 
 

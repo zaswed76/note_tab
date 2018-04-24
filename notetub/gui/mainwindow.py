@@ -35,7 +35,7 @@ class MainWindow(QFrame):
 
         self.__init_tool()
 
-        self.wizard = wizard.WizardManager()
+        self.wizard = wizard.WizardManager(self.cfg)
         self.box.addWidget(self.wizard)
         self.resize(self.cfg["last_width"], self.cfg["minimum_height"])
         self.setMinimumHeight(self.cfg["minimum_height"])

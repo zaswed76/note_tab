@@ -9,8 +9,9 @@ from PyQt5.QtCore import *
 from notetub.gui.listwidget import *
 
 class TableList(QFrame):
-    def __init__(self):
+    def __init__(self, cfg):
         super().__init__()
+        self.cfg = cfg
         self.box = QHBoxLayout(self)
         self.box.setSpacing(0)
         self.box.setContentsMargins(0, 0, 0, 0)
@@ -21,7 +22,7 @@ class TableList(QFrame):
 
     def set_items(self, items_list):
         for n, lst in enumerate(items_list):
-            model = ListModel()
+            model = ListModel(self.cfg)
             model.set_items(lst)
             self.lst_models.append(model)
             view = ListView(model)

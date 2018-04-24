@@ -1,17 +1,18 @@
-
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
 
+
 class StandardItem(QStandardItem):
-    def __init__(self, text, ratio, ratio_in_text=False, ndigits=3):
+    def __init__(self, text, ratio, ratio_in_text=True, ndigits=3,
+                 tool_tip=False):
 
         super().__init__()
         ratio = str(round(ratio, ndigits))
         if ratio_in_text:
             text = "{} {}".format(text, ratio)
-        else:
+        elif tool_tip:
             self.setToolTip(ratio)
 
         self.setText(text)
@@ -32,24 +33,28 @@ class ListView(QListView):
 
 
 class ListModel(QStandardItemModel):
-    def __init__(self):
+    def __init__(self, cfg):
         super().__init__()
+        self.cfg = cfg
 
     def set_items(self, items):
+        ratio_in_text = self.cfg["ratio_in_text"]
+        ndigits = self.cfg["ndigits"]
+        tool_tip = self.cfg["tool_tip"]
+
         self.clear()
         for i, r in items:
-            item = StandardItem(i, r)
+            item = StandardItem(i, r, ratio_in_text=ratio_in_text,
+                                ndigits=ndigits,
+                                tool_tip=tool_tip)
 
             self.appendRow(item)
 
 
-
 if __name__ == "__main__":
-
     from notetub.lib import serv
+
     app = QApplication(sys.argv)
-
-
 
     model = ListModel()
     mw = ListView()
