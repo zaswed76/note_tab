@@ -18,7 +18,7 @@ ndigits: 3
 number_columns: 6
 prefix_weight: 0.01
 ratio_in_text: false
-search_algorithm: jaro_winkler
+search_algorithm: jaro
 tool_height: 50
 tool_tip: true
 words_on_page: 60

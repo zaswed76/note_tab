@@ -117,18 +117,18 @@ class MainWindow(QFrame):
             if words:
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_words(words)
-                width = (
-                            self.wizard.wizard.max_column_size + 3) * number_columns
-                height = (self.wizard.wizard.max_line_size + 0) * (
-                    words_on_page // number_columns) + self.cfg[
-                             "tool_height"] + 1
-
-                if height != self.height():
-                    self.setFixedHeight(height)
-
-                if width > self.width():
-                    self.resize(width, height)
-                    self.setMinimumWidth(width)
+                # width = (
+                #             self.wizard.wizard.max_column_size + 3) * number_columns
+                # height = (self.wizard.wizard.max_line_size + 0) * (
+                #     words_on_page // number_columns) + self.cfg[
+                #              "tool_height"] + 1
+                #
+                # if height != self.height():
+                #     self.setFixedHeight(height)
+                #
+                # if width > self.width():
+                #     self.resize(width, height)
+                #     self.setMinimumWidth(width)
             elif self.wizard.wizard is not None:
                 self.wizard.wizard.clear_table()
 

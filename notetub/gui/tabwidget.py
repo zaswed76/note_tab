@@ -39,7 +39,6 @@ class TableList(QFrame):
         return max(self.max_line_size_list)
 
     def clear_table(self):
-
         for m in self.lst_models:
             print(m, 111)
             m.clear()
