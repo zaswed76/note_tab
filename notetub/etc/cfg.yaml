@@ -7,7 +7,7 @@ dictionaries_files:
 - ./dictionaries\corpora_noun.txt
 - ./dictionaries\test.txt
 dictionary_ext: .txt
-last_width: 630
+last_width: 919
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
@@ -15,7 +15,7 @@ max_words: 60
 min_ratio: 50
 minimum_height: 381
 ndigits: 3
-number_columns: 6
+number_columns: 5
 prefix_weight: 0.01
 ratio_in_text: false
 search_algorithm: jaro

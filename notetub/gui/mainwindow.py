@@ -135,7 +135,8 @@ class MainWindow(QFrame):
 
             if words:
                 self.wizard.create_pages(max_words, words_on_page)
-                self.wizard.set_words(words)
+                self.wizard.set_data(words)
+                self.wizard.update_table()
                 # width = (
                 #             self.wizard.wizard.max_column_size + 3) * number_columns
                 # height = (self.wizard.wizard.max_line_size + 0) * (

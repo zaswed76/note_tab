@@ -16,8 +16,19 @@ TableList  {
     border-top: none;
 }
 
+Column {
+    font-family: "Helvetica Neue";
+    border-left: none;
+    border-right:  1px solid #8f8f91;
+    border-bottom:  none;
+    border-top: none;
+}
 
-
+LabelItem {
+    font-family: "Helvetica Neue";
+    font-size: 12pt;
+    color: #636363;
+}
 
 ListView::item {
     /*background-color: qlineargradient(spread:pad, x1:0.499, y1:0, x2:0.511364, y2:1, stop:0 rgba(171, 171, 171, 149), stop:1 rgba(198, 198, 198, 158));*/
