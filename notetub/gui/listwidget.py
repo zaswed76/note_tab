@@ -13,7 +13,6 @@ class CustomItem(QLabel):
             text = "{} {}".format(text, ratio)
         elif tool_tip:
             self.setToolTip(ratio)
-
         self.setText(text)
 
 
@@ -36,6 +35,11 @@ class ListView(QListView):
 class ListWidget(QListWidget):
     def __init__(self, cfg):
         super().__init__()
+        self.setSelectionMode(QAbstractItemView.MultiSelection)
+        self.setFocusPolicy(Qt.NoFocus)
+        self.setSelectionRectVisible(False)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.cfg = cfg
 
     def set_items(self, items):
@@ -45,11 +49,17 @@ class ListWidget(QListWidget):
 
         self.clear()
         for i, r in items:
+
+
+
+
             item = CustomItem(i, r, ratio_in_text=ratio_in_text,
                                 ndigits=ndigits,
                                 tool_tip=tool_tip)
+            sitem = QListWidgetItem(self)
+            sitem.setSizeHint(item.sizeHint())
 
-            self.setItemWidget(QListWidgetItem(self), item)
+            self.setItemWidget(sitem, item)
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ class MainWindow(QFrame):
         self.wizard = wizard.WizardManager(self.cfg)
         self.box.addWidget(self.wizard)
         self.resize(self.cfg["last_width"], self.cfg["minimum_height"])
-        self.setMinimumHeight(self.cfg["minimum_height"])
+        # self.setMinimumHeight(self.cfg["minimum_height"])
 
     def _is_checked_dict(self):
         check_dict = self.config_manager.config_widget.dict_cfg.get_active_dict

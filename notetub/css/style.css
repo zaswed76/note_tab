@@ -24,10 +24,13 @@ Column {
     border-top: none;
 }
 
-LabelItem {
+CustomItem {
     font-family: "Helvetica Neue";
     font-size: 12pt;
     color: #636363;
+    padding-left: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 ListView::item {
@@ -36,31 +39,13 @@ ListView::item {
     padding-left: 6px;
     padding-top: 6px;
     padding-bottom: 6px;
-}
-
-
-
-QListView {
-    /*alternate-background-color: #407487;*/
-    /*alternate-background-color: #e0e0e0;*/
-    /*background-color: #cbcbcb;*/
-    font-family: "Helvetica Neue";
-    font-size: 12pt;
-    color: #636363;
-    border-left: 1px solid #8f8f91;
-    border-right:  none;
-    border-bottom:  none;
-    border-top: none;
-
-    /*padding-right: 52px;*/
-
 
 }
 
-TextEdit {
-    /*alternate-background-color: #407487;*/
-    /*alternate-background-color: #e0e0e0;*/
-    /*background-color: #cbcbcb;*/
+
+
+ListWidget {
+
     font-family: "Helvetica Neue";
     font-size: 12pt;
     color: #636363;
@@ -77,10 +62,12 @@ TextEdit {
 
 
 
-QListView::item:selected {
-    /*background-color: #cbcbcb;*/
-    color: #088115;
-    font-weight: bold;
+
+ListWidget::item:selected {
+    border-left: none;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
 
 
 }
@@ -89,7 +76,7 @@ QListView::item:selected {
 
 
 
-QListView::item:hover {
+ListWidget::item:hover {
     /*background-color: #cbcbcb;*/
     /*color: green;*/
     /*border-left: none;*/

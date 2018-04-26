@@ -34,8 +34,8 @@ class TableList(QFrame):
             list_widget.set_items(lst)
             self.lst_models.append(list_widget)
 
-            # self.max_column_size_list.append(view.sizeHintForColumn(0))
-            # self.max_line_size_list.append(view.sizeHintForRow(0))
+            # self.max_column_size_list.append(self.sizeHintForColumn(0))
+            # self.max_line_size_list.append(self.sizeHintForRow(0))
             self.box.addWidget(list_widget)
 
     @property
