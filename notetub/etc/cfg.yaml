@@ -5,23 +5,21 @@ algorithm_list:
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
-- ./dictionaries\test.txt
 dictionary_ext: .txt
 last_width: 1083
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
-max_words: 40
+max_words: 60
 min_ratio: 50
-minimum_height: 434
+minimum_height: 364
 ndigits: 3
-number_columns: 4
+number_columns: 6
 prefix_weight: 0.01
 ratio_in_text: false
 search_algorithm: jaro
 tool_height: 50
 tool_tip: true
-words_on_page: 40
+words_on_page: 60
 works_dictionaries:
 - corpora_noun
-- test

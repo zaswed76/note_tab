@@ -3,7 +3,7 @@ from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import pyqtProperty
 from PyQt5.QtWidgets import *
-from notetub.gui import tabwidget, textedit, tablelab
+from notetub.gui import tabwidget
 
 
 class WizardManager(QFrame):

@@ -46,7 +46,6 @@ class MainWindow(QFrame):
 
         self._update_dictionaries()
 
-        self.cfg["dictionaries_files"] = self.dictionaries_files
         self.cfg.save()
         self.box = QVBoxLayout(self)
         self.box.setContentsMargins(0, 0, 0, 0)
@@ -66,15 +65,21 @@ class MainWindow(QFrame):
             self.config_manager.tool.dict_cfg_btn.click()
 
     def _update_dictionaries(self):
-        self.dictionaries_files = serv.get_dictionaries_files(
-            self.cfg.dictionaries_dir,
-            self.cfg.dictionary_ext)
+        """
 
+        """
+        print(1)
+        # пути к файлам согласно списка dict_names
         files = serv.get_files_by_names(self.cfg.dictionaries_dir,
                                         self.cfg["works_dictionaries"],
                                         self.cfg.dictionary_ext)
-
+        # список слов из списка  files если пути существуют
         self.work_dictionary = serv.files_to_list(files)
+
+        # сохраняем в cfg пути к словарям в директории
+        self.cfg["dictionaries_files"] = serv.get_dictionaries_files(
+            self.cfg.dictionaries_dir,
+            self.cfg.dictionary_ext)
 
     def __init_tool(self):
         self.tool = tool.Tool(self.cfg)
@@ -84,6 +89,7 @@ class MainWindow(QFrame):
             self.tool.set_line_validator(self.cfg.line_validator_reg)
 
     def set_config_manager(self, manager):
+        print(2)
         self.config_manager = manager
         self._is_checked_dict()
         self.config_manager.closeEvent = self.config_close_event

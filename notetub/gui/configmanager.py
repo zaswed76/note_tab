@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-from notetub.gui import cfg_windows
+from notetub.gui import cfg_windows, dictcfgwidget
 
 class ConfigBtn(QPushButton):
     def __init__(self, name, text=None):
@@ -62,7 +62,7 @@ class ConfigWidget(QFrame):
         self.search_cfg = cfg_windows.SearchCfgWidget("search_cfg", cfg)
         self.table_cfg = cfg_windows.TableCfgWidget("table_cfg", cfg)
         self.view_cfg = cfg_windows.ViewCfgWidget("view_cfg", cfg)
-        self.dict_cfg = cfg_windows.DictCfgWidget("dict_cfg", cfg)
+        self.dict_cfg = dictcfgwidget.DictCfgWidget("dict_cfg", cfg)
         self.stack.addWidget(self.search_cfg)
         self.stack.addWidget(self.table_cfg)
         self.stack.addWidget(self.view_cfg)

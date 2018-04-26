@@ -72,17 +72,36 @@ def file_to_list(file):
     with open(file, "r", encoding="utf-8") as f:
         return [x.strip() for x in f]
 
-def files_to_list(files):
+def files_to_list(files: list):
+    """
+
+    :param files: list < str
+    :return: список слов из файлов указанных в list files
+    """
     s = set()
     for f in files:
-        s.update(set(file_to_list(f)))
+        if os.path.isfile(f):
+            s.update(set(file_to_list(f)))
     return sorted(s)
 
 
 def get_dictionaries_files(folder, ext):
+    """
+
+    :param folder: str
+    :param ext: str
+    :return: list < str словари в указанной директории
+    """
     return glob.glob(pjoin(folder, '*' + ext))
 
 def get_files_by_names(folder, dict_names, ext):
+    """
+
+    :param folder: str
+    :param dict_names: list < str
+    :param ext: str
+    :return: пути к файлам согласно списка dict_names
+    """
     fd = []
     for n in dict_names:
         fd.append(pjoin(folder, n + ext))
