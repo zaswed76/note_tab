@@ -3,6 +3,24 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
+import sip
+
+def qt_message_handler(mode, context, message):
+    if mode == QtInfoMsg:
+        mode = 'INFO'
+    elif mode == QtWarningMsg:
+        mode = 'WARNING'
+    elif mode == QtCriticalMsg:
+        mode = 'CRITICAL'
+    elif mode == QtFatalMsg:
+        mode = 'FATAL'
+    else:
+        mode = 'DEBUG'
+    print('qt_message_handler: line: %d, func: %s(), file: %s' % (
+          context.line, context.function, context.file))
+    print('  %s: %s\n' % (mode, message))
+
+qInstallMessageHandler(qt_message_handler)
 
 
 class LabelItem(QLabel):
@@ -37,6 +55,7 @@ class Column(QFrame):
 class Table(QFrame):
     def __init__(self):
         super().__init__()
+        qDebug('something informative')
         self.main_box = QHBoxLayout(self)
         self.main_box.setSpacing(1)
         self.tool = QFrame()
@@ -65,20 +84,20 @@ class Table(QFrame):
         self.dynamic_widget = {}
 
     def add(self):
-        self.remove()
+        try:
+            self.remove()
+        except KeyError:
+            pass
         self.dynamic_widget = {}
         self.dynamic_widget["1"] = QFrame()
         self.dynamic_widget["1"].setStyleSheet("background-color: green")
         self.display_box.addWidget(self.dynamic_widget["1"])
 
     def remove(self):
+        self.display_box.removeWidget(self.dynamic_widget["1"])
+        sip.delete(self.dynamic_widget["1"])
+        self.dynamic_widget["1"] = None
 
-
-        for i in reversed (range(self.display_box.count())):
-            self.display_box.itemAt(i).widget().close()
-            self.display_box.takeAt(i)
-        if self.dynamic_widget:
-            del(self.dynamic_widget)
 
 
 

@@ -1,15 +1,15 @@
 import sys
+
+import sip
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-
 
 
 class LabelItem(QLabel):
     def __init__(self, *__args):
         super().__init__(*__args)
         self.select_flag = False
-
 
     def mousePressEvent(self, QMouseEvent):
         self.select_flag = not self.select_flag
@@ -20,6 +20,7 @@ class LabelItem(QLabel):
 
     def enterEvent(self, *args, **kwargs):
         self.setToolTip("0.86")
+
 
 class Column(QFrame):
     def __init__(self):
@@ -34,12 +35,13 @@ class Column(QFrame):
     def add_stretch(self, s):
         self.main_box.addStretch(s)
 
+
 class Table(QFrame):
     def __init__(self):
         super().__init__()
         self._data = None
         self.main_hbox = QHBoxLayout(self)
-        self.columns = {}
+
 
     @property
     def data(self):
@@ -50,8 +52,7 @@ class Table(QFrame):
         self._data = data
 
     def update_table(self):
-        self.clearLayout(self.main_hbox)
-
+        self.columns = {}
         if self.data is not None:
             for n, col in enumerate(self.data):
                 self.columns[n] = Column()
@@ -60,23 +61,21 @@ class Table(QFrame):
                     self.columns[n].add_item((LabelItem(w[0])))
                 self.columns[n].add_stretch(1)
 
-    def clearLayout(self, layout):
-        while layout.count():
-            child = layout.takeAt(0)
-            if child.widget() is not None:
-                child.widget().deleteLater()
-            elif child.layout() is not None:
-                self.clearLayout(child.layout())
 
+    def clear(self):
+        print(self.main_hbox.count(), 777)
+        while self.main_hbox.count() > 0:
+            print(555)
+            item = self.main_hbox.takeAt(0)
+            print(item)
+        # for col in self.columns.values():
+        #     self.main_hbox.removeWidget(col)
+        #     sip.delete(col)
+        #
+        #     del(col)
 
     def sort_by(self, sorter):
         return sorter(self.data)
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -84,7 +83,8 @@ if __name__ == '__main__':
     app.setStyleSheet(open("../css/style.css", "r").read())
     main = Table()
     main.show()
-    data = [[("w", 1), ("w2", 2)], [("w3", 3), ("w4", 4)], [("w5", 5), ("w6", 6)]]
+    data = [[("w", 1), ("w2", 2)], [("w3", 3), ("w4", 4)],
+            [("w5", 5), ("w6", 6)]]
     main.data = data
     main.update_table()
 

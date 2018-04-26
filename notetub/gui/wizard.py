@@ -2,7 +2,7 @@ from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import pyqtProperty
 from PyQt5.QtWidgets import *
-from notetub.gui import tabwidget, textedit, accam
+from notetub.gui import tabwidget, textedit, tablelab
 
 
 class WizardManager(QFrame):
@@ -16,9 +16,8 @@ class WizardManager(QFrame):
 
     def create_pages(self, max_words, words_on_page):
         if max_words == words_on_page:
-
             self.box.removeWidget(self.wizard)
-            self.wizard = accam.Table()
+            self.wizard = tabwidget.TableList(self.cfg)
             self.box.addWidget(self.wizard)
 
 
@@ -27,7 +26,9 @@ class WizardManager(QFrame):
         self.wizard.data = data
 
     def update_table(self):
+        self.wizard.clear_table()
         self.wizard.update_table()
+        # self.wizard.clear()
 
 
 class MagicWizard(QWizard):

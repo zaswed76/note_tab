@@ -18,17 +18,25 @@ class TableList(QFrame):
         self.lst_models = []
         self.max_column_size_list = []
         self.max_line_size_list = []
+        self._data = None
 
+    @property
+    def data(self):
+        return self._data
 
-    def set_items(self, items_list):
-        for n, lst in enumerate(items_list):
-            model = ListModel(self.cfg)
-            model.set_items(lst)
-            self.lst_models.append(model)
-            view = ListView(model)
-            self.max_column_size_list.append(view.sizeHintForColumn(0))
-            self.max_line_size_list.append(view.sizeHintForRow(0))
-            self.box.addWidget(view)
+    @data.setter
+    def data(self, data):
+        self._data = data
+
+    def update_table(self):
+        for n, lst in enumerate(self._data):
+            list_widget = ListWidget(self.cfg)
+            list_widget.set_items(lst)
+            self.lst_models.append(list_widget)
+
+            # self.max_column_size_list.append(view.sizeHintForColumn(0))
+            # self.max_line_size_list.append(view.sizeHintForRow(0))
+            self.box.addWidget(list_widget)
 
     @property
     def max_column_size(self):
@@ -40,7 +48,6 @@ class TableList(QFrame):
 
     def clear_table(self):
         for m in self.lst_models:
-            print(m, 111)
             m.clear()
 
 

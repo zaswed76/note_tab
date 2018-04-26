@@ -4,11 +4,10 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
 
 
-class StandardItem(QStandardItem):
+class CustomItem(QLabel):
     def __init__(self, text, ratio, ratio_in_text=True, ndigits=3,
-                 tool_tip=False):
-
-        super().__init__()
+                 tool_tip=False, *__args):
+        super().__init__(*__args)
         ratio = str(round(ratio, ndigits))
         if ratio_in_text:
             text = "{} {}".format(text, ratio)
@@ -32,7 +31,9 @@ class ListView(QListView):
         # self.setSizePolicy(sizePolicy)
 
 
-class ListModel(QStandardItemModel):
+
+
+class ListWidget(QListWidget):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
@@ -44,11 +45,11 @@ class ListModel(QStandardItemModel):
 
         self.clear()
         for i, r in items:
-            item = StandardItem(i, r, ratio_in_text=ratio_in_text,
+            item = CustomItem(i, r, ratio_in_text=ratio_in_text,
                                 ndigits=ndigits,
                                 tool_tip=tool_tip)
 
-            self.appendRow(item)
+            self.setItemWidget(QListWidgetItem(self), item)
 
 
 if __name__ == "__main__":
