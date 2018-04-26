@@ -24,7 +24,7 @@ Column {
     border-top: none;
 }
 
-CustomItem {
+CustomLabel {
     font-family: "Helvetica Neue";
     font-size: 12pt;
     color: #636363;

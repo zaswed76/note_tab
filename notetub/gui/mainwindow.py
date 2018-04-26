@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFrame, QApplication, QVBoxLayout
 from PyQt5.QtCore import *
 
 from notetub.gui import wizard, tool
-from notetub.lib import serv
+from notetub.lib import serv, sorter
 from notetub.morphlibs import _diff
 
 
@@ -126,16 +126,17 @@ class MainWindow(QFrame):
                                                         word=diff_word,
                                                         ratio=min_ratio,
                                                         prefix_weight=prefix_weight)
+            if omo_list:
+                sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
+                cut_omo_list = sorted_on_ratio[:max_words]
 
-            sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
-            cut_omo_list = sorted_on_ratio[:max_words]
 
-            words = serv.group_by(cut_omo_list,
-                                  words_on_page // number_columns)
 
-            if words:
+
                 self.wizard.create_pages(max_words, words_on_page)
-                self.wizard.set_data(words)
+                self.wizard.set_data(cut_omo_list)
+                self.wizard.sort_by(sorter.lexic)
+                self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
                 self.wizard.update_table()
                 # width = (
                 #             self.wizard.wizard.max_column_size + 3) * number_columns

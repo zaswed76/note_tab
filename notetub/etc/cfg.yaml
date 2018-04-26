@@ -11,17 +11,17 @@ last_width: 1083
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
-max_words: 60
+max_words: 40
 min_ratio: 50
-minimum_height: 409
+minimum_height: 434
 ndigits: 3
-number_columns: 6
+number_columns: 4
 prefix_weight: 0.01
 ratio_in_text: false
 search_algorithm: jaro
 tool_height: 50
 tool_tip: true
-words_on_page: 60
+words_on_page: 40
 works_dictionaries:
 - corpora_noun
 - test

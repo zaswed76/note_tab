@@ -35,7 +35,7 @@ def get_text(file, nword=0, ncol=1):
 
 
 
-def group_by(lst, by=None):
+def group_on_count(lst, by=None):
     """ Группировка элементов последовательности по count элементов """
     return [lst[i:i+by] for i in range(0,len(lst),by)]
 

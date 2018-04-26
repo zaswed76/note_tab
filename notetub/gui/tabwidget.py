@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import sys
+
+import sip
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
@@ -28,6 +30,12 @@ class TableList(QFrame):
     def data(self, data):
         self._data = data
 
+    def sort_by(self, sorter):
+        self.data = sorter(self.data)
+
+    def group_by(self, grouper, count=None):
+        self.data = grouper(self.data, count)
+
     def update_table(self):
         for n, lst in enumerate(self._data):
             list_widget = ListWidget(self.cfg)
@@ -48,7 +56,9 @@ class TableList(QFrame):
 
     def clear_table(self):
         for m in self.lst_models:
+
             m.clear()
+
 
 
 if __name__ == '__main__':

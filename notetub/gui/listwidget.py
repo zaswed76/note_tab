@@ -4,7 +4,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
 
 
-class CustomItem(QLabel):
+class CustomLabel(QLabel):
     def __init__(self, text, ratio, ratio_in_text=True, ndigits=3,
                  tool_tip=False, *__args):
         super().__init__(*__args)
@@ -14,21 +14,14 @@ class CustomItem(QLabel):
         elif tool_tip:
             self.setToolTip(ratio)
         self.setText(text)
+        self.select_flag = False
 
-
-class ListView(QListView):
-    def __init__(self, model):
-        super().__init__()
-        self.setModel(model)
-        # self.setAlternatingRowColors(True)
-        self.setSelectionMode(QAbstractItemView.MultiSelection)
-        self.setFocusPolicy(Qt.NoFocus)
-        self.setSelectionRectVisible(False)
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        # sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        # self.setSizePolicy(sizePolicy)
-
+    def mousePressEvent(self, QMouseEvent):
+        self.select_flag = not self.select_flag
+        if self.select_flag:
+            self.setStyleSheet("QLabel {color: #51D731;}")
+        else:
+            self.setStyleSheet("QLabel {color: #636363;}")
 
 
 
@@ -53,9 +46,9 @@ class ListWidget(QListWidget):
 
 
 
-            item = CustomItem(i, r, ratio_in_text=ratio_in_text,
-                                ndigits=ndigits,
-                                tool_tip=tool_tip)
+            item = CustomLabel(i, r, ratio_in_text=ratio_in_text,
+                               ndigits=ndigits,
+                               tool_tip=tool_tip)
             sitem = QListWidgetItem(self)
             sitem.setSizeHint(item.sizeHint())
 

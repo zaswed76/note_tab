@@ -1,3 +1,4 @@
+import sip
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import pyqtProperty
@@ -17,10 +18,15 @@ class WizardManager(QFrame):
     def create_pages(self, max_words, words_on_page):
         if max_words == words_on_page:
             self.box.removeWidget(self.wizard)
+            try:
+                sip.delete(self.wizard)
+            except TypeError:
+                pass
             self.wizard = tabwidget.TableList(self.cfg)
             self.box.addWidget(self.wizard)
 
-
+    def sort_by(self, sorter):
+        self.wizard.sort_by(sorter)
 
     def set_data(self, data):
         self.wizard.data = data
@@ -28,8 +34,9 @@ class WizardManager(QFrame):
     def update_table(self):
         self.wizard.clear_table()
         self.wizard.update_table()
-        # self.wizard.clear()
 
+    def group_by(self, grouper, count=None):
+        self.wizard.group_by(grouper, count)
 
 class MagicWizard(QWizard):
     def __init__(self, parent=None):
