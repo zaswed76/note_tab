@@ -5,6 +5,7 @@ algorithm_list:
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
+- ./dictionaries\test.txt
 dictionary_ext: .txt
 last_width: 1083
 line_edit__height: 50
