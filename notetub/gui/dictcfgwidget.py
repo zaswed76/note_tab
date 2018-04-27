@@ -26,4 +26,8 @@ class DictCfgWidget(AbcCfgWidget):
 
     @property
     def get_active_dict(self):
-        return [x for x in self.all_check_dictionaries.values() if x.isChecked()]
+        check_stub = CheckDict("corpora_noun")
+
+
+        # return [x for x in self.all_check_dictionaries.values() if x.isChecked()]
+        return [check_stub]

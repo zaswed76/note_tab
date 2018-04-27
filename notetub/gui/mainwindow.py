@@ -60,6 +60,7 @@ class MainWindow(QFrame):
 
     def _is_checked_dict(self):
         check_dict = self.config_manager.config_widget.dict_cfg.get_active_dict
+
         if not check_dict:
             self.show_config_manager()
             self.config_manager.tool.dict_cfg_btn.click()
@@ -176,6 +177,8 @@ class MainWindow(QFrame):
             "search_algorithm"] = self.config_manager.config_widget.search_cfg.algorithm_box.get_active_algorithm()
         self.cfg["works_dictionaries"] = [x.text() for x in
                                           self.config_manager.config_widget.dict_cfg.get_active_dict]
+
+        print(self.config_manager.config_widget.dict_cfg.get_active_dict[0].text())
         self._update_dictionaries()
         self.cfg.save()
 
