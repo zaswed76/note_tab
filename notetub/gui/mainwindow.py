@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QFrame, QApplication, QVBoxLayout
+from PyQt5.QtWidgets import QFrame, QApplication, QVBoxLayout, QMessageBox
 from PyQt5.QtCore import *
 
 from notetub.gui import wizard, tool
@@ -40,9 +40,11 @@ class MainWindow(QFrame):
     def __init__(self, cfg):
         super().__init__()
         qDebug('something informative')
+
         self.controller = None
         self.config_manager = None
         self.cfg = cfg
+        self._work_dictionary_list = None
 
         self._update_dictionaries()
 
@@ -69,18 +71,22 @@ class MainWindow(QFrame):
         """
 
         """
-        print(1)
+
         # пути к файлам согласно списка dict_names
         files = serv.get_files_by_names(self.cfg.dictionaries_dir,
                                         self.cfg["works_dictionaries"],
                                         self.cfg.dictionary_ext)
         # список слов из списка  files если пути существуют
-        self.work_dictionary = serv.files_to_list(files)
 
+        self._work_dictionary_list, error = serv.files_to_list(files)
         # сохраняем в cfg пути к словарям в директории
         self.cfg["dictionaries_files"] = serv.get_dictionaries_files(
             self.cfg.dictionaries_dir,
             self.cfg.dictionary_ext)
+
+    @property
+    def work_dictionary_list(self):
+        return self._work_dictionary_list
 
     def __init_tool(self):
         self.tool = tool.Tool(self.cfg)
@@ -90,7 +96,6 @@ class MainWindow(QFrame):
             self.tool.set_line_validator(self.cfg.line_validator_reg)
 
     def set_config_manager(self, manager):
-        print(2)
         self.config_manager = manager
         self._is_checked_dict()
         self.config_manager.closeEvent = self.config_close_event
@@ -112,13 +117,13 @@ class MainWindow(QFrame):
         else:
             print("controller not installed")
 
-    def set_work_list(self):
-        self.work_dictionary = serv.files_to_list(
-            serv.get_dictionaries_files(self.cfg.dictionaries_dir,
-                                        self.cfg.dictionary_ext))
+
+
+
 
     def set_omo_words(self):
-        work_dictionary = self.work_dictionary
+
+
         diff_word = self.tool.line_edit_text
         min_ratio = self.cfg.min_ratio
         prefix_weight = self.cfg.prefix_weight
@@ -129,34 +134,19 @@ class MainWindow(QFrame):
 
         if diff_word:
 
-            omo_list = getattr(_diff, search_algorithm)(lst=work_dictionary,
+            omo_list = getattr(_diff, search_algorithm)(lst=self.work_dictionary_list,
                                                         word=diff_word,
                                                         ratio=min_ratio,
                                                         prefix_weight=prefix_weight)
             if omo_list:
                 sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
                 cut_omo_list = sorted_on_ratio[:max_words]
-
-
-
-
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_data(cut_omo_list)
                 self.wizard.sort_by(sorter.lexic)
                 self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
                 self.wizard.update_table()
-                # width = (
-                #             self.wizard.wizard.max_column_size + 3) * number_columns
-                # height = (self.wizard.wizard.max_line_size + 0) * (
-                #     words_on_page // number_columns) + self.cfg[
-                #              "tool_height"] + 1
-                #
-                # if height != self.height():
-                #     self.setFixedHeight(height)
-                #
-                # if width > self.width():
-                #     self.resize(width, height)
-                #     self.setMinimumWidth(width)
+
             elif self.wizard.wizard is not None:
                 self.wizard.wizard.clear_table()
 
@@ -175,6 +165,7 @@ class MainWindow(QFrame):
         self.cfg["number_columns"] = columns
         self.cfg[
             "search_algorithm"] = self.config_manager.config_widget.search_cfg.algorithm_box.get_active_algorithm()
+        print([x.text() for x in self.config_manager.config_widget.dict_cfg.get_active_dict], "!!!")
         self.cfg["works_dictionaries"] = [x.text() for x in
                                           self.config_manager.config_widget.dict_cfg.get_active_dict]
 
@@ -182,6 +173,8 @@ class MainWindow(QFrame):
         self._update_dictionaries()
         self.cfg.save()
 
+    def critical_decode(self, message):
+        QMessageBox.critical(self, 'decode', "{}".format(message))
 
 if __name__ == '__main__':
     from notetub.config import Config

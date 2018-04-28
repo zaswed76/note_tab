@@ -1,7 +1,9 @@
 import fileinput
 import glob
 import os
-from os.path import join as pjoin
+from os import path
+import shutil
+
 import pprint
 from itertools import groupby
 
@@ -69,8 +71,14 @@ def file_to_list(file):
     :param file: path
     :return: дшые
     """
+    error = None
     with open(file, "r", encoding="utf-8") as f:
-        return [x.strip() for x in f]
+        try:
+            r = [x.strip() for x in f]
+        except UnicodeDecodeError as mes:
+            r = []
+            error = mes
+        return r, error
 
 def files_to_list(files: list):
     """
@@ -79,10 +87,14 @@ def files_to_list(files: list):
     :return: список слов из файлов указанных в list files
     """
     s = set()
+    error = None
     for f in files:
         if os.path.isfile(f):
-            s.update(set(file_to_list(f)))
-    return sorted(s)
+            lst, error = file_to_list(f)
+            if lst:
+                lst[0] = lst[0].replace("\ufeff", "")
+            s.update(set(lst))
+    return sorted(s), error
 
 
 def get_dictionaries_files(folder, ext):
@@ -92,7 +104,7 @@ def get_dictionaries_files(folder, ext):
     :param ext: str
     :return: list < str словари в указанной директории
     """
-    return glob.glob(pjoin(folder, '*' + ext))
+    return glob.glob(path.join(folder, '*' + ext))
 
 def get_files_by_names(folder, dict_names, ext):
     """
@@ -104,8 +116,19 @@ def get_files_by_names(folder, dict_names, ext):
     """
     fd = []
     for n in dict_names:
-        fd.append(pjoin(folder, n + ext))
+        fd.append(path.join(folder, n + ext))
     return fd
+
+
+
+def add_dict(dpath, dict_dir, ext):
+    if path.isfile(dpath):
+        if path.splitext(dpath)[1] == ext:
+            base_name = path.basename(dpath)
+            target = path.join(dict_dir, base_name)
+            shutil.copy2(dpath, target)
+            return path.splitext(base_name)[0]
+
 
 
 

@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from os.path import basename, splitext
 from notetub.gui.cfg_windows import AbcCfgWidget, CheckDict
-
+from notetub.lib import serv
 
 class ListItem(QListWidgetItem):
     def __init__(self, *__args):
@@ -18,6 +18,7 @@ class Tools(QFrame):
         self.main_box = QVBoxLayout(self)
 
         self.add_btn = QPushButton("add")
+
         self.del_btn = QPushButton("del")
         self.edit_btn = QPushButton("edit")
         self.add_to_btn = QPushButton("add to")
@@ -30,6 +31,7 @@ class Tools(QFrame):
         self.main_box.insertStretch(-1, 1)
 
 
+
 class DictList(QListWidget):
     def __init__(self):
         super().__init__()
@@ -39,10 +41,14 @@ class DictList(QListWidget):
             item = ListItem(line)
             self.addItem(item)
 
+    def add_item(self, item):
+        self.addItem(ListItem(item))
+
 
 class DictCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
+        self.cfg = cfg
         self.all_dicts = [splitext(basename(x))[0] for x in
                           cfg["dictionaries_files"]]
         self.works_dictionaries = cfg["works_dictionaries"]
@@ -59,6 +65,7 @@ class DictCfgWidget(AbcCfgWidget):
         self.__init_check_dict()
         # self.main_box.addStretch(1)
         self.__init_active_dict()
+        self.__init_controllers()
 
     def __init_check_dict(self):
         """
@@ -83,3 +90,13 @@ class DictCfgWidget(AbcCfgWidget):
             if self.dict_list_widget.item(index).checkState() == Qt.Checked:
                 checked_items.append(self.dict_list_widget.item(index))
         return checked_items
+
+    def __init_controllers(self):
+        self.tools.add_btn.clicked.connect(self.add_dict_file)
+
+    def add_dict_file(self):
+        fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')[0]
+        if fname:
+            item = serv.add_dict(fname, self.cfg["dictionaries_dir"], self.cfg["dictionary_ext"])
+
+            self.dict_list_widget.add_item(item)
