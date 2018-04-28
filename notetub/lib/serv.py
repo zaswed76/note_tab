@@ -130,7 +130,12 @@ def add_dict(dpath, dict_dir, ext):
             return path.splitext(base_name)[0]
 
 
-
+def del_dict(del_item, directory, ext):
+    print(del_item)
+    pth = path.join(directory, del_item+ext)
+    if os.path.isfile(pth):
+        os.remove(pth)
+        return pth
 
 if __name__ == '__main__':
     files = get_dictionaries_files("../dictionaries", ".txt")
@@ -140,3 +145,5 @@ if __name__ == '__main__':
     # split_list = lambda n: zip(*[iter(l+[None]*((n-len(l)%n)%n))]*n)
     # print(list(split_list(4)))
     # pprint.pprint(group_on_lst(lst, 10, 3))
+
+
