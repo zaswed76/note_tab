@@ -178,7 +178,7 @@ class MainWindow(QFrame):
         self.cfg["works_dictionaries"] = [x.text() for x in
                                           self.config_manager.config_widget.dict_cfg.get_active_dict]
 
-        print(self.config_manager.config_widget.dict_cfg.get_active_dict[0].text())
+        # print(self.config_manager.config_widget.dict_cfg.get_active_dict[0].text())
         self._update_dictionaries()
         self.cfg.save()
 

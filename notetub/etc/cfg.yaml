@@ -5,7 +5,7 @@ algorithm_list:
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
-- ./dictionaries\test.txt
+- ./dictionaries\укр именники.txt
 dictionary_ext: .txt
 last_width: 1083
 line_edit__height: 50
@@ -23,4 +23,4 @@ tool_height: 50
 tool_tip: true
 words_on_page: 60
 works_dictionaries:
-- corpora_noun
+- укр именники
