@@ -90,6 +90,7 @@ class MainWindow(QFrame):
 
     def __init_tool(self):
         self.tool = tool.Tool(self.cfg)
+        self.tool.set_custom_dict()
         self.box.addWidget(self.tool)
 
         if self.cfg.line_validator:
@@ -122,8 +123,6 @@ class MainWindow(QFrame):
 
 
     def set_omo_words(self):
-
-
         diff_word = self.tool.line_edit_text
         min_ratio = self.cfg.min_ratio
         prefix_weight = self.cfg.prefix_weight
@@ -133,7 +132,6 @@ class MainWindow(QFrame):
         search_algorithm = self.cfg.search_algorithm
 
         if diff_word:
-
             omo_list = getattr(_diff, search_algorithm)(lst=self.work_dictionary_list,
                                                         word=diff_word,
                                                         ratio=min_ratio,
@@ -165,16 +163,17 @@ class MainWindow(QFrame):
         self.cfg["number_columns"] = columns
         self.cfg[
             "search_algorithm"] = self.config_manager.config_widget.search_cfg.algorithm_box.get_active_algorithm()
-        print([x.text() for x in self.config_manager.config_widget.dict_cfg.get_active_dict], "!!!")
+
         self.cfg["works_dictionaries"] = [x.text() for x in
                                           self.config_manager.config_widget.dict_cfg.get_active_dict]
 
-        # print(self.config_manager.config_widget.dict_cfg.get_active_dict[0].text())
         self._update_dictionaries()
         self.cfg.save()
 
     def critical_decode(self, message):
         QMessageBox.critical(self, 'decode', "{}".format(message))
+
+
 
 if __name__ == '__main__':
     from notetub.config import Config

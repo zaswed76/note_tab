@@ -49,8 +49,9 @@ class DictList(QListWidget):
 
 
 class DictCfgWidget(AbcCfgWidget):
-    def __init__(self, name, cfg, *args, **kwargs):
+    def __init__(self, parent, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
+        self.main = parent
         self.cfg = cfg
         self.all_dicts = [splitext(basename(x))[0] for x in
                           cfg["dictionaries_files"]]
@@ -97,13 +98,14 @@ class DictCfgWidget(AbcCfgWidget):
     def __init_controllers(self):
         self.tools.add_btn.clicked.connect(self.add_dict_file)
         self.tools.del_btn.clicked.connect(self.del_dict_file)
+        self.tools.del_from_btn.clicked.connect(self.del_from)
 
     def add_dict_file(self):
         fname = QFileDialog.getOpenFileName(self, 'Open file', '/home')[0]
         if fname:
             item = serv.add_dict(fname, self.cfg["dictionaries_dir"], self.cfg["dictionary_ext"])
-
-            self.dict_list_widget.add_item(item)
+            if item is not None:
+                self.dict_list_widget.add_item(item)
 
     def del_dict_file(self):
         del_item = self.dict_list_widget.selectedItems()[0]
@@ -111,3 +113,7 @@ class DictCfgWidget(AbcCfgWidget):
         del_file = serv.del_dict(del_item_text, self.cfg["dictionaries_dir"], self.cfg["dictionary_ext"])
         if del_file is not None:
             self.dict_list_widget.remove_item(del_item)
+
+
+    def del_from(self):
+       self.main.tool.add_btn("ru")

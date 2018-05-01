@@ -2,6 +2,8 @@
   <qresource prefix="/">
     <file>resource/icons/forward.png</file>
     <file>resource/icons/config.png</file>
+    <file>resource/icons/uncheck.png</file>
+    <file>resource/icons/check.png</file>
 
 
   </qresource>

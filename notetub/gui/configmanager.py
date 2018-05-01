@@ -51,9 +51,10 @@ class ConfigTool(QFrame):
 
 
 class ConfigWidget(QFrame):
-    def __init__(self, cfg):
+    def __init__(self, parent, cfg):
         super().__init__()
 
+        self.main = parent
         self.setStyleSheet("background-color: 000000")
         self.stack = QStackedLayout(self)
 
@@ -62,7 +63,7 @@ class ConfigWidget(QFrame):
         self.search_cfg = cfg_windows.SearchCfgWidget("search_cfg", cfg)
         self.table_cfg = cfg_windows.TableCfgWidget("table_cfg", cfg)
         self.view_cfg = cfg_windows.ViewCfgWidget("view_cfg", cfg)
-        self.dict_cfg = dictcfgwidget.DictCfgWidget("dict_cfg", cfg)
+        self.dict_cfg = dictcfgwidget.DictCfgWidget(parent, "dict_cfg", cfg)
         self.stack.addWidget(self.search_cfg)
         self.stack.addWidget(self.table_cfg)
         self.stack.addWidget(self.view_cfg)
@@ -78,8 +79,9 @@ class AcceptFrame(QFrame):
 
 
 class ConfigManager(QFrame):
-    def __init__(self, cfg):
+    def __init__(self, parent, cfg):
         super().__init__()
+        self.main = parent
         self.cfg = cfg
 
         self.setWindowTitle("Настройки")
@@ -101,7 +103,7 @@ class ConfigManager(QFrame):
 
         self.hbox.addWidget(self.box_frame)
 
-        self.config_widget = ConfigWidget(cfg)
+        self.config_widget = ConfigWidget(parent, cfg)
         self.vbox.addWidget(self.config_widget)
 
         self.accept_frame = AcceptFrame()

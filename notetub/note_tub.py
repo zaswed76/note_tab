@@ -28,7 +28,7 @@ def main():
     note.set_controller(controller)
     note.register_controllers()
 
-    config_manager = configmanager.ConfigManager(cfg)
+    config_manager = configmanager.ConfigManager(note, cfg)
     note.set_config_manager(config_manager)
 
 

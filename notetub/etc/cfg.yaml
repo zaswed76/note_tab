@@ -2,6 +2,14 @@ algorithm_list:
 - jaro_winkler
 - jaro
 - ratio
+custom_controlls:
+  dictionaries:
+    ru:
+      name: ru_noun
+      tag: RU
+    uk:
+      name: uk_noun
+      tag: UK
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
@@ -17,8 +25,8 @@ ndigits: 3
 number_columns: 6
 prefix_weight: 0.01
 ratio_in_text: false
-search_algorithm: jaro
-tool_height: 50
+search_algorithm: ratio
+tool_height: 58
 tool_tip: true
 words_on_page: 60
 works_dictionaries:

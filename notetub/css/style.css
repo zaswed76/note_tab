@@ -231,3 +231,37 @@ Algorithms {
     font-size: 12pt;
     color: #636363;
 }
+
+CustomDictControls{
+    border-left: none;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
+
+
+}
+
+DictCustomBtn {
+    min-width: 25px;
+    min-height: 25px;
+    font-family: "Helvetica Neue";
+    color: #69696b;
+    font-size: 10pt;
+    border-left: 1px solid #059c9a;
+    border-right:  1px solid #059c9a;
+    border-bottom:  1px solid #059c9a;
+    border-top: 1px solid #059c9a;
+    border-radius: 4px;
+
+ }
+
+DictCustomBtn:checked {
+
+
+    color: #ce6214;
+    background-color: #e1e1e1;
+    border-left: 2px solid #0ebf06;
+    border-right:  2px solid #0ebf06;
+    border-bottom:  2px solid #0ebf06;
+    border-top: 2px solid #0ebf06;
+ }
