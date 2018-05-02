@@ -73,8 +73,14 @@ class Tool(QFrame):
     def set_custom_dict(self):
         controls = self.cfg.get("custom_controlls", {}).get("dictionaries", {})
 
-        if self.custom_groups.get("dict"):
+        # if self.custom_groups.get("dict"):
+        #     print()
+        print(controls, "controls")
+        try:
             self.box.removeWidget(self.custom_groups["dict"])
+            print(333)
+        except:
+            pass
         if len(controls) > 0:
 
             self.custom_groups["dict"] = customctrls.CustomDictControls()

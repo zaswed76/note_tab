@@ -3,8 +3,7 @@ algorithm_list:
 - jaro
 - ratio
 custom_controlls:
-  dictionaries:
-    {}
+  dictionaries: {}
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt

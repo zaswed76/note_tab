@@ -242,8 +242,8 @@ CustomDictControls{
 }
 
 DictCustomBtn {
-    min-width: 25px;
-    min-height: 25px;
+    min-width: 22px;
+    min-height: 22px;
     font-family: "Helvetica Neue";
     color: #69696b;
     font-size: 10pt;
@@ -252,6 +252,7 @@ DictCustomBtn {
     border-bottom:  1px solid #059c9a;
     border-top: 1px solid #059c9a;
     border-radius: 4px;
+
 
  }
 

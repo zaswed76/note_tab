@@ -169,12 +169,12 @@ class MainWindow(QFrame):
 
         self._update_dictionaries()
         self.cfg.save()
+        self.tool.set_custom_dict()
 
     def critical_decode(self, message):
         QMessageBox.critical(self, 'decode', "{}".format(message))
 
-    def abrabr(self):
-        self.tool.set_custom_dict()
+
 
 if __name__ == '__main__':
     from notetub.config import Config

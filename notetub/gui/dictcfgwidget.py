@@ -117,7 +117,17 @@ class DictCfgWidget(AbcCfgWidget):
 
 
     def del_from(self):
-       self.main.tool.add_btn("ru")
+        selected_items = self.dict_list_widget.selectedItems()
+        if selected_items:
+            dict_name = selected_items[0].text()
+            try:
+                del(self.cfg["custom_controlls"]["dictionaries"][dict_name])
+            except KeyError:
+                pass
+            else:
+                self.main.tool.set_custom_dict()
+
+
 
     def add_to(self):
         try:
@@ -132,4 +142,5 @@ class DictCfgWidget(AbcCfgWidget):
             if ok:
                 dct = self.cfg.get("custom_controlls", {}).get("dictionaries", {})
                 dct[dict_name] = {"name": dict_name, "tag": tag}
+                self.main.tool.set_custom_dict()
 
