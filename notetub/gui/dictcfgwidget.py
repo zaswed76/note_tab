@@ -98,6 +98,7 @@ class DictCfgWidget(AbcCfgWidget):
     def __init_controllers(self):
         self.tools.add_btn.clicked.connect(self.add_dict_file)
         self.tools.del_btn.clicked.connect(self.del_dict_file)
+        self.tools.add_to_btn.clicked.connect(self.add_to)
         self.tools.del_from_btn.clicked.connect(self.del_from)
 
     def add_dict_file(self):
@@ -117,3 +118,18 @@ class DictCfgWidget(AbcCfgWidget):
 
     def del_from(self):
        self.main.tool.add_btn("ru")
+
+    def add_to(self):
+        try:
+            dict_name = self.dict_list_widget.selectedItems()[0].text()
+        except IndexError:
+            pass
+        else:
+
+            tag, ok = QInputDialog.getText(self, 'Set Tag', 'введите тег:')
+
+
+            if ok:
+                dct = self.cfg.get("custom_controlls", {}).get("dictionaries", {})
+                dct[dict_name] = {"name": dict_name, "tag": tag}
+

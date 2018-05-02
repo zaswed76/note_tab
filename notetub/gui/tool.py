@@ -34,7 +34,7 @@ class Tool(QFrame):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
-        self.custom_bts = {}
+        self.custom_groups = {}
         self.setFixedHeight(cfg["tool_height"])
         # self.setStyleSheet("background-color: lightgrey")
 
@@ -71,8 +71,15 @@ class Tool(QFrame):
 
 
     def set_custom_dict(self):
-        cust_dict_group = customctrls.CustomDictControls()
-        self.box.insertWidget(3, cust_dict_group)
-        controls = self.cfg["custom_controlls"]["dictionaries"]
-        for n, ctrl in controls.items():
-            cust_dict_group.add_control(ctrl["tag"])
+        controls = self.cfg.get("custom_controlls", {}).get("dictionaries", {})
+
+        if self.custom_groups.get("dict"):
+            self.box.removeWidget(self.custom_groups["dict"])
+        if len(controls) > 0:
+
+            self.custom_groups["dict"] = customctrls.CustomDictControls()
+            self.box.insertWidget(3, self.custom_groups["dict"])
+
+            for n, ctrl in controls.items():
+                self.custom_groups["dict"].add_control(ctrl["tag"])
+

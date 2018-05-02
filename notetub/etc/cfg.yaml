@@ -4,17 +4,12 @@ algorithm_list:
 - ratio
 custom_controlls:
   dictionaries:
-    ru:
-      name: ru_noun
-      tag: RU
-    uk:
-      name: uk_noun
-      tag: UK
+    {}
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
 dictionary_ext: .txt
-last_width: 1083
+last_width: 664
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
@@ -25,8 +20,8 @@ ndigits: 3
 number_columns: 6
 prefix_weight: 0.01
 ratio_in_text: false
-search_algorithm: ratio
-tool_height: 58
+search_algorithm: jaro_winkler
+tool_height: 50
 tool_tip: true
 words_on_page: 60
 works_dictionaries:
