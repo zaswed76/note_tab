@@ -75,17 +75,20 @@ class Tool(QFrame):
 
         # if self.custom_groups.get("dict"):
         #     print()
-        print(controls, "controls")
+
         try:
             self.box.removeWidget(self.custom_groups["dict"])
-            print(333)
+            del(self.custom_groups["dict"] )
+            print(controls, "controls111")
         except:
             pass
-        if len(controls) > 0:
-
+        print(len(controls), "len")
+        if controls:
+            print(777)
             self.custom_groups["dict"] = customctrls.CustomDictControls()
             self.box.insertWidget(3, self.custom_groups["dict"])
-
+            print(controls.items(), "items")
             for n, ctrl in controls.items():
                 self.custom_groups["dict"].add_control(ctrl["tag"])
+            # self.box.removeWidget(self.custom_groups["dict"])
 
