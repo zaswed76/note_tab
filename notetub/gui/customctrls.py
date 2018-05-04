@@ -1,11 +1,7 @@
 import sys
 
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-
-
-
-
+from PyQt5.QtWidgets import *
 
 
 class DictCustomBtn(QPushButton):
@@ -15,27 +11,18 @@ class DictCustomBtn(QPushButton):
         self.setText(name)
 
 
-class CustomDictControls(QGroupBox):
+class CustomDictControls(QComboBox):
     def __init__(self, *__args):
         super().__init__(*__args)
-        self.group = QButtonGroup()
-        self.controls = {}
-
-        self.main_box = QHBoxLayout(self)
-        self.main_box.setSpacing(5)
-        self.main_box.setContentsMargins(0, 0, 0, 0)
 
     def add_control(self, name):
-        self.controls[name] = DictCustomBtn(name)
-        self.group.addButton(self.controls[name])
-        self.main_box.addWidget(self.controls[name])
-
+        self.addItem(name)
 
     def del_control(self, name):
-        self.main_box.removeWidget(self.controls[name])
+        i = self.findText(name, Qt.MatchExactly)
+        if i > 0:
+            self.removeItem(i)
 
-        self.group.removeButton(self.controls[name])
-        del(self.controls[name])
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

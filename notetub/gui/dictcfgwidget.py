@@ -117,15 +117,16 @@ class DictCfgWidget(AbcCfgWidget):
 
 
     def del_from(self):
-        selected_items = self.dict_list_widget.selectedItems()
-        if selected_items:
-            dict_name = selected_items[0].text()
-            try:
-                del(self.cfg["custom_controlls"]["dictionaries"][dict_name])
-            except KeyError:
-                pass
-            else:
-                self.main.tool.set_custom_dict()
+        self.main.tool.del_custom_dict()
+        # selected_items = self.dict_list_widget.selectedItems()
+        # if selected_items:
+        #     dict_name = selected_items[0].text()
+        #     try:
+        #         del(self.cfg["custom_controlls"]["dictionaries"][dict_name])
+        #     except KeyError:
+        #         pass
+        #     else:
+        #         self.main.tool.set_custom_dict()
 
 
 

@@ -4,11 +4,15 @@ algorithm_list:
 - ratio
 custom_controlls:
   dictionaries:
-    uk:
-      name: uk
-      tag: uk
+    c2:
+      name: c2
+      tag: r2
+    corpora_noun:
+      name: corpora_noun
+      tag: ru
 dictionaries_dir: ./dictionaries
 dictionaries_files:
+- ./dictionaries\c2.txt
 - ./dictionaries\corpora_noun.txt
 dictionary_ext: .txt
 last_width: 664
@@ -27,4 +31,5 @@ tool_height: 50
 tool_tip: true
 words_on_page: 60
 works_dictionaries:
+- c2
 - corpora_noun
