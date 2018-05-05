@@ -21,8 +21,11 @@ class Tools(QFrame):
 
         self.del_btn = QPushButton("del")
         self.edit_btn = QPushButton("edit")
+        self.edit_btn.setDisabled(True)
         self.add_to_btn = QPushButton("add to")
+        self.add_to_btn.setDisabled(True)
         self.del_from_btn = QPushButton("del from")
+        self.del_from_btn.setDisabled(True)
         self.main_box.addWidget(self.add_btn)
         self.main_box.addWidget(self.del_btn)
         self.main_box.addWidget(self.edit_btn)

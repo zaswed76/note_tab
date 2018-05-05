@@ -25,9 +25,9 @@ Column {
 }
 
 CustomLabel {
-    font-family: "Helvetica Neue";
-    font-size: 12pt;
-    color: #636363;
+    /*font-family: "Helvetica Neue";*/
+    /*font-size: 12pt;*/
+    /*color: #636363;*/
     padding-left: 6px;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -230,6 +230,10 @@ Algorithms {
     font-family: "Helvetica Neue";
     font-size: 12pt;
     color: #636363;
+}
+
+CustomButton {
+
 }
 
 /*CustomDictControls{*/

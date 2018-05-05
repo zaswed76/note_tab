@@ -90,7 +90,6 @@ class MainWindow(QFrame):
 
     def __init_tool(self):
         self.tool = tool.Tool(self.cfg)
-        self.tool.set_custom_dict()
         self.box.addWidget(self.tool)
 
         if self.cfg.line_validator:
@@ -141,7 +140,7 @@ class MainWindow(QFrame):
                 cut_omo_list = sorted_on_ratio[:max_words]
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_data(cut_omo_list)
-                self.wizard.sort_by(sorter.lexic)
+                # self.wizard.sort_by(sorter.lexic)
                 self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
                 self.wizard.update_table()
 
@@ -169,7 +168,7 @@ class MainWindow(QFrame):
 
         self._update_dictionaries()
         self.cfg.save()
-        self.tool.set_custom_dict()
+        # self.tool.set_custom_dict()
 
     def critical_decode(self, message):
         QMessageBox.critical(self, 'decode', "{}".format(message))

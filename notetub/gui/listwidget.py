@@ -2,11 +2,12 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 
 class CustomLabel(QLabel):
     def __init__(self, text, ratio, ratio_in_text=True, ndigits=3,
-                 tool_tip=False, *__args):
+                 tool_tip=False, lb_font=None, *__args):
         super().__init__(*__args)
         ratio = str(round(ratio, ndigits))
         if ratio_in_text:
@@ -15,6 +16,14 @@ class CustomLabel(QLabel):
             self.setToolTip(ratio)
         self.setText(text)
         self.select_flag = False
+
+        if lb_font is not None:
+            self.setStyleSheet("QLabel {{color: {}}}".format(lb_font["color"]))
+            font = QFont()
+            font.setFamily(lb_font["font-family"])
+            font.setPointSize(int(lb_font["font-size"]))
+            self.setFont(font)
+
 
     def mousePressEvent(self, QMouseEvent):
         self.select_flag = not self.select_flag
@@ -26,7 +35,7 @@ class CustomLabel(QLabel):
 
 
 class ListWidget(QListWidget):
-    def __init__(self, cfg):
+    def __init__(self, cfg, lb_font):
         super().__init__()
         self.setSelectionMode(QAbstractItemView.MultiSelection)
         self.setFocusPolicy(Qt.NoFocus)
@@ -34,6 +43,8 @@ class ListWidget(QListWidget):
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.cfg = cfg
+        self.lb_font = lb_font
+
 
     def set_items(self, items):
         ratio_in_text = self.cfg["ratio_in_text"]
@@ -48,7 +59,7 @@ class ListWidget(QListWidget):
 
             item = CustomLabel(i, r, ratio_in_text=ratio_in_text,
                                ndigits=ndigits,
-                               tool_tip=tool_tip)
+                               tool_tip=tool_tip, lb_font=self.lb_font)
             sitem = QListWidgetItem(self)
             sitem.setSizeHint(item.sizeHint())
 

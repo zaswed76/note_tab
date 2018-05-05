@@ -21,6 +21,7 @@ class TableList(QFrame):
         self.max_column_size_list = []
         self.max_line_size_list = []
         self._data = None
+        self.lb_font = self.cfg["text_label"]["base"]
 
     @property
     def data(self):
@@ -28,6 +29,7 @@ class TableList(QFrame):
 
     @data.setter
     def data(self, data):
+        print(data)
         self._data = data
 
     def sort_by(self, sorter):
@@ -38,7 +40,7 @@ class TableList(QFrame):
 
     def update_table(self):
         for n, lst in enumerate(self._data):
-            list_widget = ListWidget(self.cfg)
+            list_widget = ListWidget(self.cfg, lb_font=self.lb_font)
             list_widget.set_items(lst)
             self.lst_models.append(list_widget)
 

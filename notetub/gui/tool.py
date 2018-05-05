@@ -11,7 +11,9 @@ class LineEdit(QLineEdit):
         super().__init__()
 
 
-
+class CustomButton(QPushButton):
+    def __init__(self, *__args):
+        super().__init__(*__args)
 
 
 class ToolBtn(QPushButton):
@@ -71,16 +73,10 @@ class Tool(QFrame):
 
 
     def set_custom_dict(self):
-        try:
-            self.box.removeWidget(self.custom_groups["dict"])
-        except KeyError:
-            pass
-        controls = self.cfg.get("custom_controlls", {}).get("dictionaries", {})
-        if controls:
-            self.custom_groups["dict"] = customctrls.CustomDictControls()
-            self.box.insertWidget(3, self.custom_groups["dict"])
-            for n, ctrl in controls.items():
-                self.custom_groups["dict"].add_control(ctrl["tag"])
+
+        self.custom_groups["dict"] = CustomButton("ru")
+        self.box.insertWidget(3, self.custom_groups["dict"])
+
 
 
     def del_custom_dict(self):
