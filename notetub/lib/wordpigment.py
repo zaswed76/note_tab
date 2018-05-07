@@ -4,22 +4,35 @@ import re
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
-class Widget(QLabel):
-    def __init__(self):
-        super().__init__()
-        self.resize(500, 500)
-        # font = QFont()
-        # font.setFamily("helvetica")
-        # font.setPointSize(18)
-        # self.setFont(font)
 
 
-class Pigment():
-    def __init__(self):
-        pass
 
-    def pigment(self, line, pat, font):
-        pass
+
+class Pigment:
+    def __init__(self, pline, pfont):
+        self.base_font = pfont["base"]
+        self.pigment_font = pfont["pigment"]
+        self.pline = pline
+        self.pat = re.compile("({})".format(pline))
+
+    def split(self, word):
+        return re.split(self.pat, word, 1)
+
+
+    def pigment_line(self, ln, font):
+
+        return '<font size={font_size}px color={color} face={font_family}>{line}</font>'.format(
+            line=ln, **font)
+
+    def get_pigment(self, line):
+        spl = self.split(line)
+        if len(spl) == 3:
+            pline = self.pigment_line(spl[1], self.pigment_font)
+            pre = self.pigment_line(spl[0], self.base_font)
+            post = self.pigment_line(spl[2], self.base_font)
+            return "<p>{}{}{}</p>".format(pre, pline, post)
+        else:
+            return self.pigment_line(line, self.base_font)
 
 
 
@@ -28,11 +41,23 @@ class Pigment():
 
 
 if __name__ == '__main__':
+
+    class Widget(QLabel):
+        def __init__(self):
+            super().__init__()
+            self.resize(500, 500)
+
     app = QApplication(sys.argv)
     # app.setStyleSheet(open('./etc/{0}.qss'.format('style'), "r").read())
     main = Widget()
-    A = "<p>ко<font size=12 color=#636363 face=Helvetica Neue>ров</font>а</p>"
-    main.setText(A)
+
+    font = dict(color='green',
+                font_family='Helvetica Neue',
+                font_size=12)
+
+    pgm = Pigment("ров", font)
+    txt = pgm.get_pigment("корова")
+    main.setText(txt)
     main.show()
     sys.exit(app.exec_())
 

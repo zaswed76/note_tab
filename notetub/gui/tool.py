@@ -84,3 +84,6 @@ class Tool(QFrame):
             self.box.removeWidget(self.custom_groups["dict"])
         except KeyError:
             pass
+
+    def selected_text(self):
+        return self.word_line.selectedText()

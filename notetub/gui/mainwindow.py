@@ -6,6 +6,7 @@ from PyQt5.QtCore import *
 from notetub.gui import wizard, tool
 from notetub.lib import serv, sorter
 from notetub.morphlibs import _diff
+from notetub.lib import wordpigment
 
 
 def qt_message_handler(mode, context, message):
@@ -118,7 +119,14 @@ class MainWindow(QFrame):
             print("controller not installed")
 
 
-
+    @property
+    def pigment_word(self):
+        select_text = self.tool.selected_text()
+        print(select_text, 999)
+        if select_text:
+            return select_text
+        else:
+            return self.tool.line_edit_text
 
 
     def set_omo_words(self):
@@ -142,6 +150,10 @@ class MainWindow(QFrame):
                 self.wizard.set_data(cut_omo_list)
                 # self.wizard.sort_by(sorter.lexic)
                 self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
+
+                pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"])
+
+                self.wizard.set_pigment(pigment)
                 self.wizard.update_table()
 
             elif self.wizard.wizard is not None:

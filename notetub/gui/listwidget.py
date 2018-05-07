@@ -20,8 +20,8 @@ class CustomLabel(QLabel):
         if lb_font is not None:
             self.setStyleSheet("QLabel {{color: {}}}".format(lb_font["color"]))
             font = QFont()
-            font.setFamily(lb_font["font-family"])
-            font.setPointSize(int(lb_font["font-size"]))
+            font.setFamily(lb_font["font_family"])
+            font.setPointSize(int(lb_font["font_size"]))
             self.setFont(font)
 
 

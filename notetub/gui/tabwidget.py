@@ -29,7 +29,6 @@ class TableList(QFrame):
 
     @data.setter
     def data(self, data):
-        print(data)
         self._data = data
 
     def sort_by(self, sorter):
@@ -60,6 +59,18 @@ class TableList(QFrame):
         for m in self.lst_models:
 
             m.clear()
+
+    def set_pigment(self, pigment):
+        data = []
+
+        for n, lst in enumerate(self._data):
+            col = []
+            for w, r in lst:
+                pgm = pigment.get_pigment(w)
+                if pgm is not None:
+                    col.append((pgm, r))
+            data.append(col)
+        self.data = data
 
 
 

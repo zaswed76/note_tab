@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 from notetub.gui import tabwidget
 
 
+
 class WizardManager(QFrame):
     def __init__(self, cfg):
         super().__init__()
@@ -37,6 +38,9 @@ class WizardManager(QFrame):
 
     def group_by(self, grouper, count=None):
         self.wizard.group_by(grouper, count)
+
+    def set_pigment(self, pigment):
+        self.wizard.set_pigment(pigment)
 
 class MagicWizard(QWizard):
     def __init__(self, parent=None):

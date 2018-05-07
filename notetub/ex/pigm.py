@@ -4,33 +4,36 @@ pline = "ров"
 word = "кровать"
 
 
+class Pigment:
+    def __init__(self, pline, pfont):
+        self.pfont = pfont
+        self.pline = pline
+        self.pat = re.compile("({})".format(pline))
 
-def split(word, pline):
-    r = re.split(pat, word, 1)
-    r.insert(1, pline)
-    return r
-
-
-def font_pigment(line, font):
-    return '<font size={font_size} color={color} face={font_family}>{line}</font>'.format(
-        line=line, **font)
+    def split(self, word):
+        return re.split(self.pat, word, 1)
 
 
+    def pigment_line(self, ln):
+        return '<font size={font_size} color={color} face={font_family}>{line}</font>'.format(
+            line=ln, **self.pfont)
 
-def line_join(line, font):
-    return
+    def get_pigment(self, line):
+        spl = self.split(line)
+        if len(spl) == 3:
+            pline = self.pigment_line(spl[1])
+            return "<p>{}{}{}</p>".format(spl[0], pline, spl[2])
+        else:
+            return None
 
-def result(line, pat, font):
-    pat = re.compile(pline)
-    spl = split(line, pat)
-    pigm_font = font_pigment(spl[1], font)
-    return '<p>{}{}{}</p>'.format(spl[0], pigm_font, spl[2])
 
+if __name__ == '__main__':
+    pass
 
-font = dict(color= '#636363',
-       font_family= 'Helvetica Neue',
-       font_size= 12)
+    font = dict(color='#636363',
+                font_family='Helvetica Neue',
+                font_size=12)
 
-pline = "рsв"
-pt = re.compile(pline)
-print(split("корова", pt))
+    pgm = Pigment("ров", font)
+    print(pgm.get_pigment("кров"))
+
