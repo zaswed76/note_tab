@@ -121,7 +121,7 @@ class MainWindow(QFrame):
 
     @property
     def pigment_word(self):
-        select_text = self.tool.selected_text()
+        select_text = self.tool.selected_line_text
         print(select_text, 999)
         if select_text:
             return select_text

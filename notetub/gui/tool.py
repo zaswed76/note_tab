@@ -11,6 +11,7 @@ class LineEdit(QLineEdit):
         super().__init__()
 
 
+
 class CustomButton(QPushButton):
     def __init__(self, *__args):
         super().__init__(*__args)
@@ -37,12 +38,14 @@ class Tool(QFrame):
         super().__init__()
         self.cfg = cfg
         self.custom_groups = {}
+        self._selected_line_text = None
         self.setFixedHeight(cfg["tool_height"])
         # self.setStyleSheet("background-color: lightgrey")
 
         self.box = QHBoxLayout(self)
 
         self.word_line = LineEdit()
+        self.word_line.selectionChanged.connect(self.set_select_text)
 
 
         self.search_btn = ToolBtn("search")
@@ -59,6 +62,17 @@ class Tool(QFrame):
         self.box.addWidget(self.config_btn)
         #
 
+    def set_select_text(self):
+        self.selected_line_text = self.word_line.selectedText()
+        print(self.selected_line_text)
+
+    @property
+    def selected_line_text(self):
+        return self._selected_line_text
+
+    @selected_line_text.setter
+    def selected_line_text(self, text):
+        self._selected_line_text = text
 
     @property
     def line_edit_text(self):

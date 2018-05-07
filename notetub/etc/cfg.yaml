@@ -14,15 +14,15 @@ dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
 dictionary_ext: .txt
-last_width: 943
+last_width: 888
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
 max_words: 50
 min_ratio: 40
-minimum_height: 246
+minimum_height: 401
 ndigits: 3
-number_columns: 10
+number_columns: 5
 prefix_weight: 0.01
 ratio_in_text: false
 search_algorithm: ratio
