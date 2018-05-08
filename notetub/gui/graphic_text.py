@@ -32,10 +32,14 @@ class MainWindow(QGraphicsView):
         self.setDragMode(QGraphicsView.RubberBandDrag)
 
         self.scene = Scene(self, QRectF(0, 0, 200, 35))
+        self.scene.selectionChanged.connect(self.selected)
 
 
         self.setScene(self.scene)
         self.setFixedSize(202, 37)
+
+    def selected(self):
+        print([x.toPlainText() for x in self.scene.selectedItems()])
 
     def set_symbol(self, symbol):
 
