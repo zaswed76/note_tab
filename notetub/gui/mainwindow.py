@@ -55,6 +55,7 @@ class MainWindow(QFrame):
         self.box.setSpacing(0)
 
         self.__init_tool()
+        # self.tool.word_line.setFocus(True)
 
         self.wizard = wizard.WizardManager(self.cfg)
         self.box.addWidget(self.wizard)
@@ -121,15 +122,19 @@ class MainWindow(QFrame):
 
     @property
     def pigment_word(self):
-        select_text = self.tool.selected_line_text
-        print(select_text, 999)
-        if select_text:
-            return select_text
-        else:
-            return self.tool.line_edit_text
 
+        select_text = self.tool.selected_line_text.copy()
+
+        if select_text:
+            s = select_text[-1]
+        else:
+            s = self.tool.line_edit_text
+
+        print(s, 777)
+        return s
 
     def set_omo_words(self):
+
         diff_word = self.tool.line_edit_text
         min_ratio = self.cfg.min_ratio
         prefix_weight = self.cfg.prefix_weight

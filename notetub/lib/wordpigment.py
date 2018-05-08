@@ -13,10 +13,17 @@ class Pigment:
         self.base_font = pfont["base"]
         self.pigment_font = pfont["pigment"]
         self.pline = pline
-        self.pat = re.compile("({})".format(pline))
+        if pline:
+            self.pat = re.compile("({})".format(pline))
+        else:
+            self.pat = None
 
     def split(self, word):
-        return re.split(self.pat, word, 1)
+
+        if self.pat is not None:
+            return re.split(self.pat, word, 1)
+        else:
+            return word
 
 
     def pigment_line(self, ln, font):
