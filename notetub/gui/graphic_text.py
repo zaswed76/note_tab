@@ -13,6 +13,7 @@ class Text(QGraphicsTextItem):
         font.setPixelSize(20)
         font.setFamily("Helvetica Neue")
         self.setFont(font)
+        self.setFrameShape(QFrame.NoFrame)
 
 class Scene(QGraphicsScene):
     def __init__(self, parent, rect):
@@ -37,6 +38,7 @@ class MainWindow(QGraphicsView):
 
         self.setScene(self.scene)
         self.setFixedSize(202, 37)
+
 
     def selected(self):
         print([x.toPlainText() for x in self.scene.selectedItems()])

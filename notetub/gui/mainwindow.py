@@ -94,8 +94,8 @@ class MainWindow(QFrame):
         self.tool = tool.Tool(self.cfg)
         self.box.addWidget(self.tool)
 
-        if self.cfg.line_validator:
-            self.tool.set_line_validator(self.cfg.line_validator_reg)
+        # if self.cfg.line_validator:
+        #     self.tool.set_line_validator(self.cfg.line_validator_reg)
 
     def set_config_manager(self, manager):
         self.config_manager = manager
@@ -114,8 +114,8 @@ class MainWindow(QFrame):
         if self.controller is not None:
             self.tool.search_btn.clicked.connect(self.controller.enter)
             self.tool.config_btn.clicked.connect(self.controller.open_config)
-            self.tool.word_line.returnPressed.connect(
-                self.controller.enter)
+            # self.tool.word_line.returnPressed.connect(
+            #     self.controller.enter)
         else:
             print("controller not installed")
 
@@ -123,10 +123,10 @@ class MainWindow(QFrame):
     @property
     def pigment_word(self):
 
-        select_text = self.tool.selected_line_text.copy()
+        select_text = self.tool.selected_text()
 
         if select_text:
-            s = select_text[-1]
+            s = select_text
         else:
             s = self.tool.line_edit_text
 

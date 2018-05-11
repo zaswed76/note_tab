@@ -1,17 +1,21 @@
 
 from PyQt5.QtWidgets import (QFrame, QHBoxLayout, QPushButton, QLineEdit,
-                             QSpacerItem, QSizePolicy, QWidget)
+                             QTextEdit)
 from PyQt5.QtGui import QFont, QRegExpValidator
-from PyQt5.QtCore import QRegExp
+from PyQt5.QtCore import QRegExp, Qt
 
 from notetub.gui import customctrls
 
-class LineEdit(QLineEdit):
-    def __init__(self):
-        super().__init__()
+# class LineEdit(QLineEdit):
+#     def __init__(self):
+#         super().__init__()
 
 
-
+class LineEdit(QTextEdit):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        # self.setFrameStyle(QFrame.Panel)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
 
 class CustomButton(QPushButton):
@@ -49,7 +53,7 @@ class Tool(QFrame):
 
         self.word_line = LineEdit()
         # self.word_line.selectionChanged.connect(self.set_select_text)
-        self.word_line.editingFinished.connect(self.set_edit_text)
+        # self.word_line.editingFinished.connect(self.set_edit_text)
 
 
         self.search_btn = ToolBtn("search")
@@ -76,7 +80,7 @@ class Tool(QFrame):
 
     @property
     def line_edit_text(self):
-        return self.word_line.text()
+        return self.word_line.toPlainText()
 
 
     def set_line_validator(self, reg=None):
@@ -87,7 +91,6 @@ class Tool(QFrame):
 
 
     def set_custom_dict(self):
-
         self.custom_groups["dict"] = CustomButton("ru")
         self.box.insertWidget(3, self.custom_groups["dict"])
 
@@ -100,4 +103,7 @@ class Tool(QFrame):
             pass
 
     def selected_text(self):
-        return self.word_line.selectedText()
+        self.word_line.setFocus()
+        cursor = self.word_line.textCursor()
+        textSelected = cursor.selectedText()
+        return textSelected
