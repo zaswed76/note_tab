@@ -59,6 +59,9 @@ class SearchCfgWidget(AbcCfgWidget):
             self.algorithm_box.add_algorithm(alg)
         self.algorithm_box.set_active_algorithm(self.cfg["search_algorithm"])
 
+class LightingCfgWidget(AbcCfgWidget):
+    def __init__(self, name, cfg, *args, **kwargs):
+        super().__init__(name, cfg, *args, **kwargs)
 
 
 
