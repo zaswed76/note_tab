@@ -114,23 +114,22 @@ class MainWindow(QFrame):
         if self.controller is not None:
             self.tool.search_btn.clicked.connect(self.controller.enter)
             self.tool.config_btn.clicked.connect(self.controller.open_config)
-            # self.tool.word_line.returnPressed.connect(
-            #     self.controller.enter)
+
         else:
             print("controller not installed")
 
 
     @property
     def pigment_word(self):
+        """
 
+        :return: выделенные текст в строке ввода
+        """
         select_text = self.tool.selected_text()
-
         if select_text:
             s = select_text
         else:
             s = self.tool.line_edit_text
-
-        print(s, 777)
         return s
 
     def set_omo_words(self):
@@ -159,6 +158,7 @@ class MainWindow(QFrame):
                 pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"])
 
                 self.wizard.set_pigment(pigment)
+
                 self.wizard.update_table()
 
             elif self.wizard.wizard is not None:
