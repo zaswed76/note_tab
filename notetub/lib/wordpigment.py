@@ -14,7 +14,7 @@ class Pigment:
         self.pigment_font = pfont["pigment"]
         self.pline = pline
         if pline:
-            self.pat = re.compile("(^{})".format(pline))
+            self.pat = re.compile("({})".format(pline))
         else:
             self.pat = None
 

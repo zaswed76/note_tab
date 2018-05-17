@@ -1,15 +1,31 @@
-class MyApp:
-    def myFunc_1(self):
-        print('i am myFunc_1')
 
-    def myFunc_2(self):
-        print('i am myFunc_2')
 
-    def run(self):
-        for i in range(1, 3):
-            rb = 'myFunc_' + str(i)
-            getattr(self, rb)()
+import sys
+from PyQt5 import QtWidgets
+
+class Btn(QtWidgets.QPushButton):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+
+
+
+
+
+class Widget(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.resize(500, 500)
+        box = QtWidgets.QHBoxLayout(self)
+        self.btn = Btn(self)
+        self.btn2 = Btn(self)
+
+        box.addWidget(self.btn)
+        box.addWidget(self.btn2)
 
 
 if __name__ == '__main__':
-    MyApp().run()
+    app = QtWidgets.QApplication(sys.argv)
+    app.setStyleSheet(open("style.css", "r").read())
+    main = Widget()
+    main.show()
+    sys.exit(app.exec_())
