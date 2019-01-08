@@ -31,9 +31,8 @@ class Pigment:
     def pigment_line(self, ln, font):
 
         html_line = """style="font-family:'Arial';font-size:25px;color:red">кар"""
-        s = """<font size={font_size}px color={color} face={font_family}>{line}</font>"""
-        s2 = """<span style="font-size:{font_size}px; color:{color}; font-family:{font_family}">{line}</span>"""
-        return s2.format(
+        s = """<span style="font-family: 'Helvetica';font-size:20px;color:#636363">тошка</span>"""
+        return '<span style="font-size:{font_size}px; color:{color}; font-family:{font_family}">{line}</span>'.format(
             line=ln, **font)
         # return html_line
 

@@ -76,14 +76,14 @@ ListWidget::item:selected {
 
 
 
-ListWidget::item:hover {
+/*ListWidget::item:hover {*/
     /*background-color: #cbcbcb;*/
     /*color: green;*/
     /*border-left: none;*/
     /*border-right:  none;*/
     /*border-bottom: 1px solid #0e9429;*/
     /*border-top: none;*/
-}
+/*}*/
 
 ToolBtn#search {
     image: url(:/resource/icons/forward.png);
