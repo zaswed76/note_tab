@@ -4,6 +4,7 @@ import sys
 
 
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore
 
@@ -171,23 +172,30 @@ class ChooseDialogBtn(QPushButton):
 
 
 class FontConfig(QGroupBox):
-    def __init__(self, *__args):
+    def __init__(self, *__args, font_cfg=None):
         super().__init__(*__args)
+        self.font_family = font_cfg["font_family"]
+        self.font_size = font_cfg["font_size"]
+        self.color = font_cfg["color"]
+
+
         self.box = QVBoxLayout()
         self.setLayout(self.box)
 
         self.box.addLayout(self.font_box())
         self.box.addLayout(self.color_box())
 
-        self.base_font = None
-        self.base_color = None
-        self.alt_font = None
-        self.alt_color = None
+
+
 
     def show_font_dialog(self):
         font, ok = QFontDialog.getFont()
-        print(font.family())
-        print(font.pointSize())
+        if ok:
+            self.font_family = font.family()
+            self.font_size = font.pointSize()
+            self.lb.setFont(font)
+
+
 
     def showDialog(self):
         col = QColorDialog.getColor()
@@ -197,9 +205,14 @@ class FontConfig(QGroupBox):
     def font_box(self):
         box = QHBoxLayout()
         btn = ChooseDialogBtn("шрифт")
-        lb = QLabel("пример")
+        btn.clicked.connect(self.show_font_dialog)
+        self.lb = QLabel("пример")
+        qfont = QFont()
+        qfont.setFamily(self.font_family)
+        qfont.setPointSize(self.font_size)
+        self.lb.setFont(qfont)
         box.addWidget(btn)
-        box.addWidget(lb)
+        box.addWidget(self.lb)
         box.addStretch(1)
         return box
 
@@ -207,6 +220,7 @@ class FontConfig(QGroupBox):
         box = QHBoxLayout()
         btn = ChooseDialogBtn("цвет")
         lb = ExColorFrame()
+        lb.set_color(self.color)
         box.addWidget(btn)
         box.addWidget(lb)
         box.addStretch(1)
@@ -219,10 +233,17 @@ class FontConfig(QGroupBox):
 class ViewCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
+        self.cfg = cfg
         self.box = QVBoxLayout(self)
 
-        self.base_font = FontConfig("основной шрифт")
-        self.backlight_font = FontConfig("шрифт подсветки")
+        base_font_cfg = cfg["text_label"]["base"]
+
+        self.base_font = FontConfig("основной шрифт", font_cfg=base_font_cfg)
+
+        pigment_font_cfg = cfg["text_label"]["pigment"]
+        self.backlight_font = FontConfig("шрифт подсветки", font_cfg=pigment_font_cfg)
+
+
         self.box.addWidget(self.base_font)
         self.box.addWidget(self.backlight_font)
 

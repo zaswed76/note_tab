@@ -173,11 +173,19 @@ class MainWindow(QFrame):
         self.cfg.save()
 
     def config_close_event(self, e):
-        print("!!!!!!!!!!!!")
         all_words = self.config_manager.config_widget.table_cfg.all_words.value()
         words_on_page = self.config_manager.config_widget.table_cfg.words_on_page.value()
         columns = self.config_manager.config_widget.table_cfg.columns.value()
         jaro_prefix = self.config_manager.config_widget.search_cfg.algorithm_options.slider.prefix()
+
+
+        base_font_family = self.config_manager.config_widget.view_cfg.base_font.font_family
+        base_font_size = self.config_manager.config_widget.view_cfg.base_font.font_size
+        base_font_color = self.config_manager.config_widget.view_cfg.base_font.color
+
+        self.cfg["text_label"]["base"]["font_family"] = base_font_family
+        self.cfg["text_label"]["base"]["font_size"] = base_font_size
+        self.cfg["text_label"]["base"]["color"] = base_font_color
 
 
         self.cfg["max_words"] = all_words
