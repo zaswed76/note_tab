@@ -234,12 +234,40 @@ ConfigBtn#dict_cfg_btn:checked {
 
 Algorithms {
     font-family: "Helvetica Neue";
-    font-size: 12pt;
+    font-size: 10pt;
+    color: #636363;
+}
+
+FontConfig {
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
     color: #636363;
 }
 
 CustomButton {
 
+}
+
+ExColorFrame {
+
+
+}
+
+ChooseDialogBtn {
+    border-left: 1px solid grey;
+    border-right:  1px solid grey;
+    border-bottom:  1px solid grey;
+    border-top: 1px solid grey;
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
+    color: #636363;
+}
+
+ChooseDialogBtn:hover {
+    border-left: 1px solid #10E2DD;
+    border-right:  1px solid #10E2DD;
+    border-bottom:  1px solid #10E2DD;
+    border-top: 1px solid #10E2DD;
 }
 
 /*CustomDictControls{*/

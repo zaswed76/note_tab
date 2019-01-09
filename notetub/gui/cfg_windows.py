@@ -5,6 +5,7 @@ import sys
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
+from PyQt5 import QtCore
 
 
 class Combo(QComboBox):
@@ -148,11 +149,84 @@ class TableCfgWidget(AbcCfgWidget):
 
         self.box_grid.setRowStretch(3, 1)
 
+class ExFontLabel(QLabel):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+
+
+class ExColorFrame(QFrame):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        self.setFixedSize(20, 20)
+        self.set_color("green")
+
+    def set_color(self, color):
+        self.setStyleSheet("""QFrame {{background-color:{}}}""".format(color))
+
+class ChooseDialogBtn(QPushButton):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        self.setFixedSize(50, 20)
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+
+
+class FontConfig(QGroupBox):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        self.box = QVBoxLayout()
+        self.setLayout(self.box)
+
+        self.box.addLayout(self.font_box())
+        self.box.addLayout(self.color_box())
+
+        self.base_font = None
+        self.base_color = None
+        self.alt_font = None
+        self.alt_color = None
+
+    def show_font_dialog(self):
+        font, ok = QFontDialog.getFont()
+        print(font.family())
+        print(font.pointSize())
+
+    def showDialog(self):
+        col = QColorDialog.getColor()
+        if col.isValid():
+            print(col.name())
+
+    def font_box(self):
+        box = QHBoxLayout()
+        btn = ChooseDialogBtn("шрифт")
+        lb = QLabel("пример")
+        box.addWidget(btn)
+        box.addWidget(lb)
+        box.addStretch(1)
+        return box
+
+    def color_box(self):
+        box = QHBoxLayout()
+        btn = ChooseDialogBtn("цвет")
+        lb = ExColorFrame()
+        box.addWidget(btn)
+        box.addWidget(lb)
+        box.addStretch(1)
+        return box
+
+
+
 
 
 class ViewCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
+        self.box = QVBoxLayout(self)
+
+        self.base_font = FontConfig("основной шрифт")
+        self.backlight_font = FontConfig("шрифт подсветки")
+        self.box.addWidget(self.base_font)
+        self.box.addWidget(self.backlight_font)
+
+
 
 class CheckDict(QCheckBox):
     def __init__(self, *__args):
