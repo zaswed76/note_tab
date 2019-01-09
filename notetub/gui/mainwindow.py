@@ -157,6 +157,9 @@ class MainWindow(QFrame):
 
                 # слово выделено - True
                 word_selected_flag = len(self.pigment_word) != len(diff_word)
+                print(self.pigment_word, len(self.pigment_word), "pig")
+                print(diff_word, len(diff_word), "diff")
+                print(word_selected_flag)
                 pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"],
                                               nsymbol=3, selected=word_selected_flag)
 
@@ -183,10 +186,17 @@ class MainWindow(QFrame):
         base_font_size = self.config_manager.config_widget.view_cfg.base_font.font_size
         base_font_color = self.config_manager.config_widget.view_cfg.base_font.color
 
+        pigment_font_family = self.config_manager.config_widget.view_cfg.backlight_font.font_family
+        pigment_font_size = self.config_manager.config_widget.view_cfg.backlight_font.font_size
+        pigment_font_color = self.config_manager.config_widget.view_cfg.backlight_font.color
+
         self.cfg["text_label"]["base"]["font_family"] = base_font_family
         self.cfg["text_label"]["base"]["font_size"] = base_font_size
         self.cfg["text_label"]["base"]["color"] = base_font_color
 
+        self.cfg["text_label"]["pigment"]["font_family"] = pigment_font_family
+        self.cfg["text_label"]["pigment"]["font_size"] = pigment_font_size
+        self.cfg["text_label"]["pigment"]["color"] = pigment_font_color
 
         self.cfg["max_words"] = all_words
         self.cfg["prefix_weight"] = jaro_prefix

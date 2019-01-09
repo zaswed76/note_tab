@@ -197,10 +197,11 @@ class FontConfig(QGroupBox):
 
 
 
-    def showDialog(self):
+    def show_color_dialog(self):
         col = QColorDialog.getColor()
         if col.isValid():
-            print(col.name())
+            self.color = col.name()
+            self.color_lb.set_color(self.color)
 
     def font_box(self):
         box = QHBoxLayout()
@@ -219,10 +220,11 @@ class FontConfig(QGroupBox):
     def color_box(self):
         box = QHBoxLayout()
         btn = ChooseDialogBtn("цвет")
-        lb = ExColorFrame()
-        lb.set_color(self.color)
+        btn.clicked.connect(self.show_color_dialog)
+        self.color_lb = ExColorFrame()
+        self.color_lb.set_color(self.color)
         box.addWidget(btn)
-        box.addWidget(lb)
+        box.addWidget(self.color_lb)
         box.addStretch(1)
         return box
 

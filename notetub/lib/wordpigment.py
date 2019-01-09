@@ -25,6 +25,7 @@ class Pigment:
 
         # если слово выделено
         if selected:
+            print("55555555555555555")
             self.pline = pline
         # если колличество н символов выключено
         elif nsymbol is None:

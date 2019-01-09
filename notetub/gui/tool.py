@@ -17,6 +17,10 @@ class LineEdit(QTextEdit):
         # self.setFrameStyle(QFrame.Panel)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
+    # def keyPressEvent(self, e):
+    #     if e.key() == Qt.Key_Return:
+    #         print(222222222)
+
 
 class CustomButton(QPushButton):
     def __init__(self, *__args):
@@ -52,6 +56,8 @@ class Tool(QFrame):
         self.box = QHBoxLayout(self)
 
         self.word_line = LineEdit()
+
+
         # self.word_line.selectionChanged.connect(self.set_select_text)
         # self.word_line.editingFinished.connect(self.set_edit_text)
 
@@ -69,6 +75,7 @@ class Tool(QFrame):
 
         self.box.addWidget(self.config_btn)
         #
+
 
     def set_select_text(self):
         self.selected_line_text.append(self.word_line.selectedText())

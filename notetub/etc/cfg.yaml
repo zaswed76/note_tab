@@ -20,7 +20,7 @@ line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
 max_words: 160
 min_ratio: 40
-minimum_height: 617
+minimum_height: 669
 ndigits: 3
 number_columns: 8
 prefix_weight: 0.2
@@ -28,13 +28,13 @@ ratio_in_text: false
 search_algorithm: jaro_winkler
 text_label:
   base:
-    color: '#636363'
-    font_family: Helvetica Neue
+    color: '#002a2a'
+    font_family: Helvetica
     font_size: 12
   pigment:
-    color: red
-    font_family: Helvetica Neue
-    font_size: 12
+    color: '#ce0000'
+    font_family: Helvetica
+    font_size: 16
 tool_height: 50
 tool_tip: true
 words_on_page: 160

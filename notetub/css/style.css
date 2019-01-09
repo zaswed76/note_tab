@@ -115,7 +115,7 @@ QTextEdit {
     border-width: @focused-border-width;
 }
 
-QTextEdit {
+QTextEdit, QLineEdit {
     font-family: "Helvetica";
     font-size: 14pt;
     font-weight: 300;
