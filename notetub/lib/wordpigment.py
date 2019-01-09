@@ -9,16 +9,44 @@ from PyQt5.QtGui import *
 
 
 class Pigment:
-    def __init__(self, pline, pfont):
+    def __init__(self, pline, pfont, nsymbol=None, selected=False):
+        """
+
+        :param nsymbol: сколько первых символов подсветить
+        :param pline: что подсветить
+        :param pfont:
+        """
+        print(pline, "!")
+        self.selected = selected
 
         self.base_font = pfont["base"]
 
         self.pigment_font = pfont["pigment"]
-        self.pline = pline
+
+        # если слово выделено
+        if selected:
+            self.pline = pline
+        # если колличество н символов выключено
+        elif nsymbol is None:
+            self.pline = pline
+        elif nsymbol == 0:
+            self.pline = "#@!#dfgh"
+        else:
+            self.pline = pline[:nsymbol]
+
+
+
+
+
         if pline:
-            self.pat = re.compile("({})".format(pline))
+            self.pat = re.compile("({})".format(self.pline))
         else:
             self.pat = None
+
+
+
+
+
 
     def split(self, word):
 
@@ -38,6 +66,7 @@ class Pigment:
         # return html_line
 
     def get_pigment(self, line):
+
 
         spl = self.split(line)
         if len(spl) == 3:

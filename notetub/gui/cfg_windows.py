@@ -4,16 +4,39 @@ import sys
 
 
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import Qt
 
 
 class Combo(QComboBox):
     def __init__(self):
         super().__init__()
 
+class SliderPrefix(QFrame):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        vbox = QVBoxLayout(self)
+        self.jaro_prefix = QSlider(Qt.Horizontal)
+
+        self.jaro_prefix.setTickPosition(QSlider.TicksBothSides)
+        self.jaro_prefix.setMinimum(0)
+        self.jaro_prefix.setMaximum(100)
+        self.jaro_prefix.setTickInterval(20)
+        # self.jaro_prefix.setSingleStep(0.1)
+        self.jaro_prefix.setValue(20)
+
+        vbox.addWidget(QLabel("jaro_prefix"))
+        vbox.addWidget(self.jaro_prefix)
+
+    def prefix(self):
+        return self.jaro_prefix.value()/100
+
+
+
 
 class QSpin(QSpinBox):
     def __init__(self):
         super().__init__()
+        self.setMaximum(10000)
 
 class AbcCfgWidget(QLabel):
     def __init__(self, name, cfg, *args, **kwargs):
@@ -27,6 +50,10 @@ class RadioButton(QRadioButton):
 
 class Algorithms(QGroupBox):
     def __init__(self, *__args):
+        """
+
+        :param __args:
+        """
         super().__init__(*__args)
         self.algorithms = {}
         self.box = QVBoxLayout()
@@ -36,6 +63,8 @@ class Algorithms(QGroupBox):
         self.algorithms[name] = RadioButton(name)
         self.box.addWidget(self.algorithms[name])
 
+
+
     def set_active_algorithm(self, name):
         self.algorithms[name].setChecked(True)
 
@@ -44,24 +73,51 @@ class Algorithms(QGroupBox):
             if r.isChecked():
                 return n
 
+class AlgorithmsOptions(QGroupBox):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+        self.options = {}
+        self.box = QVBoxLayout()
+        self.setLayout(self.box)
+
+    def add_jaro_prefix(self):
+        self.slider = SliderPrefix()
+        self.box.addWidget(self.slider)
+
+
+
+
+
 class SearchCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
         self.cfg = cfg
         self.main_box = QVBoxLayout(self)
         self.__init_algorithms()
+        self.__init_options()
         self.main_box.addStretch(1)
+
+    def __init_options(self):
+        self.algorithm_options = AlgorithmsOptions("опции")
+        self.algorithm_options.add_jaro_prefix()
+        self.main_box.addWidget(self.algorithm_options)
+
 
     def __init_algorithms(self):
         self.algorithm_box = Algorithms("алгоритмы")
         self.main_box.addWidget(self.algorithm_box)
         for alg in self.cfg["algorithm_list"]:
+            print(alg)
             self.algorithm_box.add_algorithm(alg)
+
+
         self.algorithm_box.set_active_algorithm(self.cfg["search_algorithm"])
 
 class LightingCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
+        box = QVBoxLayout(self)
+        box.addWidget(QLabel("подсветка"))
 
 
 
@@ -71,9 +127,11 @@ class TableCfgWidget(AbcCfgWidget):
         super().__init__(name, cfg, *args, **kwargs)
         self.box_grid = QGridLayout(self)
         self.all_words = QSpin()
+
         self.all_words.setValue(cfg["max_words"])
         self.box_grid.addWidget(QLabel("найденных слов"), 0, 0)
         self.box_grid.addWidget(self.all_words, 0, 1)
+
 
         self.words_on_page = QSpin()
         self.words_on_page.setValue(cfg["words_on_page"])

@@ -155,7 +155,10 @@ class MainWindow(QFrame):
                 # self.wizard.sort_by(sorter.lexic)
                 self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
 
-                pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"])
+                # слово выделено - True
+                word_selected_flag = len(self.pigment_word) != len(diff_word)
+                pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"],
+                                              nsymbol=3, selected=word_selected_flag)
 
                 self.wizard.set_pigment(pigment)
 
@@ -170,11 +173,15 @@ class MainWindow(QFrame):
         self.cfg.save()
 
     def config_close_event(self, e):
+        print("!!!!!!!!!!!!")
         all_words = self.config_manager.config_widget.table_cfg.all_words.value()
         words_on_page = self.config_manager.config_widget.table_cfg.words_on_page.value()
         columns = self.config_manager.config_widget.table_cfg.columns.value()
+        jaro_prefix = self.config_manager.config_widget.search_cfg.algorithm_options.slider.prefix()
+
 
         self.cfg["max_words"] = all_words
+        self.cfg["prefix_weight"] = jaro_prefix
         self.cfg["words_on_page"] = words_on_page
         self.cfg["number_columns"] = columns
         self.cfg[

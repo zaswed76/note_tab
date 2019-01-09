@@ -43,6 +43,7 @@ def jaro_winkler(**kwargs):
 
     result = []
     ratio = float(ratio) / 100
+
     for line in lst:
         r = lv._levenshtein.jaro_winkler(word, line, prefix_weight)
         if r > ratio:

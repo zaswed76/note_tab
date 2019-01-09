@@ -14,29 +14,29 @@ dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
 dictionary_ext: .txt
-last_width: 982
+last_width: 994
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
-max_words: 90
+max_words: 160
 min_ratio: 40
-minimum_height: 639
+minimum_height: 617
 ndigits: 3
-number_columns: 6
-prefix_weight: 0.01
+number_columns: 8
+prefix_weight: 0.2
 ratio_in_text: false
-search_algorithm: jaro
+search_algorithm: jaro_winkler
 text_label:
   base:
     color: '#636363'
     font_family: Helvetica Neue
-    font_size: 20
+    font_size: 12
   pigment:
     color: red
     font_family: Helvetica Neue
-    font_size: 22
+    font_size: 12
 tool_height: 50
 tool_tip: true
-words_on_page: 90
+words_on_page: 160
 works_dictionaries:
 - corpora_noun
