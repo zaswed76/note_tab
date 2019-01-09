@@ -28,11 +28,11 @@ ratio_in_text: false
 search_algorithm: jaro_winkler
 text_label:
   base:
-    color: '#002a2a'
+    color: '#6f6f6f'
     font_family: Helvetica
     font_size: 12
   pigment:
-    color: '#ce0000'
+    color: '#ff0000'
     font_family: Helvetica
     font_size: 16
 tool_height: 50

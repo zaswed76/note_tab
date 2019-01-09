@@ -16,7 +16,6 @@ class Pigment:
         :param pline: что подсветить
         :param pfont:
         """
-        print(pline, "!")
         self.selected = selected
 
         self.base_font = pfont["base"]
@@ -25,7 +24,6 @@ class Pigment:
 
         # если слово выделено
         if selected:
-            print("55555555555555555")
             self.pline = pline
         # если колличество н символов выключено
         elif nsymbol is None:

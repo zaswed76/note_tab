@@ -156,12 +156,10 @@ class MainWindow(QFrame):
                 self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
 
                 # слово выделено - True
-                word_selected_flag = len(self.pigment_word) != len(diff_word)
-                print(self.pigment_word, len(self.pigment_word), "pig")
-                print(diff_word, len(diff_word), "diff")
-                print(word_selected_flag)
+                word_selected_flag = self.tool.selected_text()
+
                 pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"],
-                                              nsymbol=3, selected=word_selected_flag)
+                                              nsymbol=0, selected=word_selected_flag)
 
                 self.wizard.set_pigment(pigment)
 
