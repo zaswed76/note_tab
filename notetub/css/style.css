@@ -9,7 +9,7 @@ MainWindow {
 
 
 TableList  {
-    background-color: #e0e0e0;
+    background-color: green;
     border-left: none;
     border-right:  none;
     border-bottom:  none;
@@ -49,10 +49,7 @@ ListWidget {
     font-family: "Helvetica Neue";
     font-size: 12pt;
     color: #636363;
-    border-left: 1px solid #8f8f91;
-    border-right:  none;
-    border-bottom:  none;
-    border-top: none;
+
 
     /*padding-right: 52px;*/
 

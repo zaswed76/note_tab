@@ -124,6 +124,7 @@ class LightingCfgWidget(AbcCfgWidget):
 
 
 
+
 class TableCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
@@ -231,6 +232,24 @@ class FontConfig(QGroupBox):
 
 
 
+class TableApp(QGroupBox):
+    def __init__(self, *__args, cfg=None):
+        super().__init__(*__args)
+        self.box = QVBoxLayout()
+        self.setLayout(self.box)
+        self.box.addLayout(self.color_box("border"))
+        self.box.addLayout(self.color_box("фон"))
+
+    def color_box(self, name):
+        box = QHBoxLayout()
+        btn = ChooseDialogBtn(name)
+        # btn.clicked.connect(self.show_color_dialog)
+        self.color_lb = ExColorFrame()
+        # self.color_lb.set_color(self.color)
+        box.addWidget(btn)
+        box.addWidget(self.color_lb)
+        box.addStretch(1)
+        return box
 
 class ViewCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
@@ -245,10 +264,12 @@ class ViewCfgWidget(AbcCfgWidget):
         pigment_font_cfg = cfg["text_label"]["pigment"]
         self.backlight_font = FontConfig("шрифт подсветки", font_cfg=pigment_font_cfg)
 
+        self.table_app = TableApp("таблица", None, cfg=cfg["list_app"])
+
 
         self.box.addWidget(self.base_font)
         self.box.addWidget(self.backlight_font)
-
+        self.box.addWidget(self.table_app)
 
 
 class CheckDict(QCheckBox):

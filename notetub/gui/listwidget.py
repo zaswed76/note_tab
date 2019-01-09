@@ -39,11 +39,22 @@ class ListWidget(QListWidget):
         super().__init__()
         self.setSelectionMode(QAbstractItemView.MultiSelection)
         self.setFocusPolicy(Qt.NoFocus)
-        self.setSelectionRectVisible(False)
+        self.setSelectionRectVisible(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.cfg = cfg
         self.lb_font = lb_font
+        self.setStyleSheet("""QListWidget
+         {{background-color:{list_bg_color};
+           border-left: 
+             {list_border_width}px
+             {list_border_style}
+             {list_border_color};
+           border-right:  none;
+           border-bottom:  none;
+           border-top: none;
+
+        }}""".format(**cfg["list_app"]))
 
 
     def set_items(self, items):
