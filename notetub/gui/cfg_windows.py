@@ -155,15 +155,27 @@ class ExFontLabel(QLabel):
     def __init__(self, *__args):
         super().__init__(*__args)
 
+class BorderStyleCombo(QComboBox):
+    def __init__(self, cfg):
+        super().__init__()
+        styles = cfg["border_styles"]
+        self.addItems(styles)
+        self.setCurrentText(cfg["list_app"]["list_border_style"])
 
-class ExColorFrame(QFrame):
+class BorderWidth(QSpin):
+    def __init__(self):
+        super().__init__()
+
+
+class ExColorFrame(QPushButton):
     def __init__(self, *__args):
         super().__init__(*__args)
         self.setFixedSize(20, 20)
         self.set_color("green")
+        self.setCursor(QtCore.Qt.PointingHandCursor)
 
     def set_color(self, color):
-        self.setStyleSheet("""QFrame {{background-color:{}}}""".format(color))
+        self.setStyleSheet("""QPushButton {{background-color:{}}}""".format(color))
 
 class ChooseDialogBtn(QPushButton):
     def __init__(self, *__args):
@@ -223,6 +235,7 @@ class FontConfig(QGroupBox):
         btn = ChooseDialogBtn("цвет")
         btn.clicked.connect(self.show_color_dialog)
         self.color_lb = ExColorFrame()
+        self.color_lb.clicked.connect(self.show_color_dialog)
         self.color_lb.set_color(self.color)
         box.addWidget(btn)
         box.addWidget(self.color_lb)
@@ -239,6 +252,8 @@ class TableApp(QGroupBox):
         self.setLayout(self.box)
         self.box.addLayout(self.color_box("border"))
         self.box.addLayout(self.color_box("фон"))
+        self.box.addWidget(BorderStyleCombo(cfg))
+        self.box.addWidget(BorderWidth())
 
     def color_box(self, name):
         box = QHBoxLayout()
@@ -264,7 +279,7 @@ class ViewCfgWidget(AbcCfgWidget):
         pigment_font_cfg = cfg["text_label"]["pigment"]
         self.backlight_font = FontConfig("шрифт подсветки", font_cfg=pigment_font_cfg)
 
-        self.table_app = TableApp("таблица", None, cfg=cfg["list_app"])
+        self.table_app = TableApp("таблица", None, cfg=cfg)
 
 
         self.box.addWidget(self.base_font)

@@ -2,6 +2,16 @@ algorithm_list:
 - jaro_winkler
 - jaro
 - ratio
+border_styles:
+- dotted
+- dashed
+- solid
+- double
+- groove
+- ridge
+- inset
+- outset
+- none
 custom_controlls:
   dictionaries:
     c2:
@@ -33,11 +43,11 @@ ratio_in_text: false
 search_algorithm: jaro_winkler
 text_label:
   base:
-    color: '#6f6f6f'
+    color: '#005500'
     font_family: Helvetica
     font_size: 12
   pigment:
-    color: '#ff0000'
+    color: '#ffff00'
     font_family: Helvetica
     font_size: 16
 tool_height: 50

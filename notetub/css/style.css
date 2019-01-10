@@ -42,7 +42,13 @@ ListView::item {
 
 }
 
+ExColorFrame {
+    border-left: none;
+    border-right:  none;
+    border-bottom:  none;
+    border-top: none;
 
+}
 
 ListWidget {
 
@@ -190,13 +196,37 @@ QSpin{
     min-width: 80px;
 }
 
-Combo{
+BorderWidth {
     border-left: 1px solid #a8a8aa;
     border-right:  1px solid #a8a8aa;
     border-bottom:  1px solid #a8a8aa;
     border-top: 1px solid #a8a8aa;
     max-width: 80px;
     min-width: 80px;
+    max-height: 20px;
+    min-height: 20px;
+}
+
+Combo{
+    border-left: 1px solid #a8a8aa;
+    border-right:  1px solid #a8a8aa;
+    border-bottom:  1px solid #a8a8aa;
+    border-top: 1px solid #a8a8aa;
+    max-width: 70px;
+    min-width: 70px;
+    max-height: 20px;
+    min-height: 20px;
+}
+
+BorderStyleCombo {
+    border-left: 1px solid #a8a8aa;
+    border-right:  1px solid #a8a8aa;
+    border-bottom:  1px solid #a8a8aa;
+    border-top: 1px solid #a8a8aa;
+    max-width: 70px;
+    min-width: 70px;
+    max-height: 20px;
+    min-height: 20px;
 }
 
 ConfigBtn#search_cfg_btn:checked {
@@ -232,13 +262,19 @@ ConfigBtn#dict_cfg_btn:checked {
 Algorithms {
     font-family: "Helvetica Neue";
     font-size: 10pt;
-    color: #636363;
+    color: #245674;
 }
 
 FontConfig {
     font-family: "Helvetica Neue";
     font-size: 10pt;
-    color: #636363;
+    color: #245674;
+}
+
+TableApp {
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
+    color: #245674;
 }
 
 CustomButton {
