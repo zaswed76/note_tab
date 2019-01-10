@@ -1,13 +1,13 @@
 
-QLabel {
-    font-family: "Helvetica Neue";
-    font-size: 10pt;
-    color: #245674;
-}
+/*QLabel {*/
+    /*font-family: "Helvetica Neue";*/
+    /*font-size: 10pt;*/
+    /*color: #245674;*/
+/*}*/
 
-QFrame {
-    border-radius: 4px;
-}
+/*QFrame {*/
+    /*border-radius: 4px;*/
+/*}*/
 
 QComboBox {
     font-family: "Helvetica Neue";

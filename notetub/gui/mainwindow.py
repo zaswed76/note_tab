@@ -159,7 +159,7 @@ class MainWindow(QFrame):
                 word_selected_flag = self.tool.selected_text()
 
                 pigment = wordpigment.Pigment(self.pigment_word, self.cfg["text_label"],
-                                              nsymbol=0, selected=word_selected_flag)
+                                              nsymbol=self.cfg["ndigits"], selected=word_selected_flag)
 
                 self.wizard.set_pigment(pigment)
 
@@ -188,6 +188,9 @@ class MainWindow(QFrame):
         pigment_font_size = self.config_manager.config_widget.view_cfg.backlight_font.font_size
         pigment_font_color = self.config_manager.config_widget.view_cfg.backlight_font.color
 
+        ndigits = self.config_manager.config_widget.lighting_cfg.nsymb.value()
+
+        self.cfg["ndigits"] = ndigits
         self.cfg["text_label"]["base"]["font_family"] = base_font_family
         self.cfg["text_label"]["base"]["font_size"] = base_font_size
         self.cfg["text_label"]["base"]["color"] = base_font_color

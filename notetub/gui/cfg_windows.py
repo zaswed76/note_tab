@@ -9,6 +9,8 @@ from PyQt5.QtCore import Qt
 from PyQt5 import QtCore
 
 
+
+
 class Combo(QComboBox):
     def __init__(self):
         super().__init__()
@@ -118,17 +120,21 @@ class SearchCfgWidget(AbcCfgWidget):
 class LightingCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
+        self.cfg = cfg
         box = QVBoxLayout(self)
         box.addLayout(self.symbol_light())
         box.addStretch(1)
 
+
     def symbol_light(self):
         box = QHBoxLayout()
         lab = QLabel("выделить n первых символов")
-        nsymb = QSpin()
+        self.nsymb = QSpin()
+        self.nsymb.setValue(self.cfg["ndigits"])
+        print(self.cfg)
         box.addWidget(lab)
         box.addStretch(1)
-        box.addWidget(nsymb)
+        box.addWidget(self.nsymb)
 
         return box
 
