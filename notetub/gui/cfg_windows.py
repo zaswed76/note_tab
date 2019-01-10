@@ -119,7 +119,24 @@ class LightingCfgWidget(AbcCfgWidget):
     def __init__(self, name, cfg, *args, **kwargs):
         super().__init__(name, cfg, *args, **kwargs)
         box = QVBoxLayout(self)
-        box.addWidget(QLabel("подсветка"))
+        box.addLayout(self.symbol_light())
+        box.addStretch(1)
+
+    def symbol_light(self):
+        box = QHBoxLayout()
+        lab = QLabel("выделить n первых символов")
+        nsymb = QSpin()
+        box.addWidget(lab)
+        box.addStretch(1)
+        box.addWidget(nsymb)
+
+        return box
+
+
+
+
+
+
 
 
 
@@ -155,12 +172,23 @@ class ExFontLabel(QLabel):
     def __init__(self, *__args):
         super().__init__(*__args)
 
-class BorderStyleCombo(QComboBox):
+class BorderStyleCombo(QFrame):
     def __init__(self, cfg):
         super().__init__()
-        styles = cfg["border_styles"]
-        self.addItems(styles)
-        self.setCurrentText(cfg["list_app"]["list_border_style"])
+        self.cfg = cfg
+        box = QHBoxLayout(self)
+        lb = QLabel("border style")
+        box.addWidget(lb)
+        box.addWidget(self.combo_box())
+        box.addStretch(1)
+
+
+    def combo_box(self):
+        self.combo = QComboBox()
+        styles = self.cfg["border_styles"]
+        self.combo.addItems(styles)
+        self.combo.setCurrentText(self.cfg["list_app"]["list_border_style"])
+        return self.combo
 
 class BorderWidth(QSpin):
     def __init__(self):

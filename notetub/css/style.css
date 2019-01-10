@@ -1,4 +1,25 @@
 
+QLabel {
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
+    color: #245674;
+}
+
+QFrame {
+    border-radius: 4px;
+}
+
+QComboBox {
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
+    color: #245674;
+    border-left: 1px solid #a8a8aa;
+    border-right:  1px solid #a8a8aa;
+    border-bottom:  1px solid #a8a8aa;
+    border-top: 1px solid #a8a8aa;
+    border-radius: 4px;
+}
+
 MainWindow {
     background-color: #d3d3d5;
 }
@@ -187,13 +208,20 @@ DictCfgWidget {
     border-top: none;
 }
 
-QSpin{
+QSpinBox {
     border-left: 1px solid #a8a8aa;
     border-right:  1px solid #a8a8aa;
     border-bottom:  1px solid #a8a8aa;
     border-top: 1px solid #a8a8aa;
     max-width: 80px;
     min-width: 80px;
+    max-height: 20px;
+    min-height: 20px;
+    border-radius: 4px;
+    font-family: "Helvetica";
+    font-size: 10pt;
+    color: #484848;
+
 }
 
 BorderWidth {
@@ -223,10 +251,8 @@ BorderStyleCombo {
     border-right:  1px solid #a8a8aa;
     border-bottom:  1px solid #a8a8aa;
     border-top: 1px solid #a8a8aa;
-    max-width: 70px;
-    min-width: 70px;
-    max-height: 20px;
-    min-height: 20px;
+
+
 }
 
 ConfigBtn#search_cfg_btn:checked {
@@ -302,6 +328,8 @@ ChooseDialogBtn:hover {
     border-bottom:  1px solid #10E2DD;
     border-top: 1px solid #10E2DD;
 }
+
+
 
 /*CustomDictControls{*/
     /*border-left: none;*/
