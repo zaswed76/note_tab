@@ -47,7 +47,7 @@ text_label:
     font_family: Helvetica
     font_size: 12
   pigment:
-    color: '#ffff00'
+    color: '#ff5500'
     font_family: Helvetica
     font_size: 16
 tool_height: 50
