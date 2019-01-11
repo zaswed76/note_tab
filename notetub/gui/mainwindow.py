@@ -188,8 +188,21 @@ class MainWindow(QFrame):
         pigment_font_size = self.config_manager.config_widget.view_cfg.backlight_font.font_size
         pigment_font_color = self.config_manager.config_widget.view_cfg.backlight_font.color
 
+        list_border_style = self.config_manager.config_widget.view_cfg.table_app.border_style.current_text()
+        border_width = self.config_manager.config_widget.view_cfg.table_app.border_width.value()
+
+        border_color = self.config_manager.config_widget.view_cfg.table_app.border_color
+        bg_color = self.config_manager.config_widget.view_cfg.table_app.bg_color
+
+
+
         ndigits = self.config_manager.config_widget.lighting_cfg.nsymb.value()
 
+        self.cfg["list_app"]["list_border_color"] = border_color
+        self.cfg["list_app"]["list_bg_color"] = bg_color
+
+        self.cfg["list_app"]["list_border_style"] = list_border_style
+        self.cfg["list_app"]["list_border_width"] = border_width
         self.cfg["ndigits"] = ndigits
         self.cfg["text_label"]["base"]["font_family"] = base_font_family
         self.cfg["text_label"]["base"]["font_size"] = base_font_size

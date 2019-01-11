@@ -26,15 +26,15 @@ dictionaries_files:
 - ./dictionaries\test.txt
 - ./dictionaries\укр именники.txt
 dictionary_ext: .txt
-last_width: 1116
+last_width: 1305
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[Р°-СЏРђ-РЇС‘РЃ!\d]+'
 list_app:
-  list_bg_color: '#E0E0E0'
-  list_border_color: '#ACACAC'
-  list_border_style: solid
-  list_border_width: 1
+  list_bg_color: '#fff8e9'
+  list_border_color: '#074267'
+  list_border_style: dotted
+  list_border_width: 2
 max_words: 160
 min_ratio: 40
 minimum_height: 521
@@ -45,13 +45,13 @@ ratio_in_text: false
 search_algorithm: jaro_winkler
 text_label:
   base:
-    color: '#005500'
-    font_family: MS Shell Dlg 2
-    font_size: 36
-  pigment:
-    color: '#ff5500'
+    color: '#346800'
     font_family: Helvetica
-    font_size: 16
+    font_size: 14
+  pigment:
+    color: '#ff007f'
+    font_family: Helvetica
+    font_size: 14
 tool_height: 50
 tool_tip: true
 words_on_page: 160

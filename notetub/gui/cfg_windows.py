@@ -1,5 +1,5 @@
 
-
+import PyQt5
 import sys
 
 
@@ -7,6 +7,10 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore
+
+class ConfigLabel(QLabel):
+    def __init__(self, *__args):
+        super().__init__(*__args)
 
 
 
@@ -28,7 +32,7 @@ class SliderPrefix(QFrame):
         # self.jaro_prefix.setSingleStep(0.1)
         self.jaro_prefix.setValue(20)
 
-        vbox.addWidget(QLabel("jaro_prefix"))
+        vbox.addWidget(ConfigLabel("jaro_prefix"))
         vbox.addWidget(self.jaro_prefix)
 
     def prefix(self):
@@ -128,7 +132,7 @@ class LightingCfgWidget(AbcCfgWidget):
 
     def symbol_light(self):
         box = QHBoxLayout()
-        lab = QLabel("выделить n первых символов")
+        lab = ConfigLabel("выделить n первых символов")
         self.nsymb = QSpin()
         self.nsymb.setValue(self.cfg["ndigits"])
         print(self.cfg)
@@ -155,19 +159,19 @@ class TableCfgWidget(AbcCfgWidget):
         self.all_words = QSpin()
 
         self.all_words.setValue(cfg["max_words"])
-        self.box_grid.addWidget(QLabel("найденных слов"), 0, 0)
+        self.box_grid.addWidget(ConfigLabel("найденных слов"), 0, 0)
         self.box_grid.addWidget(self.all_words, 0, 1)
 
 
         self.words_on_page = QSpin()
         self.words_on_page.setValue(cfg["words_on_page"])
-        self.box_grid.addWidget(QLabel("слов на странице"), 1, 0)
+        self.box_grid.addWidget(ConfigLabel("слов на странице"), 1, 0)
         self.box_grid.addWidget(self.words_on_page, 1, 1)
 
 
         self.columns = QSpin()
         self.columns.setValue(cfg["number_columns"])
-        self.box_grid.addWidget(QLabel("колонок"), 2, 0)
+        self.box_grid.addWidget(ConfigLabel("колонок"), 2, 0)
         self.box_grid.addWidget(self.columns, 2, 1)
 
 
@@ -178,34 +182,64 @@ class ExFontLabel(QLabel):
     def __init__(self, *__args):
         super().__init__(*__args)
 
-class BorderStyleCombo(QFrame):
+class GroupFrame(QFrame):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
-        box = QHBoxLayout(self)
-        lb = QLabel("border style")
-        box.addWidget(lb)
-        box.addWidget(self.combo_box())
-        box.addStretch(1)
+        self.box = QHBoxLayout(self)
+        self.box.setSpacing(12)
+
+class BorderStyleCombo(GroupFrame):
+    def __init__(self, cfg):
+        super().__init__(cfg)
+        self.cfg = cfg
+
+        lb = ConfigLabel("border style ")
+        self.box.addWidget(lb)
+        self.box.addWidget(self.combo_box())
+        self.box.addStretch(1)
 
 
     def combo_box(self):
-        self.combo = QComboBox()
+        self.combo_style = QComboBox()
         styles = self.cfg["border_styles"]
-        self.combo.addItems(styles)
-        self.combo.setCurrentText(self.cfg["list_app"]["list_border_style"])
-        return self.combo
+        self.combo_style.addItems(styles)
+        self.combo_style.setCurrentText(self.cfg["list_app"]["list_border_style"])
+        return self.combo_style
 
-class BorderWidth(QSpin):
-    def __init__(self):
-        super().__init__()
+    def current_text(self):
+        return self.combo_style.currentText()
 
 
-class ExColorFrame(QPushButton):
-    def __init__(self, *__args):
+class BorderListWidth(GroupFrame):
+    def __init__(self, cfg):
+        super().__init__(cfg)
+        self.cfg = cfg
+
+        self.setFixedHeight(40)
+        # self.setStyleSheet("background-color: red")
+        lb = ConfigLabel("border width")
+        self.box.addWidget(lb)
+        self.box.addWidget(self.spin_box())
+        self.box.addStretch(1)
+
+    def spin_box(self):
+        self.border_width = QSpin()
+        self.border_width.setValue(self.cfg["list_app"]["list_border_width"])
+        return self.border_width
+
+    def value(self):
+        return self.border_width.value()
+
+
+
+
+class ExColorButton(QPushButton):
+    def __init__(self, *__args, object_name=None, opt_color=None):
         super().__init__(*__args)
+        self.opt_color = opt_color
+        self.setObjectName(object_name)
         self.setFixedSize(20, 20)
-        self.set_color("green")
         self.setCursor(QtCore.Qt.PointingHandCursor)
 
     def set_color(self, color):
@@ -216,6 +250,12 @@ class ChooseDialogBtn(QPushButton):
         super().__init__(*__args)
         self.setFixedSize(50, 20)
         self.setCursor(QtCore.Qt.PointingHandCursor)
+
+class FontLabelConf(QLabel):
+    def __init__(self, *__args):
+        super().__init__(*__args)
+
+
 
 
 class FontConfig(QGroupBox):
@@ -241,6 +281,8 @@ class FontConfig(QGroupBox):
             self.font_family = font.family()
             self.font_size = font.pointSize()
             self.lb.setFont(font)
+            self.font_lab_family.setText(str(self.font_family))
+            self.font_lab_size.setText(str(self.font_size))
 
 
 
@@ -249,18 +291,25 @@ class FontConfig(QGroupBox):
         if col.isValid():
             self.color = col.name()
             self.color_lb.set_color(self.color)
+            self.lb.setStyleSheet("""QLabel {{color:{}}}""".format(self.color))
+
 
     def font_box(self):
         box = QHBoxLayout()
         btn = ChooseDialogBtn("шрифт")
         btn.clicked.connect(self.show_font_dialog)
         self.lb = QLabel("пример")
+        self.lb.setStyleSheet("""QLabel {{color:{}}}""".format(self.color))
         qfont = QFont()
         qfont.setFamily(self.font_family)
         qfont.setPointSize(self.font_size)
         self.lb.setFont(qfont)
         box.addWidget(btn)
         box.addWidget(self.lb)
+        self.font_lab_family = FontLabelConf(str(self.font_family))
+        self.font_lab_size = FontLabelConf(str(self.font_size))
+        box.addWidget(self.font_lab_family)
+        box.addWidget(self.font_lab_size)
         box.addStretch(1)
         return box
 
@@ -268,7 +317,7 @@ class FontConfig(QGroupBox):
         box = QHBoxLayout()
         btn = ChooseDialogBtn("цвет")
         btn.clicked.connect(self.show_color_dialog)
-        self.color_lb = ExColorFrame()
+        self.color_lb = ExColorButton()
         self.color_lb.clicked.connect(self.show_color_dialog)
         self.color_lb.set_color(self.color)
         box.addWidget(btn)
@@ -277,23 +326,71 @@ class FontConfig(QGroupBox):
         return box
 
 
-
-
 class TableApp(QGroupBox):
     def __init__(self, *__args, cfg=None):
         super().__init__(*__args)
+        self.cfg = cfg
+        self._bg_color = cfg["list_app"]["list_bg_color"]
+        self._border_color = cfg["list_app"]["list_border_color"]
         self.box = QVBoxLayout()
         self.setLayout(self.box)
-        self.box.addLayout(self.color_box("border"))
-        self.box.addLayout(self.color_box("фон"))
-        self.box.addWidget(BorderStyleCombo(cfg))
-        self.box.addWidget(BorderWidth())
 
-    def color_box(self, name):
+        self.border_color_btn = self.color_box("border", self.border_color, "set_border_color")
+        self.box.addLayout(self.border_color_btn)
+
+        self.bg_color_btn = self.color_box("фон", self.bg_color, "set_bg_color")
+        self.box.addLayout(self.bg_color_btn)
+
+        self.border_width = BorderListWidth(cfg)
+        self.box.addWidget(self.border_width)
+
+
+        self.border_style = BorderStyleCombo(cfg)
+
+        self.box.addWidget(self.border_style)
+
+
+    @property
+    def bg_color(self):
+        return self._bg_color
+
+
+    def set_bg_color(self, color):
+        self._bg_color = color
+
+    @property
+    def border_color(self):
+        return self._border_color
+
+    def set_border_color(self, color):
+        self._border_color = color
+
+    def show_color_dialog(self):
+        col = QColorDialog.getColor()
+        if col.isValid():
+            self.color = col.name()
+            sender = self.sender()
+            sender.setStyleSheet("""QPushButton {{background-color:{}}}""".format(self.color))
+            getattr(self, sender.opt_color)(self.color)
+
+
+    def color_box(self, name, color, opt_color):
+        box = QHBoxLayout()
+        choose_dialog_btn = ChooseDialogBtn(name)
+
+        color_lb = ExColorButton(opt_color=opt_color)
+        color_lb.clicked.connect(self.show_color_dialog)
+        color_lb.set_color(color)
+        box.addWidget(choose_dialog_btn)
+        box.addWidget(color_lb)
+        box.addStretch(1)
+        return box
+
+    def border_size_box(self, name):
         box = QHBoxLayout()
         btn = ChooseDialogBtn(name)
         # btn.clicked.connect(self.show_color_dialog)
-        self.color_lb = ExColorFrame()
+        self.color_lb = ExColorButton()
         # self.color_lb.set_color(self.color)
         box.addWidget(btn)
         box.addWidget(self.color_lb)

@@ -1,13 +1,11 @@
 
-/*QLabel {*/
-    /*font-family: "Helvetica Neue";*/
-    /*font-size: 10pt;*/
-    /*color: #245674;*/
-/*}*/
+ConfigLabel {
+    font-family: "Helvetica Neue";
+    font-size: 10pt;
+    color: #007687;
+}
 
-/*QFrame {*/
-    /*border-radius: 4px;*/
-/*}*/
+
 
 QComboBox {
     font-family: "Helvetica Neue";
@@ -18,15 +16,23 @@ QComboBox {
     border-bottom:  1px solid #a8a8aa;
     border-top: 1px solid #a8a8aa;
     border-radius: 4px;
+
+    max-width: 80px;
+    min-width: 80px;
+    max-height: 20px;
+    min-height: 20px;
 }
+
+
+
+
+
 
 MainWindow {
     background-color: #d3d3d5;
 }
 
-/*Tool {*/
-    /*background-color: #a4a4a4;*/
-/*}*/
+
 
 
 TableList  {
@@ -71,30 +77,30 @@ ExColorFrame {
 
 }
 
-ListWidget {
+/*ListWidget {*/
 
-    font-family: "Helvetica Neue";
-    font-size: 12pt;
-    color: #636363;
-
-
-    /*padding-right: 52px;*/
+    /*font-family: "Helvetica Neue";*/
+    /*font-size: 12pt;*/
+    /*color: #636363;*/
 
 
-}
+    /*!*padding-right: 52px;*!*/
 
 
+/*}*/
 
 
 
-ListWidget::item:selected {
-    border-left: none;
-    border-right:  none;
-    border-bottom:  none;
-    border-top: none;
 
 
-}
+/*ListWidget::item:selected {*/
+    /*border-left: none;*/
+    /*border-right:  none;*/
+    /*border-bottom:  none;*/
+    /*border-top: none;*/
+
+
+/*}*/
 
 
 
@@ -235,25 +241,18 @@ BorderWidth {
     min-height: 20px;
 }
 
-Combo{
-    border-left: 1px solid #a8a8aa;
-    border-right:  1px solid #a8a8aa;
-    border-bottom:  1px solid #a8a8aa;
-    border-top: 1px solid #a8a8aa;
-    max-width: 70px;
-    min-width: 70px;
-    max-height: 20px;
-    min-height: 20px;
-}
-
-BorderStyleCombo {
-    border-left: 1px solid #a8a8aa;
-    border-right:  1px solid #a8a8aa;
-    border-bottom:  1px solid #a8a8aa;
-    border-top: 1px solid #a8a8aa;
+/*Combo{*/
+    /*border-left: 1px solid #a8a8aa;*/
+    /*border-right:  1px solid #a8a8aa;*/
+    /*border-bottom:  1px solid #a8a8aa;*/
+    /*border-top: 1px solid #a8a8aa;*/
+    /*max-width: 80px;*/
+    /*min-width: 80px;*/
+    /*max-height: 20px;*/
+    /*min-height: 20px;*/
+/*}*/
 
 
-}
 
 ConfigBtn#search_cfg_btn:checked {
     color: #088115;
@@ -291,17 +290,17 @@ Algorithms {
     color: #245674;
 }
 
-FontConfig {
+FontConfig, TableApp {
     font-family: "Helvetica Neue";
     font-size: 10pt;
     color: #245674;
 }
 
-TableApp {
-    font-family: "Helvetica Neue";
-    font-size: 10pt;
-    color: #245674;
-}
+/*TableApp {*/
+    /*font-family: "Helvetica Neue";*/
+    /*font-size: 10pt;*/
+    /*color: #245674;*/
+/*}*/
 
 CustomButton {
 

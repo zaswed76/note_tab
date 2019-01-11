@@ -92,7 +92,7 @@ class ConfigManager(QFrame):
         self.setWindowTitle("Настройки")
         self.setWindowFlags(Qt.Dialog)
         self.setWindowModality(Qt.ApplicationModal)
-        self.setFixedSize(500, 480)
+        self.setFixedSize(660, 480)
         self.hbox = QHBoxLayout(self)
         self.hbox.setContentsMargins(0, 0, 0, 0)
         self.hbox.setSpacing(0)
