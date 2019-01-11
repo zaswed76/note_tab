@@ -23,8 +23,6 @@ custom_controlls:
 dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
-- ./dictionaries\test.txt
-- ./dictionaries\укр именники.txt
 dictionary_ext: .txt
 last_width: 1305
 line_edit__height: 50
@@ -32,26 +30,26 @@ line_validator: true
 line_validator_reg: '[Р°-СЏРђ-РЇС‘РЃ!\d]+'
 list_app:
   list_bg_color: '#fff8e9'
-  list_border_color: '#074267'
-  list_border_style: dotted
-  list_border_width: 2
+  list_border_color: '#c7c7c7'
+  list_border_style: solid
+  list_border_width: 1
 max_words: 160
 min_ratio: 40
 minimum_height: 521
-ndigits: 3
+ndigits: 0
 number_columns: 8
 prefix_weight: 0.2
 ratio_in_text: false
-search_algorithm: jaro_winkler
+search_algorithm: ratio
 text_label:
   base:
-    color: '#346800'
+    color: '#2f2f2f'
     font_family: Helvetica
     font_size: 14
   pigment:
     color: '#ff007f'
     font_family: Helvetica
-    font_size: 14
+    font_size: 16
 tool_height: 50
 tool_tip: true
 words_on_page: 160

@@ -20,9 +20,8 @@ def file_to_words(file):
 
 
 diff_functions = dict(
-    distance=lv.distance,
     jaro_winkler=lv.jaro_winkler,
-    jaro=lv.jaro_winkler,
+    jaro=lv.jaro,
     ratio=lv.ratio
 )
 
@@ -36,6 +35,11 @@ def test():
 
 
 def jaro_winkler(**kwargs):
+    """
+
+    :param kwargs:
+    :return: список кортежей [(str, float), (слово, рейтинг)]
+    """
     lst = kwargs["lst"]
     word = kwargs["word"]
     ratio = kwargs["ratio"]
@@ -88,10 +92,11 @@ def find(lst, *words):
 
 if __name__ == '__main__':
     # print(test())
-    opcorpora_noun_file = pjoin("../resource/dictionaries/corpora_noun.txt")
+    opcorpora_noun_file = pjoin(r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
     corp = file_to_words(opcorpora_noun_file)
 
-    r = jaro_winkler(corp, "потрит",  40, prefix_weight=0.01)
+    dct = dict(lst=corp, word="потрит",  ratio=40, prefix_weight=0.2)
+    r = jaro_winkler(**dct)
     # r = jaro(corp, "ден!м!",  65)
     print(sorted_on_ratio(r)[:1550])
     print(find(sorted_on_ratio(r)[:1550], "портрет", "патриот"))
