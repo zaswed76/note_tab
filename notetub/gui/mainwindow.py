@@ -147,12 +147,19 @@ class MainWindow(QFrame):
                                                         word=diff_word,
                                                         ratio=min_ratio,
                                                         prefix_weight=prefix_weight)
+
             if omo_list:
                 sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
+                print(sorted_on_ratio)
+                print("****************************")
                 cut_omo_list = sorted_on_ratio[:max_words]
+
+
                 self.wizard.create_pages(max_words, words_on_page)
                 self.wizard.set_data(cut_omo_list)
-                # self.wizard.sort_by(sorter.lexic)
+
+
+
                 self.wizard.group_by(serv.group_on_count, words_on_page // number_columns)
 
                 # слово выделено - True

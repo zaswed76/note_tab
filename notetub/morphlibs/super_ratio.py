@@ -6,19 +6,23 @@ my_diff_functions = {
     'ratio': ratio
 }
 
+def mix(seq):
+    nd = dict()
+    d = dict()
+    for lst in seq:
+        for it in lst:
+            d[it[0]] = d.get(it[0], []) + [it[1]]
+
+    for k, v in d.items():
+        nd[k] = sum(v)/len(v)
+    return nd
 
 def mix_diff(**kwargs):
-    # lst = kwargs["lst"]
-    # word = kwargs["word"]
-    # ratio = kwargs["ratio"]
-    # prefix_weight = kwargs["prefix_weight"]
-
-
-    result_lst = set()
-
+    result_lst = []
     for func in my_diff_functions.values():
-        print(sorted_on_ratio(func(**kwargs)))
-        print("-------------")
+        result_lst.append(sorted_on_ratio(func(**kwargs)))
+    return result_lst
+
 
 
 if __name__ == '__main__':
@@ -27,9 +31,11 @@ if __name__ == '__main__':
         r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
     corp = file_to_words(opcorpora_noun_file)
 
-    dct = dict(lst=corp, word="корол", ratio=90, prefix_weight=0.2)
+    dct = dict(lst=corp, word="карол", ratio=80, prefix_weight=0.2)
 
-    mix_diff(**dct)
+    print(mix(mix_diff(**dct)))
+    print("--------------")
+    resjaro(**dct))
     # r = jaro_winkler(**dct)
     # # r = jaro(corp, "ден!м!",  65)
     # print(sorted_on_ratio(r)[:200])

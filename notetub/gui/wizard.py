@@ -32,6 +32,7 @@ class WizardManager(QFrame):
     def set_data(self, data):
         self.wizard.data = data
 
+
     def update_table(self):
         self.wizard.clear_table()
         self.wizard.update_table()

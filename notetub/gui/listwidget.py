@@ -59,15 +59,12 @@ class ListWidget(QListWidget):
 
     def set_items(self, items):
         ratio_in_text = self.cfg["ratio_in_text"]
+        print(ratio_in_text, 9999)
         ndigits = self.cfg["ndigits"]
         tool_tip = self.cfg["tool_tip"]
 
         self.clear()
         for i, r in items:
-
-
-
-
             item = CustomLabel(i, r, ratio_in_text=ratio_in_text,
                                ndigits=ndigits,
                                tool_tip=tool_tip, lb_font=self.lb_font)

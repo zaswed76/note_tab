@@ -50,7 +50,10 @@ def jaro_winkler(**kwargs):
 
     for line in lst:
         r = lv._levenshtein.jaro_winkler(word, line, prefix_weight)
+
         if r > ratio:
+            # print(r)
+
             result.append((line, r))
     return result
 
@@ -90,13 +93,15 @@ def find(lst, *words):
     return d
 
 
+
+
 if __name__ == '__main__':
     # print(test())
     opcorpora_noun_file = pjoin(r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
     corp = file_to_words(opcorpora_noun_file)
 
-    dct = dict(lst=corp, word="потрит",  ratio=40, prefix_weight=0.2)
+    dct = dict(lst=corp, word="карол",  ratio=40, prefix_weight=0.2)
     r = jaro_winkler(**dct)
     # r = jaro(corp, "ден!м!",  65)
-    print(sorted_on_ratio(r)[:1550])
-    print(find(sorted_on_ratio(r)[:1550], "портрет", "патриот"))
+    print(sorted_on_ratio(r)[:15])
+

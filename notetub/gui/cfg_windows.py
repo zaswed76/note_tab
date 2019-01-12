@@ -115,7 +115,6 @@ class SearchCfgWidget(AbcCfgWidget):
         self.algorithm_box = Algorithms("алгоритмы")
         self.main_box.addWidget(self.algorithm_box)
         for alg in self.cfg["algorithm_list"]:
-            print(alg)
             self.algorithm_box.add_algorithm(alg)
 
 
@@ -135,7 +134,6 @@ class LightingCfgWidget(AbcCfgWidget):
         lab = ConfigLabel("выделить n первых символов")
         self.nsymb = QSpin()
         self.nsymb.setValue(self.cfg["ndigits"])
-        print(self.cfg)
         box.addWidget(lab)
         box.addStretch(1)
         box.addWidget(self.nsymb)
