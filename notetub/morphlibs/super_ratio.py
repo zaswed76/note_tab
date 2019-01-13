@@ -36,14 +36,14 @@ def find(seq, word):
 if __name__ == '__main__':
     # print(test())
     opcorpora_noun_file = pjoin(
-        r"C:\save\serg\project\note_tab\notetub\dictionaries\corpora_noun.txt")
+        r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
     corp = file_to_words(opcorpora_noun_file)
 
-    dct = dict(lst=corp, word="карол", ratio=60, prefix_weight=1.0)
+    dct = dict(lst=corp, word="фарон", ratio=60, prefix_weight=0.3)
 
     res = mix(mix_diff(**dct))
     print(len(res))
-    print(find(res, "корол"))
+    print(find(res, "фараон"))
 
     # r = jaro_winkler(**dct)
     # # r = jaro(corp, "ден!м!",  65)

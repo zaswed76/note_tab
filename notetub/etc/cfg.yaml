@@ -40,7 +40,7 @@ ndigits: 3
 number_columns: 12
 prefix_weight: 0.2
 ratio_in_text: false
-search_algorithm: ratio
+search_algorithm: jaro_winkler
 text_label:
   base:
     color: '#2f2f2f'
