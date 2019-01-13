@@ -12,15 +12,15 @@ consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
 
 
 
-  # Required to call maketrans function.
 
-# intab = "".join(vowels)
-# outtab = ""
-# print(intab)
-# trantab = str.maketrans(intab, outtab)
-#
-# str = "корова"
-# print(str.translate(trantab))
+
+intab = "".join(vowels)
+outtab = "*"
+print(intab)
+trantab = str.maketrans("", "", intab)
+
+str = "корова"
+print(str.translate(trantab))
 
 
 

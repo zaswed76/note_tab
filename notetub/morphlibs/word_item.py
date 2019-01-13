@@ -1,6 +1,18 @@
 vowels = ['а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я']
+vowels_line = "".join(vowels)
+trantab_cyrillic_vowels = str.maketrans("", "", vowels_line)
 consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
               'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
+
+
+def consonants_skeleton(line, trantab):
+    """
+
+    :param trantab: str.maketrans
+    :param line: str cirillisa
+    :return: new line str
+    """
+    return line.translate(trantab)
 
 
 class WordItem:
@@ -21,3 +33,5 @@ if __name__ == '__main__':
     it = ("карол", 0.25)
     wi = WordItem(it)
     wi.compare(word)
+
+    print(consonants_skeleton(word, trantab_cyrillic_vowels))
