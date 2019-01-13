@@ -24,7 +24,7 @@ dictionaries_dir: ./dictionaries
 dictionaries_files:
 - ./dictionaries\corpora_noun.txt
 dictionary_ext: .txt
-last_width: 1920
+last_width: 1218
 line_edit__height: 50
 line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
@@ -35,12 +35,12 @@ list_app:
   list_border_width: 1
 max_words: 360
 min_ratio: 40
-minimum_height: 1017
+minimum_height: 514
 ndigits: 3
 number_columns: 12
-prefix_weight: 0.21
+prefix_weight: 0.2
 ratio_in_text: false
-search_algorithm: jaro_winkler
+search_algorithm: ratio
 text_label:
   base:
     color: '#2f2f2f'

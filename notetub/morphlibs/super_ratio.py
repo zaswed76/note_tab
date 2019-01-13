@@ -7,15 +7,14 @@ my_diff_functions = {
 }
 
 def mix(seq):
-    nd = dict()
+    nd = []
     d = dict()
     for lst in seq:
         for it in lst:
             d[it[0]] = d.get(it[0], []) + [it[1]]
-
     for k, v in d.items():
-        nd[k] = sum(v)/len(v)
-    return nd
+        nd.append((k, sum(v)/len(v)))
+    return tuple(nd)
 
 def mix_diff(**kwargs):
     result_lst = []
@@ -23,19 +22,29 @@ def mix_diff(**kwargs):
         result_lst.append(sorted_on_ratio(func(**kwargs)))
     return result_lst
 
+def find(seq, word):
+    for w, r in seq:
+        # print(item)
+        if w == word:
+            return "{}, {}".format(w, r)
+    else:
+        return "не найдено"
+
+
 
 
 if __name__ == '__main__':
     # print(test())
     opcorpora_noun_file = pjoin(
-        r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
+        r"C:\save\serg\project\note_tab\notetub\dictionaries\corpora_noun.txt")
     corp = file_to_words(opcorpora_noun_file)
 
-    dct = dict(lst=corp, word="карол", ratio=80, prefix_weight=0.2)
+    dct = dict(lst=corp, word="карол", ratio=60, prefix_weight=1.0)
 
-    print(mix(mix_diff(**dct)))
-    print("--------------")
-    resjaro(**dct))
+    res = mix(mix_diff(**dct))
+    print(len(res))
+    print(find(res, "корол"))
+
     # r = jaro_winkler(**dct)
     # # r = jaro(corp, "ден!м!",  65)
     # print(sorted_on_ratio(r)[:200])
