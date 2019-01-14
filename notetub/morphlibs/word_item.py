@@ -4,8 +4,9 @@ trantab_cyrillic_vowels = str.maketrans("", "", vowels_line)
 consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
               'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
 
+deaf_ring_id = str.maketrans("бпвфгкдтжшзс", "112233445566")
 
-def consonants_skeleton(line, trantab):
+def replace_characters(line, trantab):
     """
 
     :param trantab: str.maketrans
@@ -16,22 +17,28 @@ def consonants_skeleton(line, trantab):
 
 
 class WordItem:
-    def __init__(self, word_item):
-        self.word_item = word_item
-        self.word = word_item[0]
-        self.ratio = word_item[1]
+    def __init__(self, word, lev_ratio=None):
+        self.word = word
+        self.lev_ratio = lev_ratio
+        self.cons_skeleton = replace_characters(self.word, trantab_cyrillic_vowels)
+        self.cons_deaf_ring_id = replace_characters(self.cons_skeleton, deaf_ring_id)
+
+
 
     def compare(self, word):
         print("{} == {}".format(self.word, word))
 
     def __repr__(self):
-        return str(self.word_item)
+        return str(self.word)
 
 
 if __name__ == '__main__':
-    word = "корал"
-    it = ("карол", 0.25)
-    wi = WordItem(it)
-    wi.compare(word)
+    word = "корова"
+    it = ("корова", 0.25)
+    wi = WordItem(*it)
+    print(wi.cons_skeleton)
+    print(wi.cons_deaf_ring_id)
 
-    print(consonants_skeleton(word, trantab_cyrillic_vowels))
+    # print(replace_characters("крф", test_trantab))
+    # print(replace_characters("крв", test_trantab))
+    # print(replace_characters("короб", test_trantab))
