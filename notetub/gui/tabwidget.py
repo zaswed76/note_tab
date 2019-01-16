@@ -65,10 +65,12 @@ class TableList(QFrame):
 
         for n, lst in enumerate(self._data):
             col = []
-            for w, r in lst:
-                pgm = pigment.get_pigment(w)
+            for w in lst:
+                print(w)
+            # for w, r in lst:
+                pgm = pigment.get_pigment(w.word)
                 if pgm is not None:
-                    col.append((pgm, r))
+                    col.append((pgm, w.lev_ratio))
             data.append(col)
         self.data = data
 

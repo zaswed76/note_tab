@@ -59,7 +59,6 @@ class ListWidget(QListWidget):
 
     def set_items(self, items):
         ratio_in_text = self.cfg["ratio_in_text"]
-        print(ratio_in_text, 9999)
         ndigits = self.cfg["ndigits"]
         tool_tip = self.cfg["tool_tip"]
 
