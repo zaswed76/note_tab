@@ -1,5 +1,4 @@
 from os.path import join as pjoin
-from notetub.morphlibs.word_item import WordItem
 
 import Levenshtein as lv
 
@@ -47,7 +46,6 @@ def jaro_winkler(**kwargs):
     prefix_weight = kwargs["prefix_weight"]
 
     result = []
-    result2 = []
     ratio = float(ratio) / 100
 
     for line in lst:
@@ -56,9 +54,8 @@ def jaro_winkler(**kwargs):
         if r > ratio:
             # print(r)
 
-            # result.append((line, r))
-            result2.append(WordItem(line, r))
-    return result2
+            result.append((line, r))
+    return result
 
 def jaro(**kwargs):
     lst = kwargs["lst"]
@@ -99,7 +96,7 @@ def find2(seq, word):
     for n, (w, r) in enumerate(seq):
         # print(item)
         if w == word:
-            return "{}, {}, {}".format(n, w, r)
+            return "{}.{}, {}".format(n, w, r)
     else:
         return "не найдено"
 
@@ -110,11 +107,7 @@ if __name__ == '__main__':
     corp = file_to_words(opcorpora_noun_file)
 
     dct = dict(lst=corp, word="карофа",  ratio=40, prefix_weight=0.2)
-    r = sorted_on_ratio(jaro_winkler(**dct))[:1500]
-    r2 = sorted_on_ratio(jaro(**dct))[:1500]
-    r3 = sorted_on_ratio(ratio(**dct))[:1500]
+    r = jaro_winkler(**dct)
     # r = jaro(corp, "ден!м!",  65)
-    print(find2(r, "корова"))
-    print(find2(r2, "корова"))
-    print(find2(r3, "корова"))
+    print(find2(sorted_on_ratio(r)[:1500], "корова"))
 

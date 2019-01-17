@@ -149,11 +149,10 @@ class MainWindow(QFrame):
                                                         prefix_weight=prefix_weight)
 
             if omo_list:
-                # sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
+                sorted_on_ratio = _diff.sorted_on_ratio(omo_list)
                 # print(sorted_on_ratio)
                 print("****************************")
-                # cut_omo_list = sorted_on_ratio[:max_words]
-                cut_omo_list = omo_list[:max_words]
+                cut_omo_list = sorted_on_ratio[:max_words]
 
 
                 self.wizard.create_pages(max_words, words_on_page)
