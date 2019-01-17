@@ -102,8 +102,7 @@ def find2(seq, word):
 
 
 if __name__ == '__main__':
-    print(test())
-    print("###################")
+    pass
     # opcorpora_noun_file = pjoin(r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
     # corp = file_to_words(opcorpora_noun_file)
     #
