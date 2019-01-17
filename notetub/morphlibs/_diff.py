@@ -102,12 +102,12 @@ def find2(seq, word):
 
 
 if __name__ == '__main__':
-    # print(test())
-    opcorpora_noun_file = pjoin(r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
-    corp = file_to_words(opcorpora_noun_file)
-
-    dct = dict(lst=corp, word="карофа",  ratio=40, prefix_weight=0.2)
-    r = jaro_winkler(**dct)
-    # r = jaro(corp, "ден!м!",  65)
-    print(find2(sorted_on_ratio(r)[:1500], "корова"))
+    print(test())
+    # opcorpora_noun_file = pjoin(r"E:\1_SYNS_ORIGINAL\0SYNC\Serg\note_tab\notetub\dictionaries\corpora_noun.txt")
+    # corp = file_to_words(opcorpora_noun_file)
+    #
+    # dct = dict(lst=corp, word="карофа",  ratio=40, prefix_weight=0.2)
+    # r = jaro_winkler(**dct)
+    # # r = jaro(corp, "ден!м!",  65)
+    # print(find2(sorted_on_ratio(r)[:1500], "корова"))
 
