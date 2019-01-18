@@ -1,13 +1,7 @@
-import fileinput
 import glob
 import os
-from os import path
 import shutil
-
-import pprint
-from itertools import groupby
-
-import math
+from os import path
 
 
 def get_words(file, nword=0):
@@ -19,8 +13,6 @@ def get_words(file, nword=0):
             n = len(word_lst)
         cut_lst = word_lst[:n]
         return cut_lst
-
-
 
 
 def text_lst(lst):
@@ -36,19 +28,19 @@ def get_text(file, nword=0, ncol=1):
     return text_lst(group_lst)
 
 
-
 def group_on_count(lst, by=None):
     """ Группировка элементов последовательности по count элементов """
-    return [lst[i:i+by] for i in range(0,len(lst),by)]
+    return [lst[i:i + by] for i in range(0, len(lst), by)]
+
 
 def group_on_lst(lst, words_on_page, number_columns):
     r = []
-    nwords = words_on_page//number_columns
+    nwords = words_on_page // number_columns
     pages = group_by(lst, words_on_page)
     for p in pages:
-
         r.append(chunks(p, nwords))
     return r
+
 
 def chunks(items, chunks_quantity):
     chunk_len = len(items) // chunks_quantity
@@ -65,6 +57,7 @@ def chunks(items, chunks_quantity):
 
     return chunks
 
+
 def file_to_list(file):
     """
     получить список слов из файла
@@ -79,6 +72,7 @@ def file_to_list(file):
             r = []
             error = mes
         return r, error
+
 
 def files_to_list(files: list):
     """
@@ -106,6 +100,7 @@ def get_dictionaries_files(folder, ext):
     """
     return glob.glob(path.join(folder, '*' + ext))
 
+
 def get_files_by_names(folder, dict_names, ext):
     """
 
@@ -118,7 +113,6 @@ def get_files_by_names(folder, dict_names, ext):
     for n in dict_names:
         fd.append(path.join(folder, n + ext))
     return fd
-
 
 
 def add_dict(dpath, dict_dir, ext):
@@ -135,10 +129,11 @@ def add_dict(dpath, dict_dir, ext):
 
 def del_dict(del_item, directory, ext):
     print(del_item)
-    pth = path.join(directory, del_item+ext)
+    pth = path.join(directory, del_item + ext)
     if os.path.isfile(pth):
         os.remove(pth)
         return pth
+
 
 if __name__ == '__main__':
     files = get_dictionaries_files("../dictionaries", ".txt")
@@ -148,5 +143,3 @@ if __name__ == '__main__':
     # split_list = lambda n: zip(*[iter(l+[None]*((n-len(l)%n)%n))]*n)
     # print(list(split_list(4)))
     # pprint.pprint(group_on_lst(lst, 10, 3))
-
-

@@ -1,7 +1,9 @@
 import yaml
 
 
-from collections import MutableMapping
+
+
+from collections.abc import MutableMapping
 
 
 class Config(MutableMapping):

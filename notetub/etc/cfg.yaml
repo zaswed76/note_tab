@@ -30,9 +30,9 @@ line_validator: true
 line_validator_reg: '[а-яА-ЯёЁ!\d]+'
 list_app:
   list_bg_color: '#fff8e9'
-  list_border_color: '#c7c7c7'
+  list_border_color: '#55ff00'
   list_border_style: solid
-  list_border_width: 1
+  list_border_width: 2
 max_words: 60
 min_ratio: 40
 minimum_height: 463
@@ -54,5 +54,4 @@ tool_height: 50
 tool_tip: true
 words_on_page: 60
 works_dictionaries:
-- corpora_noun
 - corpora_noun
