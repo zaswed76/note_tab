@@ -122,9 +122,12 @@ def get_files_by_names(folder, dict_names, ext):
 
 
 def add_dict(dpath, dict_dir, ext):
+    if not path.isdir(dict_dir):
+        os.makedirs(dict_dir)
     if path.isfile(dpath):
         if path.splitext(dpath)[1] == ext:
             base_name = path.basename(dpath)
+
             target = path.join(dict_dir, base_name)
             shutil.copy2(dpath, target)
             return path.splitext(base_name)[0]
