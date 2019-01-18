@@ -1,26 +1,19 @@
-import re
 
-vowels = ['а', 'о', 'и', 'е', 'ё', 'э', 'ы', 'у', 'ю', 'я']
-consonants = ['б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к',
-              'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ']
+import pickle
+from notetub.morphlibs.word_item import WordItem
 
 
 
+def save_obj(obj, name ):
+    with open('obj/'+ name + '.pkl', 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def load_obj(name ):
+    with open('obj/' + name + '.pkl', 'rb') as f:
+        return pickle.load(f)
 
 
-
-
-
-
-
-
-intab = "".join(vowels)
-outtab = "*"
-print(intab)
-trantab = str.maketrans("", "", intab)
-
-str = "корова"
-print(str.translate(trantab))
+print(load_obj("corp_word_items"))
 
 
 
