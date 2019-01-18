@@ -12,6 +12,7 @@ from notetub.config import Config
 
 ROOT = os.path.join(os.path.dirname(__file__))
 CSS_STYLE = os.path.join(ROOT, "css/style.css")
+print(ROOT, "!!!!!!!!!!!!!!!")
 
 cfg_path = os.path.join(ROOT, "etc/cfg.yaml")
 
