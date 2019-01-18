@@ -2,3 +2,4 @@
 recursive-include notetub/etc *.yaml
 recursive-include notetub/css *.css
 recursive-include notetub/dictionaries *.txt
+recursive-include notetub/resource *.png
