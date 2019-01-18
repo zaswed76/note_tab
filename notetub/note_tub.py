@@ -8,6 +8,7 @@ import os
 from notetub.gui import mainwindow, configmanager
 from notetub.config import Config
 
+from notetub import resources
 
 
 ROOT = os.path.join(os.path.dirname(__file__))

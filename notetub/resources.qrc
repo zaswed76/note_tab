@@ -4,7 +4,5 @@
     <file>resource/icons/config.png</file>
     <file>resource/icons/uncheck.png</file>
     <file>resource/icons/check.png</file>
-
-
   </qresource>
 </RCC>

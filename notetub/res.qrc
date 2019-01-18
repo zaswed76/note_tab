@@ -1,8 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-    <file>resource/icons/check.png</file>
-    <file>resource/icons/config.png</file>
-    <file>resource/icons/forward.png</file>
-    <file>resource/icons/uncheck.png</file>
-</qresource>
-</RCC>
