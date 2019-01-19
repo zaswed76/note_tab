@@ -16,10 +16,15 @@ class LineEdit(QTextEdit):
         super().__init__(*__args)
         # self.setFrameStyle(QFrame.Panel)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    def set_enter_method(self, enter_method):
+        self.enter_method = enter_method
 
-    # def keyPressEvent(self, e):
-    #     if e.key() == Qt.Key_Return:
-    #         print(222222222)
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Return:
+            self.enter_method()
+        else:
+            super().keyPressEvent(e)
 
 
 class CustomButton(QPushButton):

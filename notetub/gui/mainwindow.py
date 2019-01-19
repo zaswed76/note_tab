@@ -55,12 +55,15 @@ class MainWindow(QFrame):
         self.box.setSpacing(0)
 
         self.__init_tool()
-        # self.tool.word_line.setFocus(True)
+        self.tool.word_line.set_enter_method(self.enter_line_press)
 
         self.wizard = wizard.WizardManager(self.cfg)
         self.box.addWidget(self.wizard)
         self.resize(self.cfg["last_width"], self.cfg["minimum_height"])
         # self.setMinimumHeight(self.cfg["minimum_height"])
+
+    def enter_line_press(self):
+        self.controller.enter()
 
     def _is_checked_dict(self):
         check_dict = self.config_manager.config_widget.dict_cfg.get_active_dict
